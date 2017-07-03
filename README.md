@@ -10,7 +10,7 @@ Branch workflow:
   
     git checkout -b <branchname>
  
-  **Add the files you want to push**
+  **Check which files got changed if you only want to push specific files**
 
     git status
  
