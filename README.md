@@ -1,6 +1,7 @@
 # Projecten3_H6
 
 Show branches: git branch
+
 Pull : git pull ('git up' to pull all branches)
 
 Branch workflow:
