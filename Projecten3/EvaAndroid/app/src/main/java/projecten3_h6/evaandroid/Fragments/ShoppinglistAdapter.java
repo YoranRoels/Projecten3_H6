@@ -12,6 +12,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import projecten3_h6.evaandroid.Domain.Ingredient;
 import projecten3_h6.evaandroid.R;
 
 /**
@@ -21,9 +22,9 @@ import projecten3_h6.evaandroid.R;
 public class ShoppinglistAdapter extends RecyclerView.Adapter<ShoppinglistAdapter.ShoppinglistViewHolder>{
 
     private int itemCount;
-    private ArrayList<String> shoppingList;
+    private ArrayList<Ingredient> shoppingList;
 
-    public ShoppinglistAdapter(ArrayList<String> shoppingList) {
+    public ShoppinglistAdapter(ArrayList<Ingredient> shoppingList) {
         this.shoppingList = shoppingList;
         this.itemCount = shoppingList.size();
     }
@@ -37,9 +38,10 @@ public class ShoppinglistAdapter extends RecyclerView.Adapter<ShoppinglistAdapte
     @Override
     public void onBindViewHolder(ShoppinglistAdapter.ShoppinglistViewHolder holder, int position) {
         CheckBox shoppingslistItemName = holder.shoppinglistItemName;
-        //TextView shoppinglistItemCount = holder.shoppinglistItemCount;
+        TextView shoppinglistItemCount = holder.shoppinglistItemCount;
 
-        shoppingslistItemName.setText(shoppingList.get(position));
+        shoppingslistItemName.setText(shoppingList.get(position).getName());
+        shoppinglistItemCount.setText(shoppingList.get(position).getAmount());
     }
 
     @Override
@@ -52,8 +54,8 @@ public class ShoppinglistAdapter extends RecyclerView.Adapter<ShoppinglistAdapte
         @BindView(R.id.shoppinglistItemNamecbx)
         public CheckBox shoppinglistItemName;
 
-        //@BindView(R.id.shoppinglistItemCount)
-        //public TextView shoppinglistItemCount;
+        @BindView(R.id.shoppinglistItemCount)
+        public TextView shoppinglistItemCount;
 
         public ShoppinglistViewHolder(View itemView) {
             super(itemView);
