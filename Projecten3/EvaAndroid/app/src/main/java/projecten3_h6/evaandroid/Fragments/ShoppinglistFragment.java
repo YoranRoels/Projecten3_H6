@@ -25,7 +25,8 @@ import projecten3_h6.evaandroid.R;
 public class ShoppinglistFragment extends Fragment {
 
     @BindView(R.id.shoppingListRecyclerView) RecyclerView mRecyclerView;
-    @BindView(R.id.addShoppingListItemtxt) TextView addShoppingListItemtxt;
+    @BindView(R.id.addShoppingListItemNametxt) TextView addShoppingListItemNametxt;
+    @BindView(R.id.addShoppingListItemAmounttxt) TextView addShoppingListItemAmounttxt;
 
     protected RecyclerView.LayoutManager mLayoutManager;
     ShoppinglistAdapter adapter ;
@@ -92,13 +93,18 @@ public class ShoppinglistFragment extends Fragment {
 
     @OnClick(R.id.addShoppingListItembtn)
     public void addShoppingListItem(){
-        shoppinglist.add(new Ingredient(addShoppingListItemtxt.getText().toString(),"")); //als je het aantal ook apart wil laten tonen hier inserten dan
+        String itemName = addShoppingListItemNametxt.getText().toString();
+        String itemAmount = addShoppingListItemAmounttxt.getText().toString();
+        if(!itemName.trim().equals("")) {
+            shoppinglist.add(new Ingredient(itemName, itemAmount)); //als je het aantal ook apart wil laten tonen hier inserten dan
 
-        // view verversen voor nieuw item te tonen
-        initCard();
+            // view verversen voor nieuw item te tonen
+            initCard();
 
-        Toast.makeText(getActivity(), addShoppingListItemtxt.getText().toString() + " has been added to the list", Toast.LENGTH_LONG).show();
-        addShoppingListItemtxt.setText("");
+            Toast.makeText(getActivity(), itemAmount + " has been added to the list", Toast.LENGTH_LONG).show();
+            addShoppingListItemNametxt.setText("");
+            addShoppingListItemAmounttxt.setText("");
+        }
     }
 
     public void initCard(){
@@ -107,29 +113,25 @@ public class ShoppinglistFragment extends Fragment {
     }
 
     public void initdata(){
-        shoppinglist.add(new Ingredient("Wortelen","20"));
-        shoppinglist.add(new Ingredient("Tomaten","15"));
-        shoppinglist.add(new Ingredient("Eiren","1"));
-        shoppinglist.add(new Ingredient("vanille","200g"));
-        shoppinglist.add(new Ingredient("Basilicum","1000g"));
-        shoppinglist.add(new Ingredient("Wortelen","20"));
-        shoppinglist.add(new Ingredient("Wortelen","20"));
-        shoppinglist.add(new Ingredient("Tomaten","15"));
-        shoppinglist.add(new Ingredient("Eiren","1"));
-        shoppinglist.add(new Ingredient("vanille","200g"));
-        shoppinglist.add(new Ingredient("Basilicum","1000g"));
-        shoppinglist.add(new Ingredient("Wortelen","20"));
-        shoppinglist.add(new Ingredient("Wortelen","20"));
-        shoppinglist.add(new Ingredient("Tomaten","15"));
-        shoppinglist.add(new Ingredient("Eiren","1"));
-        shoppinglist.add(new Ingredient("vanille","200g"));
-        shoppinglist.add(new Ingredient("Basilicum","1000g"));
-        shoppinglist.add(new Ingredient("Wortelen","20"));
-        shoppinglist.add(new Ingredient("Wortelen","20"));
-        shoppinglist.add(new Ingredient("Tomaten","15"));
-        shoppinglist.add(new Ingredient("Eiren","1"));
-        shoppinglist.add(new Ingredient("vanille","200g"));
-        shoppinglist.add(new Ingredient("Basilicum","1000g"));
-        shoppinglist.add(new Ingredient("Wortelen","20"));
+        shoppinglist.add(new Ingredient("Carrots","2kg"));
+        shoppinglist.add(new Ingredient("Tomatoes","500g"));
+        shoppinglist.add(new Ingredient("Eggs","12"));
+        shoppinglist.add(new Ingredient("Vanilla","200g"));
+        shoppinglist.add(new Ingredient("Strawberries","1kg"));
+        shoppinglist.add(new Ingredient("Carrots","2kg"));
+        shoppinglist.add(new Ingredient("Tomatoes","500g"));
+        shoppinglist.add(new Ingredient("Eggs","12"));
+        shoppinglist.add(new Ingredient("Vanilla","200g"));
+        shoppinglist.add(new Ingredient("Strawberries","1kg"));
+        shoppinglist.add(new Ingredient("Carrots","2kg"));
+        shoppinglist.add(new Ingredient("Tomatoes","500g"));
+        shoppinglist.add(new Ingredient("Eggs","12"));
+        shoppinglist.add(new Ingredient("Vanilla","200g"));
+        shoppinglist.add(new Ingredient("Strawberries","1kg"));
+        shoppinglist.add(new Ingredient("Carrots","2kg"));
+        shoppinglist.add(new Ingredient("Tomatoes","500g"));
+        shoppinglist.add(new Ingredient("Eggs","12"));
+        shoppinglist.add(new Ingredient("Vanilla","200g"));
+        shoppinglist.add(new Ingredient("Strawberries","1kg"));
     }
 }

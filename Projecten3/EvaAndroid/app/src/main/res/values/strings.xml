@@ -5,12 +5,19 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="action_settings">Settings</string>
+
+    <!-- Drawer Strings -->
     <string name="navigation_drawer_header_top">Tuesday, 4 July</string>
     <string name="navigation_drawer_header_bottom">Started on Wednesday, 28 June</string>
-
     <string name="navigation_drawer_item1">Progress</string>
     <string name="navigation_drawer_item2">Today</string>
     <string name="navigation_drawer_item3">Shopping list</string>
     <string name="navigation_drawer_item4">Achievements</string>
+
+    <!-- Shopping List Strings -->
+    <string name="shoppinglist_ingredient">Ingredient</string>
+    <string name="shoppinglist_amount">Amount</string>
+    <string name="shoppinglist_add_ingredient">+</string>
+
 
 </resources>
