@@ -101,7 +101,7 @@ public class ShoppinglistFragment extends Fragment {
             // view verversen voor nieuw item te tonen
             initCard();
 
-            Toast.makeText(getActivity(), itemAmount + " has been added to the list", Toast.LENGTH_LONG).show();
+            Toast.makeText(getActivity(), "\"" + itemName + "\"" + " has been added to the list", Toast.LENGTH_LONG).show();
             addShoppingListItemNametxt.setText("");
             addShoppingListItemAmounttxt.setText("");
         }
