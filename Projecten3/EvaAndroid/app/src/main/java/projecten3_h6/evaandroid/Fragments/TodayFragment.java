@@ -30,7 +30,7 @@ import projecten3_h6.evaandroid.R;
 public class TodayFragment extends Fragment {
 
     @BindView(R.id.todayIngredients)TextView ingredientsView;
-    @BindView(R.id.todayPreperation)TextView preperationView;
+    @BindView(R.id.todayPreparation)TextView preparationView;
     @BindView(R.id.todayImage)ImageView recipeImage;
     @BindView(R.id.todayCookingTime)TextView cookingTime;
     @BindView(R.id.todayDifficulty)TextView difficulty;
@@ -60,27 +60,29 @@ public class TodayFragment extends Fragment {
         ingredients.add(new Ingredient("Wortelen","10"));
 
 
-        dish = new Dish(R.drawable.winterovenschotel,"Winterovenschotel met Le Puy-linzen", CookingTime.MEDIUM, "For starters", TypeDish.MAINDISH,
+        dish = new Dish(R.drawable.winterovenschotel,"Winterovenschotel met Le Puy-linzen", CookingTime.MEDIUM, "Beginner", TypeDish.MAINDISH,
                 ingredients,
-                        "1.Kook de linzen gaar in de groentenbouillon samen met een blaadje laurier," +
+                        "1. Kook de linzen gaar in de groentenbouillon samen met een blaadje laurier," +
                         " een halve ui en 1/2 tl gedroogde tijm.\n" +
                         "\n" +
-                        "2.Versnipper de rest van de uit en stoof ze aan in 3 el olijfolie." +
+                        "2. Versnipper de rest van de uit en stoof ze aan in 3 el olijfolie." +
                         " Voeg de look, groenten, wat zout en de gemengde mediterraanse kruiden toe en laat alles zo goed als gaar stoven" +
                         " met het deksel op de pan. Voeg eventueel wat water toe als de groenten dreigen aan te branden.\n" +
                         "\n" +
-                        "3.Warm de oven voor op 18°C en vet een ovenschaal in. Meng het broodkruim met de boter," +
+                        "3. Warm de oven voor op 18°C en vet een ovenschaal in. Meng het broodkruim met de boter," +
                         " 2 teentjes fijngehakte knoflook, de verse kruiden, zout en peper.\n" +
                         "\n" +
-                        "4.Meng de gekookte linzen (haal de halve ui en het laurierblad eruit)," +
+                        "4. Meng de gekookte linzen (haal de halve ui en het laurierblad eruit)," +
                         " de groenten en de noten onder elkaar in de ovenschotel." +
                         " Leg bovenop een laagje van het broodkruim en bak de schotel zo'n 10 minuten in de oven," +
                         " tot het korstje licht verkleurt.");
 
 
         StringBuilder sb = new StringBuilder();
+        String delim = "";
         for(Ingredient i : dish.getIngredients()){
-            sb.append(i.getName() + ": ").append(i.getAmount()).append("\n");
+            sb.append(delim).append(i.getName() + ": ").append(i.getAmount());
+            delim = "\n";
         }
 
         String typeStr;
@@ -106,7 +108,7 @@ public class TodayFragment extends Fragment {
         type.setText(typeStr);
         cookingTime.setText(time);
         ingredientsView.setText(sb.toString());
-        preperationView.setText(dish.getPreparation());
+        preparationView.setText(dish.getPreparation());
         recipeImage.setImageResource(dish.getImageId());
         difficulty.setText(dish.getDifficulty());
         dishName.setText(dish.getName());
