@@ -7,6 +7,7 @@ import java.util.List;
  */
 
 public class Dish {
+    private int imageId;
     private String name;
     private CookingTime cookingTime;
     private String difficulty;
@@ -14,13 +15,22 @@ public class Dish {
     private List<Ingredient> ingredients;
     private String preparation;
 
-    public Dish(String name, CookingTime cookingTime, String difficulty, TypeDish type, List<Ingredient> ingredients, String preparation) {
+    public Dish(int imageId, String name, CookingTime cookingTime, String difficulty, TypeDish type, List<Ingredient> ingredients, String preparation) {
+        this.imageId = imageId;
         this.name = name;
         this.cookingTime = cookingTime;
         this.difficulty = difficulty;
         this.type = type;
         this.ingredients = ingredients;
         this.preparation = preparation;
+    }
+
+    public int getImageId() {
+        return imageId;
+    }
+
+    public void setImageId(int imageId) {
+        this.imageId = imageId;
     }
 
     public String getName() {

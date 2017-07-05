@@ -15,6 +15,7 @@ import android.view.MenuItem;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import projecten3_h6.evaandroid.Fragments.ShoppinglistFragment;
+import projecten3_h6.evaandroid.Fragments.TodayFragment;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -89,10 +90,11 @@ public class MainActivity extends AppCompatActivity
         if (itemId == R.id.nav_camera) {
             // Handle the camera action
         } else if (itemId == R.id.nav_gallery) {
-
+            fragment = new TodayFragment();
+            toolbar.setTitle("Today");
         } else if (itemId == R.id.nav_slideshow) {
             fragment = new ShoppinglistFragment();
-            toolbar.setTitle("shopping list");
+            toolbar.setTitle("Shopping List");
 
         } else if (itemId == R.id.nav_manage) {
 
