@@ -3,6 +3,18 @@
     <color name="colorPrimaryDark">#7CB342</color>
     <color name="colorPrimary">#8BC34A</color>
     <color name="colorPrimaryLight">#9CCC65</color>
+    <color name="colorAccentLight">#FFA726</color>
     <color name="colorAccent">#FB8C00</color>
-    <color name="iconColor">#FFFFFF</color>
+    <color name="colorAccentDark">#EF6C00</color>
+    <color name="contentColor">#FFFFFF</color>
+    <color name="grayDark">#3D3D3D</color>
+    <color name="grayMedium">#6D6D6D</color>
+    <color name="grayLight">#B3B3B3</color>
+    <color name="grayBorder">#ECECEC</color>
+    <color name="textPrimary">#CC000000</color>
+    <color name="textSecondary">#8C000000</color>
+    <color name="textHint">#66000000</color>
+
+    <!-- EditText Colors -->
+    <color name="hintColor">#EEEEEE</color>
 </resources>
