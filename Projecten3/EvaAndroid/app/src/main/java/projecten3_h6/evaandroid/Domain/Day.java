@@ -5,22 +5,42 @@ package projecten3_h6.evaandroid.Domain;
  */
 
 public class Day {
-    private String Date;
+    private String dateOfTheWeek;
+    private String date;
     private Dish dish;
     private String tip;
+    private Boolean completed;
 
-    public Day(String date, Dish dish, String tip) {
-        Date = date;
+    public Day(String dateOfTheWeek, String date, Dish dish, String tip) {
+        this.dateOfTheWeek = dateOfTheWeek;
+        this.date = date;
         this.dish = dish;
         this.tip = tip;
+        completed = false;
+    }
+
+    public Boolean getCompleted() {
+        return completed;
+    }
+
+    public void setCompleted(Boolean completed) {
+        this.completed = completed;
+    }
+
+    public String getDateOfTheWeek() {
+        return dateOfTheWeek;
+    }
+
+    public void setDateOfTheWeek(String dateOfTheWeek) {
+        this.dateOfTheWeek = dateOfTheWeek;
     }
 
     public String getDate() {
-        return Date;
+        return date;
     }
 
     public void setDate(String date) {
-        Date = date;
+        this.date = date;
     }
 
     public Dish getDish() {
