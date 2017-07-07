@@ -14,6 +14,7 @@ import android.view.MenuItem;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import projecten3_h6.evaandroid.Fragments.ProgressFragment;
 import projecten3_h6.evaandroid.Fragments.ShoppinglistFragment;
 import projecten3_h6.evaandroid.Fragments.TodayFragment;
 
@@ -87,16 +88,16 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         Fragment fragment = null;
 
-        if (itemId == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (itemId == R.id.nav_gallery) {
+        if (itemId == R.id.nav_progress) {
+            fragment = new ProgressFragment();
+            toolbar.setTitle("Progress");
+        } else if (itemId == R.id.nav_today) {
             fragment = new TodayFragment();
             toolbar.setTitle("Today");
-        } else if (itemId == R.id.nav_slideshow) {
+        } else if (itemId == R.id.nav_shoppinglist) {
             fragment = new ShoppinglistFragment();
             toolbar.setTitle("Shopping List");
-
-        } else if (itemId == R.id.nav_manage) {
+        } else if (itemId == R.id.nav_achievements) {
 
         }
 
