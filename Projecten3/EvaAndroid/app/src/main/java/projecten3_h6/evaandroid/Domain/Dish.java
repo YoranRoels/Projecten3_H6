@@ -15,7 +15,8 @@ public class Dish {
     private List<Ingredient> ingredients;
     private String preparation;
 
-    public Dish(int imageId, String name, CookingTime cookingTime, String difficulty, TypeDish type, List<Ingredient> ingredients, String preparation) {
+    public Dish(int imageId, String name, CookingTime cookingTime, String difficulty, TypeDish type,
+                List<Ingredient> ingredients, String preparation) {
         this.imageId = imageId;
         this.name = name;
         this.cookingTime = cookingTime;
