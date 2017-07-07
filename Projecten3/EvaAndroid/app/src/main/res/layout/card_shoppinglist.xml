@@ -30,7 +30,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/textPrimary"
-                android:theme="@style/checkBoxWhite"/>
+                android:theme="@style/checkBoxGray"/>
 
             <TextView
                 android:paddingTop="5dp"
