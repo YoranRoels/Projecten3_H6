@@ -39,8 +39,7 @@ public class MainActivity extends AppCompatActivity
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
-        displaySelectedScreen(R.id.content_frame);
-        toolbar.setTitle("Home");
+        displaySelectedScreen(R.id.nav_progress);
 
         navigationView.setNavigationItemSelectedListener(this);
     }
@@ -103,7 +102,6 @@ public class MainActivity extends AppCompatActivity
 
         //replacing the fragment
         if (fragment != null) {
-
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
             ft.replace(R.id.content_frame, fragment);
             ft.commit();
