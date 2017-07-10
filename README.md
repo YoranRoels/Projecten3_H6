@@ -36,8 +36,8 @@ Branch workflow:
 Npm install
 ## Structure
 
-|--------------	|------------------------------------------------------------------------------------------------------	|
 | Bin          	| generally not needed                                                                                 	|
+|--------------	|------------------------------------------------------------------------------------------------------	|
 | Config       	| Password Strategy                                                                                    	|
 | Models       	| Contains schema's for the objects used(mongoose)                                                     	|
 | Node_modules 	| External modules, not needed(npm install should fix these)                                           	|
