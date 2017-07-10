@@ -30,6 +30,8 @@ import projecten3_h6.evaandroid.R;
 public class ProgressFragment extends Fragment {
 
     @BindView(R.id.progressRecyclerView) RecyclerView mRecyclerView;
+    @BindView(R.id.progressTextView) TextView progressTextView;
+    @BindView(R.id.progressMotivationTextView) TextView progressMotivationTextView;
 
     protected RecyclerView.LayoutManager mLayoutManager;
     private ProgressAdapter adapter ;
@@ -79,9 +81,9 @@ public class ProgressFragment extends Fragment {
                         " de groenten en de noten onder elkaar in de ovenschotel." +
                         " Leg bovenop een laagje van het broodkruim en bak de schotel zo'n 10 minuten in de oven," +
                         " tot het korstje licht verkleurt."),
-                "A durum a day keeps the vegan away"));
+                "A durum a day keeps the vegan away."));
 
-        days.add(new Day("Tuesday","11/07/2017",new Dish(R.drawable.winterovenschotel,"Lasagna with vegetables", CookingTime.SHORT, "Beginner", TypeDish.MAINDISH,
+        days.add(new Day("Tuesday (Today)","11/07/2017",new Dish(R.drawable.winterovenschotel,"Lasagna with vegetables", CookingTime.SHORT, "Beginner", TypeDish.MAINDISH,
                 ingredients,
                 "1. Kook de linzen gaar in de groentenbouillon samen met een blaadje laurier," +
                         " een halve ui en 1/2 tl gedroogde tijm.\n" +
@@ -97,7 +99,7 @@ public class ProgressFragment extends Fragment {
                         " de groenten en de noten onder elkaar in de ovenschotel." +
                         " Leg bovenop een laagje van het broodkruim en bak de schotel zo'n 10 minuten in de oven," +
                         " tot het korstje licht verkleurt."),
-                "you can never have enough veggies"));
+                "You can never have enough veggies."));
 
         days.add(new Day("Wednesday","12/07/2017",new Dish(R.drawable.winterovenschotel,"Veggie Pizza", CookingTime.LONG, "Proffesional", TypeDish.MAINDISH,
                 ingredients,
@@ -115,9 +117,10 @@ public class ProgressFragment extends Fragment {
                         " de groenten en de noten onder elkaar in de ovenschotel." +
                         " Leg bovenop een laagje van het broodkruim en bak de schotel zo'n 10 minuten in de oven," +
                         " tot het korstje licht verkleurt."),
-                "There is no meat on mars!"));
+                "There is no meat on mars."));
 
-
+        progressTextView.setText("You've completed 4 days. Keep it up!");
+        progressMotivationTextView.setText("It's ok that you've missed a day, it's our secret.");
     }
 
     @Override

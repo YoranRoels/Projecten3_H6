@@ -64,14 +64,14 @@
 
             <Button
                 android:id="@+id/addShoppingListItembtn"
-                android:text="@string/shoppinglist_add_ingredient"
+                android:text="@string/plus"
                 android:textColor="@color/contentColor"
                 android:layout_width="50dp"
                 android:layout_height="40dp"
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
                 android:background="@color/colorAccentLight"
-                android:textSize="25dp"/>
+                android:textSize="25sp"/>
 
         </LinearLayout>
 

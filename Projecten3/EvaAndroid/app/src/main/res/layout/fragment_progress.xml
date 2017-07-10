@@ -6,14 +6,23 @@
     android:orientation="vertical">
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/progressTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="You've completed 4 days! Keep it up!"
+        android:text=""
         android:textAlignment="center"
         android:textSize="20sp"
         android:textColor="@color/textPrimary"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="10dp"/>
+
+    <TextView
+        android:id="@+id/progressMotivationTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textAlignment="center"
+        android:textSize="14sp"
+        android:textColor="@color/textSecondary"
         android:layout_marginBottom="15dp"/>
 
     <LinearLayout
@@ -66,7 +75,7 @@
             android:id="@+id/progressBox4"
             android:layout_width="20dp"
             android:layout_height="20dp"
-            android:src="@drawable/checkbox_completed"
+            android:src="@drawable/checkbox"
             android:layout_marginStart="1dp"
             android:layout_marginLeft="1dp"
             android:layout_marginEnd="1dp"
@@ -76,7 +85,7 @@
             android:id="@+id/progressBox5"
             android:layout_width="20dp"
             android:layout_height="20dp"
-            android:src="@drawable/checkbox"
+            android:src="@drawable/checkbox_completed"
             android:layout_marginStart="1dp"
             android:layout_marginLeft="1dp"
             android:layout_marginEnd="1dp"
@@ -291,5 +300,6 @@
     <android.support.v7.widget.RecyclerView
         android:id="@+id/progressRecyclerView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:layout_marginTop="20dp"/>
 </LinearLayout>

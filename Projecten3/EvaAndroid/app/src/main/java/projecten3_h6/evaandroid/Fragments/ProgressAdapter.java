@@ -44,7 +44,7 @@ public class ProgressAdapter extends RecyclerView.Adapter<ProgressAdapter.Progre
     public void onBindViewHolder(ProgressAdapter.ProgressViewHolder holder, int position) {
         TextView progressDayOfTheWeek = holder.progressDayOfTheWeek;
         TextView progressDishTitle = holder.progressDishTitle;
-        Button progressDayCompleted = holder.progressDayCompleted; // todo implement button
+        Button toggleComplete = holder.toggleComplete; // todo implement button
         ImageView progressCardImage = holder.progressCardImage;
 
 
@@ -77,8 +77,8 @@ public class ProgressAdapter extends RecyclerView.Adapter<ProgressAdapter.Progre
         @BindView(R.id.progressCardDishTitle)
         public TextView progressDishTitle;
 
-        @BindView(R.id.progresscompletedBtn)
-        public Button progressDayCompleted;
+        @BindView(R.id.toggleComplete)
+        public Button toggleComplete;
 
 
         @BindView(R.id.progresscardImage)

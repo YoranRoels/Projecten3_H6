@@ -17,7 +17,7 @@
     <!-- Shopping List Strings -->
     <string name="shoppinglist_ingredient">Ingredient</string>
     <string name="shoppinglist_amount">Amount</string>
-    <string name="shoppinglist_add_ingredient">+</string>
+    <string name="plus">+</string>
 
 
 </resources>
