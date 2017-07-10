@@ -31,10 +31,10 @@ Branch workflow:
     git push
 
 
-#AngularApp
-##Setup
+# AngularApp
+## Setup
 Npm install
-##Structure
+## Structure
 | Bin          	| generally not needed                                                                                 	|
 |--------------	|------------------------------------------------------------------------------------------------------	|
 | Config       	| Password Strategy                                                                                    	|
