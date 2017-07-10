@@ -26,8 +26,8 @@
             <ImageView
                 android:layout_width="100dp"
                 android:layout_height="70dp"
-                android:src="@drawable/winterovenschotel"
-                android:id="@+id/progresscardImage"/>
+                android:src="@drawable/dish_placeholder"
+                android:id="@+id/dayDishImage"/>
 
             <LinearLayout
                 android:paddingLeft="20dp"
@@ -43,7 +43,7 @@
                     android:layout_width="150dp"
                     android:layout_height="wrap_content"
                     android:id="@+id/progressCardDay"
-                    android:text=""
+                    android:text="@string/empty_dash"
                     android:textStyle="bold"
                     />
 
@@ -52,7 +52,7 @@
                     android:layout_width="150dp"
                     android:layout_height="wrap_content"
                     android:id="@+id/progressCardDishTitle"
-                    android:text=""/>
+                    android:text="@string/empty_dash"/>
 
             </LinearLayout>
 
@@ -74,7 +74,8 @@
                     android:textOn=""
                     android:textOff=""
                     android:focusable="false"
-                    android:focusableInTouchMode="false"/>
+                    android:focusableInTouchMode="false"
+                    android:visibility="invisible"/>
 
             </LinearLayout>
 

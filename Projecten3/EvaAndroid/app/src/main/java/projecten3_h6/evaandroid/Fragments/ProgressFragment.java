@@ -34,7 +34,7 @@ public class ProgressFragment extends Fragment {
     @BindView(R.id.progressMotivationTextView) TextView progressMotivationTextView;
 
     protected RecyclerView.LayoutManager mLayoutManager;
-    private ProgressAdapter adapter ;
+    private ProgressAdapter adapter;
     private ArrayList<Day> days = new ArrayList<>();
 
     @Nullable
@@ -48,12 +48,22 @@ public class ProgressFragment extends Fragment {
 
         mLayoutManager = new LinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(mLayoutManager);
-
+        
         initdata();
+        // initemptydata();
+
+        progressTextView.setText("You've completed 4 days. Keep it up!");
+        progressMotivationTextView.setText("It's ok that you've missed a day, it's our secret.");
 
         adapter = new ProgressAdapter(days);
         mRecyclerView.setAdapter(adapter);
         return v;
+    }
+
+    public void initemptydata() {
+        days.add(new Day("Monday"));
+        days.add(new Day("Tuesday"));
+        days.add(new Day("Wednesday"));
     }
 
     public void initdata(){
@@ -118,9 +128,6 @@ public class ProgressFragment extends Fragment {
                         " Leg bovenop een laagje van het broodkruim en bak de schotel zo'n 10 minuten in de oven," +
                         " tot het korstje licht verkleurt."),
                 "There is no meat on mars."));
-
-        progressTextView.setText("You've completed 4 days. Keep it up!");
-        progressMotivationTextView.setText("It's ok that you've missed a day, it's our secret.");
     }
 
     @Override
