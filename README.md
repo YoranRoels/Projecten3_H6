@@ -33,7 +33,13 @@ Branch workflow:
 
 # AngularApp
 ## Setup
+
 Npm install
+
+## Start-up
+
+npm run dev (= script to start nodemon)
+
 ## Structure
 
 | Directory     | Usage                                                                                                	|
