@@ -19,6 +19,11 @@ public class Day {
         completed = false;
     }
 
+    public Day(String dateOfTheWeek) {
+        this.dateOfTheWeek = dateOfTheWeek;
+        completed = false;
+    }
+
     public Boolean getCompleted() {
         return completed;
     }

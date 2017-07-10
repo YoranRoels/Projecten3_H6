@@ -44,18 +44,16 @@ public class ProgressAdapter extends RecyclerView.Adapter<ProgressAdapter.Progre
     public void onBindViewHolder(ProgressAdapter.ProgressViewHolder holder, int position) {
         TextView progressDayOfTheWeek = holder.progressDayOfTheWeek;
         TextView progressDishTitle = holder.progressDishTitle;
-        Button progressDayCompleted = holder.progressDayCompleted; // todo implement button
-        ImageView progressCardImage = holder.progressCardImage;
+        Button toggleComplete = holder.toggleComplete; // todo implement button
+        ImageView dayDishImage = holder.dayDishImage;
 
-
-        if(days.get(position).getCompleted() == false){
-            progressDayOfTheWeek.setText(days.get(position).getDateOfTheWeek());
+        progressDayOfTheWeek.setText(days.get(position).getDateOfTheWeek());
+        if(days.get(position).getDish() != null) {
             progressDishTitle.setText(days.get(position).getDish().getName());
-            Context context = holder.progressCardImage.getContext();
-            Picasso.with(context).load(days.get(position).getDish().getImageId()).into(progressCardImage);
-            progressCardImage.setImageResource(days.get(position).getDish().getImageId());
-        } else {
-            // do something
+            Context context = holder.dayDishImage.getContext();
+            Picasso.with(context).load(days.get(position).getDish().getImageId()).into(dayDishImage);
+            dayDishImage.setImageResource(days.get(position).getDish().getImageId());
+            toggleComplete.setVisibility(View.VISIBLE);
         }
 
 
@@ -77,12 +75,12 @@ public class ProgressAdapter extends RecyclerView.Adapter<ProgressAdapter.Progre
         @BindView(R.id.progressCardDishTitle)
         public TextView progressDishTitle;
 
-        @BindView(R.id.progresscompletedBtn)
-        public Button progressDayCompleted;
+        @BindView(R.id.toggleComplete)
+        public Button toggleComplete;
 
 
-        @BindView(R.id.progresscardImage)
-        public ImageView progressCardImage;
+        @BindView(R.id.dayDishImage)
+        public ImageView dayDishImage;
 
         public ProgressViewHolder(View itemView) {
             super(itemView);
