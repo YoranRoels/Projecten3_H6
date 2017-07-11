@@ -8,7 +8,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -20,7 +19,7 @@ import projecten3_h6.evaandroid.Domain.CookingTime;
 import projecten3_h6.evaandroid.Domain.Day;
 import projecten3_h6.evaandroid.Domain.Dish;
 import projecten3_h6.evaandroid.Domain.Ingredient;
-import projecten3_h6.evaandroid.Domain.TypeDish;
+import projecten3_h6.evaandroid.Domain.DishType;
 import projecten3_h6.evaandroid.R;
 
 /**
@@ -75,7 +74,7 @@ public class ProgressFragment extends Fragment {
         ingredients.add(new Ingredient("Zout","200g"));
         ingredients.add(new Ingredient("Wortelen","10"));
 
-        days.add(new Day("Monday","10/07/2017",new Dish(R.drawable.winterovenschotel,"Winterovenschotel met Le Puy-linzen", CookingTime.MEDIUM, "Beginner", TypeDish.MAINDISH,
+        days.add(new Day("Monday","10/07/2017",new Dish(R.drawable.winterovenschotel,"Winterovenschotel met Le Puy-linzen", CookingTime.MEDIUM, "Beginner", DishType.MAINDISH,
                 ingredients,
                 "1. Kook de linzen gaar in de groentenbouillon samen met een blaadje laurier," +
                         " een halve ui en 1/2 tl gedroogde tijm.\n" +
@@ -93,7 +92,7 @@ public class ProgressFragment extends Fragment {
                         " tot het korstje licht verkleurt."),
                 "A durum a day keeps the vegan away."));
 
-        days.add(new Day("Tuesday (Today)","11/07/2017",new Dish(R.drawable.winterovenschotel,"Lasagna with vegetables", CookingTime.SHORT, "Beginner", TypeDish.MAINDISH,
+        days.add(new Day("Tuesday (Today)","11/07/2017",new Dish(R.drawable.winterovenschotel,"Lasagna with vegetables", CookingTime.SHORT, "Beginner", DishType.MAINDISH,
                 ingredients,
                 "1. Kook de linzen gaar in de groentenbouillon samen met een blaadje laurier," +
                         " een halve ui en 1/2 tl gedroogde tijm.\n" +
@@ -111,7 +110,7 @@ public class ProgressFragment extends Fragment {
                         " tot het korstje licht verkleurt."),
                 "You can never have enough veggies."));
 
-        days.add(new Day("Wednesday","12/07/2017",new Dish(R.drawable.winterovenschotel,"Veggie Pizza", CookingTime.LONG, "Proffesional", TypeDish.MAINDISH,
+        days.add(new Day("Wednesday","12/07/2017",new Dish(R.drawable.winterovenschotel,"Veggie Pizza", CookingTime.LONG, "Proffesional", DishType.MAINDISH,
                 ingredients,
                 "1. Kook de linzen gaar in de groentenbouillon samen met een blaadje laurier," +
                         " een halve ui en 1/2 tl gedroogde tijm.\n" +
