@@ -7,7 +7,7 @@
     android:layout_height="match_parent">
 
     <LinearLayout
-        android:paddingTop="20dp"
+        android:layout_marginTop="77dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -17,52 +17,57 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:orientation="vertical"
-            android:padding="10dp">
-
-            <TextView
-                android:layout_gravity="center"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/achievementsTotalVeganDays"
-                android:text="72"
-                android:textSize="20dp"
-                android:textStyle="bold"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Total vegan days"/>
-
-
-        </LinearLayout>
-
-        <View
-            android:layout_width="2dp"
-            android:layout_height="50dp"
-            android:background="@android:color/black"
-            />
-
-        <LinearLayout
-            android:padding="10dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
+            android:gravity="center"
             android:orientation="vertical">
 
             <TextView
                 android:layout_gravity="center"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/achievementsMaxVeganStrea"
-                android:text="16"
-                android:textSize="20dp"
-                android:textStyle="bold"/>
+                android:id="@+id/achievementsTotalVeganDays"
+                android:text="25"
+                android:textSize="20sp"
+                android:textColor="@color/textPrimary"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Max vegan streak"/>
+                android:text="@string/total_vegan_days"
+                android:textColor="@color/textSecondary"/>
+
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="50dp"
+            android:background="@color/grayBorder"
+            android:layout_marginLeft="30dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginEnd="30dp"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/achievementsMaxVeganStreak"
+                android:text="12"
+                android:textSize="20sp"
+                android:textColor="@color/textPrimary"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/max_vegan_streak"
+                android:textColor="@color/textSecondary"/>
 
 
         </LinearLayout>
@@ -70,46 +75,46 @@
     </LinearLayout>
 
     <TextView
-        android:paddingTop="10dp"
+        android:id="@+id/achievementsTotalProgressCount"
+        android:paddingTop="25dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="16/32"
-        android:id="@+id/achievementsTotalProgressCount"
-        android:textStyle="bold"
+        android:text="6/12"
         android:textSize="20sp"
-        android:textColor="@android:color/black"/>
+        android:textColor="@color/textPrimary"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:text="Achievements"
-        android:padding="2dp"/>
+        android:textColor="@color/textSecondary"/>
 
     <ProgressBar
         android:padding="5dp"
-        style="?android:attr/progressBarStyleHorizontal"
-        android:layout_width="250dp"
+        style="@android:style/Widget.ProgressBar.Horizontal"
+        android:layout_width="274dp"
         android:layout_height="wrap_content"
+        android:minHeight="5dip"
+        android:maxHeight="5dip"
         android:layout_gravity="center"
+        android:indeterminate="false"
         android:max="32"
         android:progress="16"
-        android:visibility="visible"
-        android:progressTint="@color/colorAccent"
-        android:progressBackgroundTint="@color/cardview_dark_background"
+        android:progressDrawable="@drawable/progress_bar"
         android:id="@+id/achievementsTotalProgressBar"
         />
 
     <LinearLayout
         android:orientation="horizontal"
-        android:padding="10dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center">
+        android:layout_gravity="center"
+        android:layout_marginBottom="10dp">
 
         <LinearLayout
-            android:padding="5dp"
+            android:padding="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
@@ -119,18 +124,20 @@
                 android:layout_gravity="center"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="9"
-                android:id="@+id/achievementsTotalBronze"/>
+                android:text="4"
+                android:id="@+id/achievementsTotalBronze"
+                android:textSize="20sp"
+                android:layout_marginBottom="5dp"/>
 
             <ImageView
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:src="@drawable/carrot_trophy"/>
+                android:src="@drawable/carrot_trophy_bronze"/>
 
         </LinearLayout>
 
         <LinearLayout
-            android:padding="5dp"
+            android:padding="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
@@ -140,18 +147,20 @@
                 android:layout_gravity="center"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="6"
-                android:id="@+id/achievementsTotalSilver"/>
+                android:text="2"
+                android:id="@+id/achievementsTotalSilver"
+                android:textSize="20sp"
+                android:layout_marginBottom="5dp"/>
 
             <ImageView
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:src="@drawable/carrot_trophy"/>
+                android:src="@drawable/carrot_trophy_silver"/>
 
         </LinearLayout>
 
         <LinearLayout
-            android:padding="5dp"
+            android:padding="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
@@ -161,13 +170,15 @@
                 android:layout_gravity="center"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="1"
-                android:id="@+id/achievementsTotalGold"/>
+                android:text="0"
+                android:id="@+id/achievementsTotalGold"
+                android:textSize="20sp"
+                android:layout_marginBottom="5dp"/>
 
             <ImageView
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:src="@drawable/carrot_trophy"/>
+                android:src="@drawable/carrot_trophy_gold"/>
 
         </LinearLayout>
 
@@ -183,7 +194,7 @@
             android:padding="5dp"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:src="@drawable/carrot_trophy"/>
+            android:src="@drawable/carrot_trophy_bronze"/>
 
         <android.support.v7.widget.RecyclerView
             android:layout_width="wrap_content"
@@ -202,7 +213,7 @@
             android:padding="5dp"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:src="@drawable/carrot_trophy"/>
+            android:src="@drawable/carrot_trophy_silver"/>
 
         <android.support.v7.widget.RecyclerView
             android:layout_width="wrap_content"
@@ -221,7 +232,7 @@
             android:padding="5dp"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:src="@drawable/carrot_trophy"/>
+            android:src="@drawable/carrot_trophy_gold"/>
 
         <android.support.v7.widget.RecyclerView
             android:layout_width="wrap_content"

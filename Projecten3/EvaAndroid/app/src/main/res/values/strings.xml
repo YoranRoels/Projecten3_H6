@@ -18,6 +18,10 @@
     <string name="shoppinglist_ingredient">Ingredient</string>
     <string name="shoppinglist_amount">Amount</string>
 
+    <!-- Achievements String -->
+    <string name="max_vegan_streak">Max Vegan Streak</string>
+    <string name="total_vegan_days">Total Vegan Days</string>
+
     <!-- Misc. -->
     <string name="plus">+</string>
     <string name="empty_dash">-</string>
