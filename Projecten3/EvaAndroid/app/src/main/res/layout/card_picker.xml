@@ -40,18 +40,10 @@
                 android:gravity="center">
 
                 <TextView
-                    android:layout_width="150dp"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/progressCardDay"
-                    android:text=""
-                    android:textStyle="bold"
-                    />
-
-                <TextView
                     android:paddingTop="5dp"
                     android:layout_width="150dp"
                     android:layout_height="wrap_content"
-                    android:id="@+id/progressCardDishTitle"
+                    android:id="@+id/progressPickerCardDishTitle"
                     android:text=""/>
 
             </LinearLayout>
