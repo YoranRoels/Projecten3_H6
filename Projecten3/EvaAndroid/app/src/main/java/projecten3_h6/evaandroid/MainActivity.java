@@ -14,6 +14,7 @@ import android.view.MenuItem;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import projecten3_h6.evaandroid.Fragments.AchievementFragment;
 import projecten3_h6.evaandroid.Fragments.ProgressFragment;
 import projecten3_h6.evaandroid.Fragments.ShoppinglistFragment;
 import projecten3_h6.evaandroid.Fragments.TodayFragment;
@@ -97,7 +98,8 @@ public class MainActivity extends AppCompatActivity
             fragment = new ShoppinglistFragment();
             toolbar.setTitle("Shopping List");
         } else if (itemId == R.id.nav_achievements) {
-
+            fragment = new AchievementFragment();
+            toolbar.setTitle("Achievements");
         }
 
         //replacing the fragment

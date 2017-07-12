@@ -90,7 +90,7 @@ public class ProgressFragment extends Fragment implements ProgressPickerDialog.D
         ingredients.add(new Ingredient("Zout","200g"));
         ingredients.add(new Ingredient("Wortelen","10"));
 
-        days.set(0, new Day("Monday","10/07/2017",new Dish(R.drawable.winterovenschotel,"Winterovenschotel met Le Puy-linzen", CookingTime.MEDIUM, "Beginner", TypeDish.MAINDISH,
+        days.set(0, new Day("Monday","10/07/2017",new Dish(R.drawable.winterovenschotel,"Winterovenschotel met Le Puy-linzen", CookingTime.MEDIUM, "Beginner", DishType.MAINDISH,
                 ingredients,
                 "1. Kook de linzen gaar in de groentenbouillon samen met een blaadje laurier," +
                         " een halve ui en 1/2 tl gedroogde tijm.\n" +
@@ -108,7 +108,7 @@ public class ProgressFragment extends Fragment implements ProgressPickerDialog.D
                         " tot het korstje licht verkleurt."),
                 "A durum a day keeps the vegan away."));
 
-        days.set(1, new Day("Tuesday (Today)","11/07/2017",new Dish(R.drawable.winterovenschotel,"Lasagna with vegetables", CookingTime.SHORT, "Beginner", TypeDish.MAINDISH,
+        days.set(1, new Day("Tuesday (Today)","11/07/2017",new Dish(R.drawable.winterovenschotel,"Lasagna with vegetables", CookingTime.SHORT, "Beginner", DishType.MAINDISH,
                 ingredients,
                 "1. Kook de linzen gaar in de groentenbouillon samen met een blaadje laurier," +
                         " een halve ui en 1/2 tl gedroogde tijm.\n" +
@@ -126,7 +126,7 @@ public class ProgressFragment extends Fragment implements ProgressPickerDialog.D
                         " tot het korstje licht verkleurt."),
                 "You can never have enough veggies."));
 
-        days.set(2, new Day("Wednesday","12/07/2017",new Dish(R.drawable.winterovenschotel,"Veggie Pizza", CookingTime.LONG, "Proffesional", TypeDish.MAINDISH,
+        days.set(2, new Day("Wednesday","12/07/2017",new Dish(R.drawable.winterovenschotel,"Veggie Pizza", CookingTime.LONG, "Proffesional", DishType.MAINDISH,
                 ingredients,
                 "1. Kook de linzen gaar in de groentenbouillon samen met een blaadje laurier," +
                         " een halve ui en 1/2 tl gedroogde tijm.\n" +
@@ -187,7 +187,7 @@ public class ProgressFragment extends Fragment implements ProgressPickerDialog.D
             ingredients.add(new Ingredient("Zout","200g"));
             ingredients.add(new Ingredient("Wortelen","10"));
 
-            choices.add(new Dish(R.drawable.winterovenschotel,"Winterovenschotel met Le Puy-linzen", CookingTime.MEDIUM, "Beginner", TypeDish.MAINDISH,
+            choices.add(new Dish(R.drawable.winterovenschotel,"Winterovenschotel met Le Puy-linzen", CookingTime.MEDIUM, "Beginner", DishType.MAINDISH,
                     ingredients,
                     "1. Kook de linzen gaar in de groentenbouillon samen met een blaadje laurier," +
                             " een halve ui en 1/2 tl gedroogde tijm.\n" +
@@ -204,7 +204,7 @@ public class ProgressFragment extends Fragment implements ProgressPickerDialog.D
                             " Leg bovenop een laagje van het broodkruim en bak de schotel zo'n 10 minuten in de oven," +
                             " tot het korstje licht verkleurt."));
 
-            choices.add(new Dish(R.drawable.winterovenschotel,"Lasagna with vegetables", CookingTime.SHORT, "Beginner", TypeDish.MAINDISH,
+            choices.add(new Dish(R.drawable.winterovenschotel,"Lasagna with vegetables", CookingTime.SHORT, "Beginner", DishType.MAINDISH,
                     ingredients,
                     "1. Kook de linzen gaar in de groentenbouillon samen met een blaadje laurier," +
                             " een halve ui en 1/2 tl gedroogde tijm.\n" +
@@ -221,7 +221,7 @@ public class ProgressFragment extends Fragment implements ProgressPickerDialog.D
                             " Leg bovenop een laagje van het broodkruim en bak de schotel zo'n 10 minuten in de oven," +
                             " tot het korstje licht verkleurt."));
 
-            choices.add(new Dish(R.drawable.winterovenschotel,"Veggie Pizza", CookingTime.LONG, "Proffesional", TypeDish.MAINDISH,
+            choices.add(new Dish(R.drawable.winterovenschotel,"Veggie Pizza", CookingTime.LONG, "Proffesional", DishType.MAINDISH,
                     ingredients,
                     "1. Kook de linzen gaar in de groentenbouillon samen met een blaadje laurier," +
                             " een halve ui en 1/2 tl gedroogde tijm.\n" +
