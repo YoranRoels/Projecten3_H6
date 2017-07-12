@@ -3,13 +3,10 @@ package projecten3_h6.evaandroid.Fragments;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.widget.TextViewCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -20,7 +17,7 @@ import butterknife.ButterKnife;
 import projecten3_h6.evaandroid.Domain.CookingTime;
 import projecten3_h6.evaandroid.Domain.Dish;
 import projecten3_h6.evaandroid.Domain.Ingredient;
-import projecten3_h6.evaandroid.Domain.TypeDish;
+import projecten3_h6.evaandroid.Domain.DishType;
 import projecten3_h6.evaandroid.R;
 
 /**
@@ -60,7 +57,7 @@ public class TodayFragment extends Fragment {
         ingredients.add(new Ingredient("Wortelen","10"));
 
 
-        dish = new Dish(R.drawable.winterovenschotel,"Winterovenschotel met Le Puy-linzen", CookingTime.MEDIUM, "Beginner", TypeDish.MAINDISH,
+        dish = new Dish(R.drawable.winterovenschotel,"Winterovenschotel met Le Puy-linzen", CookingTime.MEDIUM, "Beginner", DishType.MAINDISH,
                 ingredients,
                         "1. Kook de linzen gaar in de groentenbouillon samen met een blaadje laurier," +
                         " een halve ui en 1/2 tl gedroogde tijm.\n" +
@@ -88,9 +85,9 @@ public class TodayFragment extends Fragment {
         String typeStr;
         String time;
 
-        if(dish.getType() == TypeDish.MAINDISH){
+        if(dish.getType() == DishType.MAINDISH){
             typeStr = "Main Dish";
-        } else if(dish.getType() == TypeDish.APPETIZER){
+        } else if(dish.getType() == DishType.APPETIZER){
             typeStr = "Appetizer";
         } else {
             typeStr = "Dessert";
