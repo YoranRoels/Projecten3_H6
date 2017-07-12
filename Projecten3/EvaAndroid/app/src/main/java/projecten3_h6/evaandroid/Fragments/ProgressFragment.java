@@ -24,7 +24,7 @@ import projecten3_h6.evaandroid.Domain.CookingTime;
 import projecten3_h6.evaandroid.Domain.Day;
 import projecten3_h6.evaandroid.Domain.Dish;
 import projecten3_h6.evaandroid.Domain.Ingredient;
-import projecten3_h6.evaandroid.Domain.TypeDish;
+import projecten3_h6.evaandroid.Domain.DishType;
 import projecten3_h6.evaandroid.R;
 
 /**
