@@ -17,7 +17,6 @@ import butterknife.ButterKnife;
 import projecten3_h6.evaandroid.Adapters.AchievementDetailAdapter;
 import projecten3_h6.evaandroid.Domain.Achievement;
 import projecten3_h6.evaandroid.Domain.AchievementRanking;
-import projecten3_h6.evaandroid.Domain.AchievementType;
 import projecten3_h6.evaandroid.Domain.User;
 import projecten3_h6.evaandroid.R;
 
@@ -52,20 +51,20 @@ public class AchievementDetailFragment extends Fragment {
 
     private void initdata(){
 
-        achievements.add(new Achievement(R.drawable.carrot_trophy,R.drawable.checkbox,"We're Just Getting Started","Launch the app.",
-                new AchievementType(AchievementRanking.BRONZE, 5),true));
+        achievements.add(new Achievement(R.drawable.bronze_app_completed,R.drawable.bronze_app,"We're Just Getting Started","Launch the app.",
+                AchievementRanking.BRONZE,true));
 
-        achievements.add(new Achievement(R.drawable.carrot_trophy,R.drawable.checkbox,"I’m On a Regime","Open the ‘Progress’ tab.",
-                new AchievementType(AchievementRanking.BRONZE, 5),true));
+        achievements.add(new Achievement(R.drawable.bronze_calendar_completed,R.drawable.bronze_calendar,"I’m On a Regime","Open the ‘Progress’ tab.",
+                AchievementRanking.BRONZE,true));
 
-        achievements.add(new Achievement(R.drawable.carrot_trophy,R.drawable.checkbox,"What’s For Dinner?","Open the ‘Today’ tab.",
-                new AchievementType(AchievementRanking.BRONZE, 5),false));
+        achievements.add(new Achievement(R.drawable.bronze_cooking_completed,R.drawable.bronze_cooking,"What’s For Dinner?","Open the ‘Today’ tab.",
+                AchievementRanking.BRONZE,false));
 
-        achievements.add(new Achievement(R.drawable.carrot_trophy,R.drawable.checkbox,"Making Progress","Complete a ‘segment’ while having all days marked as complete.",
-                new AchievementType(AchievementRanking.SILVER, 10),false));
+        achievements.add(new Achievement(R.drawable.silver_checkbox_completed,R.drawable.silver_checkbox,"Making Progress","Complete a ‘segment’ while having all days marked as complete.",
+                AchievementRanking.SILVER,false));
 
-        achievements.add(new Achievement(R.drawable.carrot_trophy,R.drawable.checkbox, "Vegan Master Streak","Achieve a 25-day vegan streak.",
-                new AchievementType(AchievementRanking.GOLD, 25),true));
+        achievements.add(new Achievement(R.drawable.gold_streak_25_completed,R.drawable.gold_streak_25, "Vegan Master Streak","Achieve a 25-day vegan streak.",
+                AchievementRanking.GOLD,true));
 
 
     }

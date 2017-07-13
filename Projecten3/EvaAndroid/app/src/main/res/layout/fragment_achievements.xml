@@ -72,34 +72,42 @@
 
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/achievementsTotalProgressCount"
-        android:paddingTop="25dp"
+    <LinearLayout
+        android:id="@+id/achievementsLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:textSize="20sp"
-        android:textColor="@color/textPrimary"/>
+        android:orientation="vertical"
+        android:layout_gravity="center">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="@string/achievements"
-        android:textColor="@color/textSecondary"/>
+        <TextView
+            android:id="@+id/achievementsTotalProgressCount"
+            android:paddingTop="25dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textSize="20sp"
+            android:textColor="@color/textPrimary"/>
 
-    <ProgressBar
-        android:padding="5dp"
-        style="@android:style/Widget.ProgressBar.Horizontal"
-        android:layout_width="274dp"
-        android:layout_height="wrap_content"
-        android:minHeight="5dip"
-        android:maxHeight="5dip"
-        android:layout_gravity="center"
-        android:indeterminate="false"
-        android:progressDrawable="@drawable/progress_bar"
-        android:id="@+id/achievementsTotalProgressBar"
-        />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/achievements"
+            android:textColor="@color/textSecondary"/>
+
+        <ProgressBar
+            android:padding="5dp"
+            style="@android:style/Widget.ProgressBar.Horizontal"
+            android:layout_width="274dp"
+            android:layout_height="wrap_content"
+            android:minHeight="5dip"
+            android:maxHeight="5dip"
+            android:layout_gravity="center"
+            android:indeterminate="false"
+            android:progressDrawable="@drawable/progress_bar"
+            android:id="@+id/achievementsTotalProgressBar"/>
+
+    </LinearLayout>
 
     <LinearLayout
         android:orientation="horizontal"

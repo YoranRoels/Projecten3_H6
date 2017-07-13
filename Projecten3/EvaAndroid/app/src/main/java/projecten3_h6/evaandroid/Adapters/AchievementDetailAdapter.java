@@ -21,7 +21,8 @@ import projecten3_h6.evaandroid.R;
  * Created by jensleirens on 13/07/2017.
  */
 
-public class AchievementDetailAdapter extends RecyclerView.Adapter<AchievementDetailAdapter.AchievementDetailViewHolder> {
+public class
+AchievementDetailAdapter extends RecyclerView.Adapter<AchievementDetailAdapter.AchievementDetailViewHolder> {
 
     private int itemCount;
     private List<Achievement> achievements;
