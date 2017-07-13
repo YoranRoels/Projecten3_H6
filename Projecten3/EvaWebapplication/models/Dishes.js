@@ -1,11 +1,15 @@
-var mongoose = require("mongoose");
-
-
+var mongoose = require('mongoose');
 
 var DishSchema = new mongoose.Schema({
-    name : String,
-    difficulty : String,
-    preparation: String,
+    name: String,
+    cookingTime: {
+        type: String,
+        enum: ['SHORT', 'MEDIUM', 'LONG']
+    },
+    difficulty: {
+        type: String,
+        enum: ['STARTERS', 'ADVANCED', 'MASTER']
+    },
     dishType: {
         type: String,
         enum:[
@@ -13,16 +17,9 @@ var DishSchema = new mongoose.Schema({
             'MAINDISH',
             'DESSERT'],
     },
-    cookingTime: {
-        type: String,
-        enum: ['SHORT', 'MEDIUM', 'LONG']},,
+    ingredients: [{ type: mongoose.Schema.Types.ObjectId, ref:'Ingredient'}],
+    preparation: String,
     imageId: {type: Number, default: 0},
-    Ingredients: [{
-        type: mongoose.Schema.types.ObjectId,
-        ref: "Ingredient"
-    }]
-    
-    
 });
 
-mongoose.model("Dish", DishSchema);
+mongoose.model('Dish', DishSchema);
