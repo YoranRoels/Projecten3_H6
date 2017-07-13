@@ -23,4 +23,3 @@ var DishSchema = new mongoose.Schema({
 });
 
 mongoose.model('Dish', DishSchema);
-
