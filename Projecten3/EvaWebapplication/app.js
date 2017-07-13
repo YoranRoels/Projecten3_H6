@@ -9,6 +9,7 @@ var mongoose = require('mongoose');
 
 require('./models/Dishes');
 require('./models/Ingredients');
+require('./models/Achievements');
 
 mongoose.connect('mongodb://localhost/eva');
 
