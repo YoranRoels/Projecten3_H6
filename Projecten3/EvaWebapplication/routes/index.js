@@ -4,6 +4,7 @@ var router = express.Router();
 var mongoose = require('mongoose');
 var Dish = mongoose.model('Dish');
 var Ingredient = mongoose.model('Ingredient');
+var Achievement = mongoose.model('Achievement');
 
 
 /* GET home page. */
@@ -17,6 +18,10 @@ router.get('/dishes', function(req, res, next) {
 
         res.json(dishes);
     });
+});
+
+router.get('/dishes/:dish', function(req, res) {
+    res.json(req.dish);
 });
 
 router.post('/dishes', function(req, res, next) {
@@ -44,9 +49,38 @@ router.param('dish', function(req, res, next, name) {
     });
 });
 
-router.get('/dishes/:dish', function(req, res) {
-    res.json(req.dish);
+router.get('/achievements', function(req, res, next) {
+    Achievement.find(function(err, achievements){
+        if(err){ return next(err); }
+
+        res.json(achievements);
+    });
 });
 
+router.get('/achievements/:achievement', function(req, res) {
+    res.json(req.achievement);
+});
+
+router.post('/achievements', function(req, res, next) {
+    var achievement = new Achievement(req.body);
+
+    achievement.save(function(err, achievement){
+        if(err){ return next(err); }
+
+        res.json(achievement);
+    });
+});
+
+router.param('achievement', function(req, res, next, id) {
+    var query = Achievement.findById(id);
+
+    query.exec(function (err, achievement){
+        if (err) { return next(err); }
+        if (!achievement) { return next(new Error('can\'t find achievement')); }
+
+        req.achievement = achievement;
+        return next();
+    });
+});
 
 module.exports = router;
