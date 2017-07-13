@@ -3,11 +3,14 @@ package projecten3_h6.evaandroid.Fragments;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -16,6 +19,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import projecten3_h6.evaandroid.Adapters.AchievementAdapter;
 import projecten3_h6.evaandroid.Domain.Achievement;
 import projecten3_h6.evaandroid.Domain.AchievementRanking;
@@ -38,6 +42,7 @@ public class AchievementFragment extends Fragment {
     @BindView(R.id.achievementsBronzeRecyclerView)RecyclerView bronzeRecycler;
     @BindView(R.id.achievementsSilverRecyclerView)RecyclerView silverRecycler;
     @BindView(R.id.achievementsGoldRecyclerView)RecyclerView goldRecycler;
+    @BindView(R.id.achievementsLayout)LinearLayout achievementsLayout;
 
     protected RecyclerView.LayoutManager bronzeLayoutManager;
     protected RecyclerView.LayoutManager silverLayoutManager;
@@ -121,5 +126,15 @@ public class AchievementFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+    }
+
+    @OnClick(R.id.achievementsLayout)
+    public void openAchievementDetails() {
+        Fragment achievementDetailFragment = new AchievementDetailFragment();
+        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.content_frame, achievementDetailFragment);
+        fragmentTransaction.addToBackStack(achievementDetailFragment.toString());
+        fragmentTransaction.commit();
     }
 }
