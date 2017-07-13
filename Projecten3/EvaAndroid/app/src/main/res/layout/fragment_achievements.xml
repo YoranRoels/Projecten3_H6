@@ -97,7 +97,6 @@
         android:maxHeight="5dip"
         android:layout_gravity="center"
         android:indeterminate="false"
-        android:max="12"
         android:progressDrawable="@drawable/progress_bar"
         android:id="@+id/achievementsTotalProgressBar"
         />
