@@ -64,7 +64,7 @@ public class AchievementFragment extends Fragment {
         ButterKnife.bind(this,v);
 
         initdata();
-        PopulateTextViews();
+        populateTextViews();
 
         bronzeLayoutManager = new LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL,false);
         silverLayoutManager = new LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL,false);
@@ -85,11 +85,12 @@ public class AchievementFragment extends Fragment {
         return v;
     }
 
-    public void PopulateTextViews(){
+    public void populateTextViews(){
+        String achievementsEarned = String.valueOf(user.getAchievements().size()) + "/12";
 
         totalVeganDays.setText(String.valueOf(user.getTotalVeganDays()));
         maxVeganStreak.setText(String.valueOf(user.getLongestStreak()));
-        totalAchievements.setText(String.valueOf(user.getAchievements().size()));
+        totalAchievements.setText(achievementsEarned);
         totalProgressBar.setProgress(user.getAchievements().size());
 
         for(Achievement a : user.getAchievements()){
@@ -106,30 +107,29 @@ public class AchievementFragment extends Fragment {
         totalBronze.setText(String.valueOf(totalBronzeAchievements.size()));
         totalSilver.setText(String.valueOf(totalSilverAchievements.size()));
         totalGold.setText(String.valueOf(totalGoldAchievements.size()));
-
     }
 
     public void initdata(){
         List<Achievement> achievements = new ArrayList<>();
 
-        achievements.add(new Achievement(R.drawable.carrot_trophy,R.drawable.checkbox,"We're Just Getting Started","Launch the app.",
+        achievements.add(new Achievement(R.drawable.bronze_app_completed,R.drawable.bronze_app,"We're Just Getting Started","Launch the app.",
                 new AchievementType(AchievementRanking.BRONZE, 5),true));
 
-        achievements.add(new Achievement(R.drawable.carrot_trophy,R.drawable.checkbox,"I’m On a Regime","Open the ‘Progress’ tab.",
+        achievements.add(new Achievement(R.drawable.bronze_calendar_completed,R.drawable.bronze_calendar,"I’m On a Regime","Open the ‘Progress’ tab.",
                 new AchievementType(AchievementRanking.BRONZE, 5),true));
 
-        achievements.add(new Achievement(R.drawable.carrot_trophy,R.drawable.checkbox,"What’s For Dinner?","Open the ‘Today’ tab.",
+        achievements.add(new Achievement(R.drawable.bronze_cooking_completed,R.drawable.bronze_cooking,"What’s For Dinner?","Open the ‘Today’ tab.",
                 new AchievementType(AchievementRanking.BRONZE, 5),false));
 
-        achievements.add(new Achievement(R.drawable.carrot_trophy,R.drawable.checkbox,"Making Progress","Complete a ‘segment’ while having all days marked as complete.",
+        achievements.add(new Achievement(R.drawable.silver_checkbox_completed,R.drawable.silver_checkbox,"Making Progress","Complete a ‘segment’ while having all days marked as complete.",
                 new AchievementType(AchievementRanking.SILVER, 10),false));
 
-        achievements.add(new Achievement(R.drawable.carrot_trophy,R.drawable.checkbox, "Vegan Master Streak","Achieve a 25-day vegan streak.",
+        achievements.add(new Achievement(R.drawable.gold_streak_25_completed,R.drawable.gold_streak_25, "Vegan Master Streak","Achieve a 25-day vegan streak.",
                 new AchievementType(AchievementRanking.GOLD, 25),true));
 
         user = new User(achievements,null,null,0,0);
-        user.setLongestStreak(25);
-        user.setTotalVeganDays(35);
+        user.setLongestStreak(15);
+        user.setTotalVeganDays(34);
     }
 
     @Override
