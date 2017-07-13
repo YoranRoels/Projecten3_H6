@@ -5,6 +5,7 @@ var mongoose = require('mongoose');
 var Dish = mongoose.model('Dish');
 var Ingredient = mongoose.model('Ingredient');
 
+
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
@@ -28,7 +29,6 @@ router.post('/dishes', function(req, res, next) {
     });
 });
 
-
 // One thing you might notice about the remaining routes we need to implement is that they all require us to load a post object by ID.
 // Rather than replicating the same code across several different request handler functions,
 // we can use Express's param() function to automatically load an object.
@@ -47,5 +47,6 @@ router.param('dish', function(req, res, next, name) {
 router.get('/dishes/:dish', function(req, res) {
     res.json(req.dish);
 });
+
 
 module.exports = router;

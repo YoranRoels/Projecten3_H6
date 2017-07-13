@@ -29,3 +29,25 @@ Branch workflow:
   **Push**
   
     git push
+
+
+# AngularApp
+## Setup
+
+Npm install
+
+## Start-up
+
+npm run dev (= script to start nodemon)
+
+## Structure
+
+| Directory     | Usage                                                                                                	|
+|--------------	|------------------------------------------------------------------------------------------------------	|
+| Bin          	| generally not needed                                                                                 	|
+| Config       	| Password Strategy                                                                                    	|
+| Models       	| Contains schema's for the objects used(mongoose)                                                     	|
+| Node_modules 	| External modules, not needed(npm install should fix these)                                           	|
+| Public       	| This is where we're going to store JavaScript, CSS, images, and templates we want the client to use. 	|
+| Routes       	| Contains node controllers, contains all backend code                                                 	|
+| Views        	| Views                                                                                                	|

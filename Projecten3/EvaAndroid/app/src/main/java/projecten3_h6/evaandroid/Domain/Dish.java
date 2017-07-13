@@ -11,11 +11,11 @@ public class Dish {
     private String name;
     private CookingTime cookingTime;
     private String difficulty;
-    private TypeDish type;
+    private DishType type;
     private List<Ingredient> ingredients;
     private String preparation;
 
-    public Dish(int imageId, String name, CookingTime cookingTime, String difficulty, TypeDish type,
+    public Dish(int imageId, String name, CookingTime cookingTime, String difficulty, DishType type,
                 List<Ingredient> ingredients, String preparation) {
         this.imageId = imageId;
         this.name = name;
@@ -58,11 +58,11 @@ public class Dish {
         this.difficulty = difficulty;
     }
 
-    public TypeDish getType() {
+    public DishType getType() {
         return type;
     }
 
-    public void setType(TypeDish type) {
+    public void setType(DishType type) {
         this.type = type;
     }
 
