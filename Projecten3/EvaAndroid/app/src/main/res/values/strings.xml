@@ -21,6 +21,7 @@
     <!-- Achievements String -->
     <string name="max_vegan_streak">Max Vegan Streak</string>
     <string name="total_vegan_days">Total Vegan Days</string>
+    <string name="achievements">Achievements</string>
 
     <!-- Misc. -->
     <string name="plus">+</string>

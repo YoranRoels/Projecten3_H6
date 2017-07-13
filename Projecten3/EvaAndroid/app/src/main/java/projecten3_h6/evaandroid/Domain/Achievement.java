@@ -10,15 +10,15 @@ public class Achievement {
     private int imageId;
     private String title;
     private String description;
-    private AchievementType achievementType;
+    private AchievementRanking achievementRanking;
     private boolean completed;
 
-    public Achievement(int completedImageId,int imageId, String title, String description, AchievementType achievementType, boolean completed ) {
+    public Achievement(int completedImageId,int imageId, String title, String description, AchievementRanking achievementRanking, boolean completed ) {
         this.completedImageId = completedImageId;
         this.imageId = imageId;
         this.title = title;
         this.description = description;
-        this.achievementType = achievementType;
+        this.achievementRanking = achievementRanking;
         this.completed = completed;
     }
 
@@ -54,12 +54,12 @@ public class Achievement {
         this.description = description;
     }
 
-    public AchievementType getAchievementType() {
-        return achievementType;
+    public AchievementRanking getAchievementRanking() {
+        return achievementRanking;
     }
 
-    public void setAchievementType(AchievementType achievementType) {
-        this.achievementType = achievementType;
+    public void setAchievementRanking(AchievementRanking achievementRanking) {
+        this.achievementRanking = achievementRanking;
     }
 
     public boolean isCompleted() {
