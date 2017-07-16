@@ -6,8 +6,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.ToggleButton;
 
 import com.squareup.picasso.Picasso;
 
@@ -17,6 +19,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import projecten3_h6.evaandroid.Domain.Day;
+import projecten3_h6.evaandroid.Domain.User;
 import projecten3_h6.evaandroid.Fragments.ProgressFragment;
 import projecten3_h6.evaandroid.R;
 
@@ -28,10 +31,12 @@ public class ProgressAdapter extends RecyclerView.Adapter<ProgressAdapter.Progre
 
     private int itemCount;
     private List<Day> days;
+    private User user = new User(null,null,null,0,0);
 
     public ProgressAdapter(List<Day> days) {
         this.days = days;
         this.itemCount = days.size();
+        user.setDays(days);
     }
 
     @Override
@@ -42,10 +47,10 @@ public class ProgressAdapter extends RecyclerView.Adapter<ProgressAdapter.Progre
     }
 
     @Override
-    public void onBindViewHolder(ProgressAdapter.ProgressViewHolder holder, int position) {
+    public void onBindViewHolder(final ProgressAdapter.ProgressViewHolder holder, final int position) {
         TextView progressDayOfTheWeek = holder.progressDayOfTheWeek;
         TextView progressDishTitle = holder.progressDishTitle;
-        Button toggleComplete = holder.toggleComplete; // todo implement button
+        ToggleButton toggleComplete = holder.toggleComplete;
         ImageView dayDishImage = holder.dayDishImage;
 
         progressDayOfTheWeek.setText(days.get(position).getDateOfTheWeek());
@@ -55,12 +60,15 @@ public class ProgressAdapter extends RecyclerView.Adapter<ProgressAdapter.Progre
             Picasso.with(context).load(days.get(position).getDish().getImageId()).into(dayDishImage);
             dayDishImage.setImageResource(days.get(position).getDish().getImageId());
             toggleComplete.setVisibility(View.VISIBLE);
+            toggleComplete.setChecked(days.get(position).getCompleted());
         }
 
-
-
-        // todo setlistener for "complete" button
-
+        toggleComplete.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                ProgressFragment.days.get(position).setCompleted(isChecked);
+            }
+        });
     }
 
     @Override
@@ -77,7 +85,7 @@ public class ProgressAdapter extends RecyclerView.Adapter<ProgressAdapter.Progre
         public TextView progressDishTitle;
 
         @BindView(R.id.toggleComplete)
-        public Button toggleComplete;
+        public ToggleButton toggleComplete;
 
 
         @BindView(R.id.dayDishImage)
