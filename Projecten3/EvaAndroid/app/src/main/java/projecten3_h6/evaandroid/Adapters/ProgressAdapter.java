@@ -19,6 +19,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import projecten3_h6.evaandroid.Domain.Day;
+import projecten3_h6.evaandroid.Domain.EvaApplication;
 import projecten3_h6.evaandroid.Domain.User;
 import projecten3_h6.evaandroid.Fragments.ProgressFragment;
 import projecten3_h6.evaandroid.R;
@@ -31,12 +32,12 @@ public class ProgressAdapter extends RecyclerView.Adapter<ProgressAdapter.Progre
 
     private int itemCount;
     private List<Day> days;
-    private User user = new User(null,null,null,0,0);
+    //private User user;
 
     public ProgressAdapter(List<Day> days) {
         this.days = days;
         this.itemCount = days.size();
-        user.setDays(days);
+        //user.setDays(days);
     }
 
     @Override

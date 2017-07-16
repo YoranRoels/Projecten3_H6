@@ -28,6 +28,7 @@ import projecten3_h6.evaandroid.Adapters.ProgressAdapter;
 import projecten3_h6.evaandroid.Domain.CookingTime;
 import projecten3_h6.evaandroid.Domain.Day;
 import projecten3_h6.evaandroid.Domain.Dish;
+import projecten3_h6.evaandroid.Domain.EvaApplication;
 import projecten3_h6.evaandroid.Domain.Ingredient;
 import projecten3_h6.evaandroid.Domain.DishType;
 import projecten3_h6.evaandroid.Domain.User;
@@ -71,7 +72,7 @@ public class ProgressFragment extends Fragment implements ProgressPickerDialog.D
     public static List<Day> days = new ArrayList<>();
     public static List<Dish> choices ;
     public static int pos;
-    private User user = new User(null,days,null,0,0);
+    private User user;
     private Calendar date;
 
     @Nullable
@@ -79,6 +80,10 @@ public class ProgressFragment extends Fragment implements ProgressPickerDialog.D
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_progress, container, false);
         ButterKnife.bind(this,v);
+
+        Context context = getContext();
+        EvaApplication app = (EvaApplication)context.getApplicationContext();
+        user = app.getUser();
 
         progressOnclickListener = new ProgressOnclickListener(getContext());
         mLayoutManager = new LinearLayoutManager(getActivity());
@@ -88,7 +93,7 @@ public class ProgressFragment extends Fragment implements ProgressPickerDialog.D
 
         // todo adapt to user
         if(days.isEmpty() ==  true){
-            initemptydata();
+            //initemptydata();
         }
 
         progressTextView.setText("You've completed 4 days. Keep it up!");
@@ -225,7 +230,7 @@ public class ProgressFragment extends Fragment implements ProgressPickerDialog.D
                             " Leg bovenop een laagje van het broodkruim en bak de schotel zo'n 10 minuten in de oven," +
                             " tot het korstje licht verkleurt."));
 
-            choices.add(new Dish(R.drawable.winterovenschotel,"Veggie Pizza", CookingTime.LONG, "Proffesional", DishType.MAINDISH,
+            choices.add(new Dish(R.drawable.winterovenschotel,"Veggie Pizza", CookingTime.LONG, "Professional", DishType.MAINDISH,
                     ingredients,
                     "1. Kook de linzen gaar in de groentenbouillon samen met een blaadje laurier," +
                             " een halve ui en 1/2 tl gedroogde tijm.\n" +
