@@ -21,7 +21,13 @@ router.get('/dishes', function(req, res, next) {
 });
 
 router.get('/dishes/:dish', function(req, res) {
-    res.json(req.dish);
+    req.dish.populate('ingredients', function(err, dish) {
+        if (err) { return next(err); }
+
+        res.json(dish);
+    });
+
+    //res.json(req.dish);
 });
 
 router.post('/dishes', function(req, res, next) {
@@ -46,6 +52,22 @@ router.param('dish', function(req, res, next, name) {
 
         req.dish = dish;
         return next();
+    });
+});
+
+router.post('/dishes/:dish/ingredients', function(req, res, next) {
+    var ingredient = new Ingredient(req.body);
+    ingredient.dish = req.dish;
+
+    ingredient.save(function(err, ingredient){
+        if(err){ return next(err); }
+
+        req.dish.ingredients.push(ingredient);
+        req.dish.save(function(err, ingredient) {
+            if(err){ return next(err); }
+
+            res.json(ingredient);
+        });
     });
 });
 
@@ -79,6 +101,43 @@ router.param('achievement', function(req, res, next, id) {
         if (!achievement) { return next(new Error('can\'t find achievement')); }
 
         req.achievement = achievement;
+        return next();
+    });
+});
+
+router.get('/ingredients', function(req, res, next) {
+    Ingredient.find(function(err, ingredients){
+        if(err){ return next(err); }
+
+        res.json(ingredients);
+    });
+});
+
+router.get('/ingredients/:ingredient', function(req, res) {
+    res.json(req.ingredient);
+});
+
+router.post('/ingredients', function(req, res, next) {
+    var ingredient = new Ingredient(req.body);
+
+    ingredient.save(function(err, ingredient){
+        if(err){ return next(err); }
+
+        res.json(ingredient);
+    });
+});
+
+// One thing you might notice about the remaining routes we need to implement is that they all require us to load a post object by ID.
+// Rather than replicating the same code across several different request handler functions,
+// we can use Express's param() function to automatically load an object.
+router.param('ingredient', function(req, res, next, name) {
+    var query = Ingredient.findOne({'name' : name});
+
+    query.exec(function (err, ingredient){
+        if (err) { return next(err); }
+        if (!ingredient) { return next(new Error('can\'t find ingredient')); }
+
+        req.ingredient = ingredient;
         return next();
     });
 });
