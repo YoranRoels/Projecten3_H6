@@ -1,11 +1,21 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
-  </body>
+<head>
+  <title><%= title %></title>
+  <link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
+<body>
+<h1><%= title %></h1>
+<p>Possible routes</p>
+<ul style="list-style-type:none">
+  <li>/achievements</li>
+  <li>/achievements/{id}</li>
+  <li>/dishes</li>
+  <li>/dishes/{name}</li>
+  <li>/ingredients</li>
+  <li>/ingredients/{name}</li>
+</ul>
+<p>To add new object <br>
+  curl --data "attribute1=value1&attribute2=value2" {URL}</p>
+</body>
 </html>
