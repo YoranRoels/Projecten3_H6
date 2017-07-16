@@ -10,14 +10,14 @@ import java.util.List;
 public class User {
 
     private List<Achievement> achievements;
-    private int completedAchievementsCount;
+    private int completedAchievementsCount = 0;
     private List<Achievement> bronzeAchievements = new ArrayList<>();
     private List<Achievement> silverAchievements = new ArrayList<>();
     private List<Achievement> goldAchievements = new ArrayList<>();
-    private List<Day> days;
-    private ShoppingList shoppingList;
-    private int totalVeganDays;
-    private int longestStreak;
+    private List<Day> days = new ArrayList<>();
+    private ShoppingList shoppingList = new ShoppingList();
+    private int totalVeganDays = 0;
+    private int longestStreak = 0;
 
     public User(List<Achievement> achievements, List<Day> days, ShoppingList shoppingList,
                 int totalVeganDays, int longestStreak) {
@@ -26,6 +26,9 @@ public class User {
         this.shoppingList = shoppingList;
         this.totalVeganDays = totalVeganDays;
         this.longestStreak = longestStreak;
+
+        assignAchievements();
+        countCompletedAchievements();
     }
 
     public List<Achievement> getAchievements() {

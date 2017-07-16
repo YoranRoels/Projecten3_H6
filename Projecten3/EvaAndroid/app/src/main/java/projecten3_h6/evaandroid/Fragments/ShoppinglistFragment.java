@@ -1,5 +1,6 @@
 package projecten3_h6.evaandroid.Fragments;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -12,11 +13,15 @@ import android.widget.TextView;
 import android.widget.Toast;
 import com.github.brnunes.swipeablerecyclerview.SwipeableRecyclerViewTouchListener;
 import java.util.ArrayList;
+import java.util.List;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import projecten3_h6.evaandroid.Adapters.ShoppinglistAdapter;
+import projecten3_h6.evaandroid.Domain.EvaApplication;
 import projecten3_h6.evaandroid.Domain.Ingredient;
+import projecten3_h6.evaandroid.Domain.User;
 import projecten3_h6.evaandroid.R;
 
 /**
@@ -30,8 +35,9 @@ public class ShoppinglistFragment extends Fragment {
     @BindView(R.id.addShoppingListItemAmounttxt) TextView addShoppingListItemAmounttxt;
 
     protected RecyclerView.LayoutManager mLayoutManager;
-    ShoppinglistAdapter adapter ;
-    ArrayList<Ingredient> shoppinglist = new ArrayList<>();
+    ShoppinglistAdapter adapter;
+    User user;
+    List<Ingredient> ingredients = new ArrayList<>();
 
     @Nullable
     @Override
@@ -40,7 +46,12 @@ public class ShoppinglistFragment extends Fragment {
         //change R.layout.yourlayoutfilename for each of your fragments
         View v = inflater.inflate(R.layout.fragment_shoppinglist, container, false);
         ButterKnife.bind(this,v);
-        initdata();
+
+        Context context = getContext();
+        EvaApplication app = (EvaApplication)context.getApplicationContext();
+        user = app.getUser();
+        ingredients = user.getShoppingList().getIngredients();
+
 
         SwipeableRecyclerViewTouchListener swipeTouchListener =
                 new SwipeableRecyclerViewTouchListener(mRecyclerView,
@@ -58,8 +69,8 @@ public class ShoppinglistFragment extends Fragment {
                             @Override
                             public void onDismissedBySwipeLeft(RecyclerView recyclerView, int[] reverseSortedPositions) {
                                 for (int position : reverseSortedPositions) {
-                                    Toast.makeText(getActivity(), shoppinglist.get(position).getName() + " has been deleted from the list", Toast.LENGTH_SHORT).show();
-                                    shoppinglist.remove(position);
+                                    Toast.makeText(getActivity(), ingredients.get(position).getName() + " has been deleted from the list", Toast.LENGTH_SHORT).show();
+                                    ingredients.remove(position);
                                 }
                                 initCard();
                             }
@@ -67,8 +78,8 @@ public class ShoppinglistFragment extends Fragment {
                             @Override
                             public void onDismissedBySwipeRight(RecyclerView recyclerView, int[] reverseSortedPositions) {
                                 for (int position : reverseSortedPositions) {
-                                    Toast.makeText(getActivity(), shoppinglist.get(position).getName() + " has been deleted from the list", Toast.LENGTH_SHORT).show();
-                                    shoppinglist.remove(position);
+                                    Toast.makeText(getActivity(), ingredients.get(position).getName() + " has been deleted from the list", Toast.LENGTH_SHORT).show();
+                                    ingredients.remove(position);
                                 }
                                 initCard();
                             }
@@ -95,7 +106,7 @@ public class ShoppinglistFragment extends Fragment {
         String itemName = addShoppingListItemNametxt.getText().toString();
         String itemAmount = addShoppingListItemAmounttxt.getText().toString();
         if(!itemName.trim().equals("")) {
-            shoppinglist.add(new Ingredient(itemName, itemAmount)); //als je het aantal ook apart wil laten tonen hier inserten dan
+            ingredients.add(new Ingredient(itemName, itemAmount)); //als je het aantal ook apart wil laten tonen hier inserten dan
 
             // view verversen voor nieuw item te tonen
             initCard();
@@ -107,30 +118,7 @@ public class ShoppinglistFragment extends Fragment {
     }
 
     public void initCard(){
-        adapter = new ShoppinglistAdapter(shoppinglist);
+        adapter = new ShoppinglistAdapter(ingredients);
         mRecyclerView.setAdapter(adapter);
-    }
-
-    public void initdata(){
-        shoppinglist.add(new Ingredient("Carrots","2kg"));
-        shoppinglist.add(new Ingredient("Tomatoes","500g"));
-        shoppinglist.add(new Ingredient("Eggs","12"));
-        shoppinglist.add(new Ingredient("Vanilla","200g"));
-        shoppinglist.add(new Ingredient("Strawberries","1kg"));
-        shoppinglist.add(new Ingredient("Carrots","2kg"));
-        shoppinglist.add(new Ingredient("Tomatoes","500g"));
-        shoppinglist.add(new Ingredient("Eggs","12"));
-        shoppinglist.add(new Ingredient("Vanilla","200g"));
-        shoppinglist.add(new Ingredient("Strawberries","1kg"));
-        shoppinglist.add(new Ingredient("Carrots","2kg"));
-        shoppinglist.add(new Ingredient("Tomatoes","500g"));
-        shoppinglist.add(new Ingredient("Eggs","12"));
-        shoppinglist.add(new Ingredient("Vanilla","200g"));
-        shoppinglist.add(new Ingredient("Strawberries","1kg"));
-        shoppinglist.add(new Ingredient("Carrots","2kg"));
-        shoppinglist.add(new Ingredient("Tomatoes","500g"));
-        shoppinglist.add(new Ingredient("Eggs","12"));
-        shoppinglist.add(new Ingredient("Vanilla","200g"));
-        shoppinglist.add(new Ingredient("Strawberries","1kg"));
     }
 }

@@ -1,5 +1,6 @@
 package projecten3_h6.evaandroid.Fragments;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -23,6 +24,7 @@ import butterknife.OnClick;
 import projecten3_h6.evaandroid.Adapters.AchievementAdapter;
 import projecten3_h6.evaandroid.Domain.Achievement;
 import projecten3_h6.evaandroid.Domain.AchievementRanking;
+import projecten3_h6.evaandroid.Domain.EvaApplication;
 import projecten3_h6.evaandroid.Domain.User;
 import projecten3_h6.evaandroid.R;
 
@@ -59,7 +61,9 @@ public class AchievementFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_achievements, container, false);
         ButterKnife.bind(this,v);
 
-        initdata();
+        Context context = getContext();
+        EvaApplication app = (EvaApplication)context.getApplicationContext();
+        user = app.getUser();
         populateTextViews();
 
         bronzeLayoutManager = new LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL,false);
@@ -95,32 +99,6 @@ public class AchievementFragment extends Fragment {
         totalBronze.setText(String.valueOf(user.getBronzeAchievements().size()));
         totalSilver.setText(String.valueOf(user.getSilverAchievements().size()));
         totalGold.setText(String.valueOf(user.getGoldAchievements().size()));
-    }
-
-    public void initdata(){
-        List<Achievement> achievements = new ArrayList<>();
-
-        achievements.add(new Achievement(R.drawable.bronze_app_completed,R.drawable.bronze_app,"We're Just Getting Started","Launch the app.",
-                AchievementRanking.BRONZE,true));
-
-        achievements.add(new Achievement(R.drawable.bronze_calendar_completed,R.drawable.bronze_calendar,"I’m On a Regime","Open the ‘Progress’ tab.",
-                AchievementRanking.BRONZE,true));
-
-        achievements.add(new Achievement(R.drawable.bronze_cooking_completed,R.drawable.bronze_cooking,"What’s For Dinner?","Open the ‘Today’ tab.",
-                AchievementRanking.BRONZE,false));
-
-        achievements.add(new Achievement(R.drawable.silver_checkbox_completed,R.drawable.silver_checkbox,"Making Progress","Complete a ‘segment’ while having all days marked as complete.",
-                AchievementRanking.SILVER,false));
-
-        achievements.add(new Achievement(R.drawable.gold_streak_25_completed,R.drawable.gold_streak_25, "Vegan Master Streak","Achieve a 25-day vegan streak.",
-                AchievementRanking.GOLD,true));
-
-        user = new User(achievements,null,null,0,0);
-        user.setLongestStreak(15);
-        user.setTotalVeganDays(34);
-
-        user.assignAchievements();
-        user.countCompletedAchievements();
     }
 
     @Override
