@@ -1,5 +1,6 @@
 package projecten3_h6.evaandroid.Fragments;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -9,15 +10,21 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import projecten3_h6.evaandroid.Domain.CookingTime;
+import projecten3_h6.evaandroid.Domain.Day;
 import projecten3_h6.evaandroid.Domain.Dish;
+import projecten3_h6.evaandroid.Domain.EvaApplication;
 import projecten3_h6.evaandroid.Domain.Ingredient;
 import projecten3_h6.evaandroid.Domain.DishType;
+import projecten3_h6.evaandroid.Domain.User;
 import projecten3_h6.evaandroid.R;
 
 /**
@@ -34,57 +41,40 @@ public class TodayFragment extends Fragment {
     @BindView(R.id.todayType)TextView type;
     @BindView(R.id.todayDishName)TextView dishName;
     private Dish dish;
+    User user;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_today, container, false);
         ButterKnife.bind(this,v);
-
-        PopulateTextViews();
+        // Get User
+        Context context = getContext();
+        EvaApplication app = (EvaApplication)context.getApplicationContext();
+        user = app.getUser();
+        // Set correct today's dish.
+        setCorrectDish();
+        // Set the TextViews and ImageView for this dish.
+        if(dish != null) {
+            setTextAndVisuals();
+        }
 
         return v;
     }
 
-    public void PopulateTextViews(){
-
-        List<Ingredient> ingredients = new ArrayList<>();
-        ingredients.add(new Ingredient("Wortelen","10"));
-        ingredients.add(new Ingredient("Tomaten","10"));
-        ingredients.add(new Ingredient("Ajuin","2"));
-        ingredients.add(new Ingredient("Prei","5"));
-        ingredients.add(new Ingredient("Zout","200g"));
-        ingredients.add(new Ingredient("Wortelen","10"));
-
-
-        dish = new Dish(R.drawable.winterovenschotel,"Winterovenschotel met Le Puy-linzen", CookingTime.MEDIUM, "Beginner", DishType.MAINDISH,
-                ingredients,
-                        "1. Kook de linzen gaar in de groentenbouillon samen met een blaadje laurier," +
-                        " een halve ui en 1/2 tl gedroogde tijm.\n" +
-                        "\n" +
-                        "2. Versnipper de rest van de uit en stoof ze aan in 3 el olijfolie." +
-                        " Voeg de look, groenten, wat zout en de gemengde mediterraanse kruiden toe en laat alles zo goed als gaar stoven" +
-                        " met het deksel op de pan. Voeg eventueel wat water toe als de groenten dreigen aan te branden.\n" +
-                        "\n" +
-                        "3. Warm de oven voor op 18°C en vet een ovenschaal in. Meng het broodkruim met de boter," +
-                        " 2 teentjes fijngehakte knoflook, de verse kruiden, zout en peper.\n" +
-                        "\n" +
-                        "4. Meng de gekookte linzen (haal de halve ui en het laurierblad eruit)," +
-                        " de groenten en de noten onder elkaar in de ovenschotel." +
-                        " Leg bovenop een laagje van het broodkruim en bak de schotel zo'n 10 minuten in de oven," +
-                        " tot het korstje licht verkleurt.");
-
-
+    public void setTextAndVisuals(){
+        // Ingredients
         StringBuilder sb = new StringBuilder();
         String delim = "";
+
         for(Ingredient i : dish.getIngredients()){
             sb.append(delim).append(i.getName() + ": ").append(i.getAmount());
             delim = "\n";
         }
+        ingredientsView.setText(sb.toString());
 
+        // Type
         String typeStr;
-        String time;
-
         if(dish.getType() == DishType.MAINDISH){
             typeStr = "Main Dish";
         } else if(dish.getType() == DishType.APPETIZER){
@@ -92,8 +82,10 @@ public class TodayFragment extends Fragment {
         } else {
             typeStr = "Dessert";
         }
+        type.setText(typeStr);
 
-
+        // Time
+        String time;
         if(dish.getCookingTime() == CookingTime.LONG){
             time = "Long";
         } else  if(dish.getCookingTime() == CookingTime.MEDIUM){
@@ -101,15 +93,34 @@ public class TodayFragment extends Fragment {
         } else {
             time = "Short";
         }
-
-        type.setText(typeStr);
         cookingTime.setText(time);
-        ingredientsView.setText(sb.toString());
+
+        // The Rests
         preparationView.setText(dish.getPreparation());
+        recipeImage.setPadding(0,0,0,0);
         recipeImage.setImageResource(dish.getImageId());
         difficulty.setText(dish.getDifficulty());
         dishName.setText(dish.getName());
 
+    }
+
+    public void setCorrectDish() {
+        List<Day> days = user.getDays();
+        System.out.println(days);
+        int daysLength = days.size();
+        System.out.println(daysLength);
+
+        Calendar c = Calendar.getInstance();
+        SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH);
+        String formattedDate = df.format(c.getTime());
+
+        if(formattedDate.equals(days.get(daysLength-3).getDate())){
+            dish = days.get(daysLength-3).getDish();
+        } else if(formattedDate.equals(days.get(daysLength-2).getDate())) {
+            dish = days.get(daysLength-2).getDish();
+        } else if(formattedDate.equals(days.get(daysLength-1).getDate())) {
+            dish = days.get(daysLength-1).getDish();
+        }
     }
 
     @Override

@@ -95,6 +95,7 @@ public class User {
     }
 
     public void assignAchievements() {
+        System.out.println(achievements);
         bronzeAchievements.clear();
         silverAchievements.clear();
         goldAchievements.clear();

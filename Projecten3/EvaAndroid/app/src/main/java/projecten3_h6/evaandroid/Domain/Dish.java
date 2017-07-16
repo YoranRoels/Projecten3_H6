@@ -1,5 +1,6 @@
 package projecten3_h6.evaandroid.Domain;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
