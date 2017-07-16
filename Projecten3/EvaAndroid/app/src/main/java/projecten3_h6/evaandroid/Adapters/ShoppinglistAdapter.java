@@ -8,6 +8,7 @@ import android.widget.CheckBox;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -21,9 +22,9 @@ import projecten3_h6.evaandroid.R;
 public class ShoppinglistAdapter extends RecyclerView.Adapter<ShoppinglistAdapter.ShoppinglistViewHolder>{
 
     private int itemCount;
-    private ArrayList<Ingredient> shoppingList;
+    private List<Ingredient> shoppingList;
 
-    public ShoppinglistAdapter(ArrayList<Ingredient> shoppingList) {
+    public ShoppinglistAdapter(List<Ingredient> shoppingList) {
         this.shoppingList = shoppingList;
         this.itemCount = shoppingList.size();
     }
