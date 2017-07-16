@@ -68,6 +68,7 @@ public class ProgressPickerDialog extends DialogFragment {
             int posOfDish;
             posOfDish = mRecyclerView.getChildAdapterPosition(v);
 
+            //todo adapt to user
             ProgressFragment.days.get(ProgressFragment.pos).setDish(ProgressFragment.choices.get(posOfDish));
             mListener.onDialogClick(df);
             dismiss();
