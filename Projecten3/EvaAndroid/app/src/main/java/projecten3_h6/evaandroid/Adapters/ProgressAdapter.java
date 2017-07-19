@@ -51,6 +51,7 @@ public class ProgressAdapter extends RecyclerView.Adapter<ProgressAdapter.Progre
         Calendar cal = Calendar.getInstance();
 
         progressDayOfTheWeek.setText(currentDays.get(position).getDayOfTheWeekString());
+
         if(currentDays.get(position).getDish() != null) {
             progressDishTitle.setText(currentDays.get(position).getDish().getName());
             Context context = holder.dayDishImage.getContext();
@@ -60,6 +61,8 @@ public class ProgressAdapter extends RecyclerView.Adapter<ProgressAdapter.Progre
             if(cal.get(Calendar.DAY_OF_YEAR) >= currentDays.get(position).getDayOfTheYear()) {
                 toggleComplete.setVisibility(View.VISIBLE);
             }
+        } else if (cal.get(Calendar.DAY_OF_YEAR) > currentDays.get(position).getDayOfTheYear()) {
+            progressDishTitle.setText("You forgot to pick a dish.");
         }
 
         toggleComplete.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {

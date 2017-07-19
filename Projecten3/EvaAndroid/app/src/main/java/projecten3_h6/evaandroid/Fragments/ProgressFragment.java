@@ -217,9 +217,9 @@ public class ProgressFragment extends Fragment implements ProgressPickerDialog.D
             pos = mRecyclerView.getChildAdapterPosition(v) ;
             FragmentManager fm = getActivity().getSupportFragmentManager();
             choices = initchoices();
-
-            //todo adapt to user
-            if(user.getDays().get(days.size() - segmentSize + pos).getDish() == null) {
+            Calendar c = Calendar.getInstance();
+            Day tappedDay = user.getDays().get(days.size() - segmentSize + pos);
+            if(tappedDay.getDish() == null && tappedDay.getDayOfTheYear() >= c.get(Calendar.DAY_OF_YEAR)) {
                 ProgressPickerDialog ppd = new ProgressPickerDialog();
                 ppd.show(fm, "food picker");
             }
