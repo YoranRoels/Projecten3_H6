@@ -14,6 +14,9 @@
     <string name="navigation_drawer_item3">Shopping list</string>
     <string name="navigation_drawer_item4">Achievements</string>
 
+    <!-- Progress Strings -->
+    <string name="finish_segment">Finish This Segment</string>
+
     <!-- Today String -->
     <string name="no_dish">You have not chosen a dish yet.</string>
     <string name="cooking_time">Cooking time:</string>
@@ -27,10 +30,12 @@
     <string name="shoppinglist_ingredient">Ingredient</string>
     <string name="shoppinglist_amount">Amount</string>
 
-    <!-- Achievements String -->
+    <!-- Achievements Strings -->
     <string name="max_vegan_streak">Max Vegan Streak</string>
     <string name="total_vegan_days">Total Vegan Days</string>
     <string name="achievements">Achievements</string>
+
+
 
     <!-- Misc. -->
     <string name="plus">+</string>

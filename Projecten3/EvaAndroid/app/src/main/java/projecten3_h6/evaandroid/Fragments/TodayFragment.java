@@ -111,15 +111,27 @@ public class TodayFragment extends Fragment {
         System.out.println(daysLength);
 
         Calendar c = Calendar.getInstance();
-        SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH);
+        SimpleDateFormat df = new SimpleDateFormat("d/M/yyyy", Locale.ENGLISH);
         String formattedDate = df.format(c.getTime());
 
-        if(formattedDate.equals(days.get(daysLength-3).getDate())){
-            dish = days.get(daysLength-3).getDish();
-        } else if(formattedDate.equals(days.get(daysLength-2).getDate())) {
-            dish = days.get(daysLength-2).getDish();
-        } else if(formattedDate.equals(days.get(daysLength-1).getDate())) {
-            dish = days.get(daysLength-1).getDish();
+        Day day1 = days.get(daysLength-3);
+        String dayDate1 = day1.getDayOfTheMonth()+"/"+day1.getMonth()+"/"+day1.getYear();
+        Day day2 = days.get(daysLength-2);
+        String dayDate2 = day2.getDayOfTheMonth()+"/"+day2.getMonth()+"/"+day2.getYear();
+        Day day3 = days.get(daysLength-1);
+        String dayDate3 = day3.getDayOfTheMonth()+"/"+day3.getMonth()+"/"+day3.getYear();
+
+        System.out.println(formattedDate);
+        System.out.println(dayDate1);
+        System.out.println(dayDate2);
+        System.out.println(dayDate3);
+
+        if(formattedDate.equals(dayDate1)) {
+            dish = day1.getDish();
+        } else if(formattedDate.equals(dayDate2)) {
+            dish = day2.getDish();
+        } else if(formattedDate.equals(dayDate3)) {
+            dish = day3.getDish();
         }
     }
 

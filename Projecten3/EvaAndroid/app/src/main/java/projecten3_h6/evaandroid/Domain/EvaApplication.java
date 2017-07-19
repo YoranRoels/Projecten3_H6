@@ -56,7 +56,7 @@ public class EvaApplication extends Application {
         ShoppingList shoppingList = new ShoppingList(ingredients);
 
         List<Day> days = new ArrayList<>();
-        days.add(new Day("Saturday", "15/07/2017", new Dish(R.drawable.winterovenschotel, "Winterovenschotel met Le Puy-linzen (SATURDAY)", CookingTime.MEDIUM, "Beginner", DishType.MAINDISH,
+        days.add(new Day(2017,7,18,4, new Dish(R.drawable.winterovenschotel, "Winterovenschotel met Le Puy-linzen (Tuesday)", CookingTime.MEDIUM, "Beginner", DishType.MAINDISH,
                 ingredients,
                 "1. Kook de linzen gaar in de groentenbouillon samen met een blaadje laurier," +
                         " een halve ui en 1/2 tl gedroogde tijm.\n" +
@@ -73,7 +73,7 @@ public class EvaApplication extends Application {
                         " Leg bovenop een laagje van het broodkruim en bak de schotel zo'n 10 minuten in de oven," +
                         " tot het korstje licht verkleurt."), ""));
 
-        days.add(new Day("Sunday", "16/07/2017", new Dish(R.drawable.winterovenschotel, "Winterovenschotel met Le Puy-linzen (SUNDAY)", CookingTime.MEDIUM, "Beginner", DishType.MAINDISH,
+        days.add(new Day(2017,7,19,5, new Dish(R.drawable.winterovenschotel, "Winterovenschotel met Le Puy-linzen (Wednesday)", CookingTime.MEDIUM, "Beginner", DishType.MAINDISH,
                 ingredients,
                 "1. Kook de linzen gaar in de groentenbouillon samen met een blaadje laurier," +
                         " een halve ui en 1/2 tl gedroogde tijm.\n" +
@@ -90,7 +90,7 @@ public class EvaApplication extends Application {
                         " Leg bovenop een laagje van het broodkruim en bak de schotel zo'n 10 minuten in de oven," +
                         " tot het korstje licht verkleurt."), ""));
 
-        days.add(new Day("Monday", "17/07/2017", new Dish(R.drawable.winterovenschotel, "Winterovenschotel met Le Puy-linzen (MONDAY)", CookingTime.MEDIUM, "Beginner", DishType.MAINDISH,
+        days.add(new Day(2017,7,20,6, new Dish(R.drawable.winterovenschotel, "Winterovenschotel met Le Puy-linzen (Thursday)", CookingTime.MEDIUM, "Beginner", DishType.MAINDISH,
                 ingredients,
                 "1. Kook de linzen gaar in de groentenbouillon samen met een blaadje laurier," +
                         " een halve ui en 1/2 tl gedroogde tijm.\n" +

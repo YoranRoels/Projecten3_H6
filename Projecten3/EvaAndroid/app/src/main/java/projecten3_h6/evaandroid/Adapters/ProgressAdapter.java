@@ -5,7 +5,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -13,14 +12,11 @@ import android.widget.ToggleButton;
 
 import com.squareup.picasso.Picasso;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import projecten3_h6.evaandroid.Domain.Day;
-import projecten3_h6.evaandroid.Domain.EvaApplication;
-import projecten3_h6.evaandroid.Domain.User;
 import projecten3_h6.evaandroid.Fragments.ProgressFragment;
 import projecten3_h6.evaandroid.R;
 
@@ -31,13 +27,11 @@ import projecten3_h6.evaandroid.R;
 public class ProgressAdapter extends RecyclerView.Adapter<ProgressAdapter.ProgressViewHolder>{
 
     private int itemCount;
-    private List<Day> days;
-    //private User user;
+    private List<Day> currentDays;
 
-    public ProgressAdapter(List<Day> days) {
-        this.days = days;
-        this.itemCount = days.size();
-        //user.setDays(days);
+    public ProgressAdapter(List<Day> currentDays) {
+        this.currentDays = currentDays;
+        itemCount = ProgressFragment.segmentSize;
     }
 
     @Override
@@ -54,20 +48,22 @@ public class ProgressAdapter extends RecyclerView.Adapter<ProgressAdapter.Progre
         ToggleButton toggleComplete = holder.toggleComplete;
         ImageView dayDishImage = holder.dayDishImage;
 
-        progressDayOfTheWeek.setText(days.get(position).getDateOfTheWeek());
-        if(days.get(position).getDish() != null) {
-            progressDishTitle.setText(days.get(position).getDish().getName());
+        progressDayOfTheWeek.setText(currentDays.get(position).getDayOfTheWeekString());
+        if(currentDays.get(position).getDish() != null) {
+            progressDishTitle.setText(currentDays.get(position).getDish().getName());
             Context context = holder.dayDishImage.getContext();
-            Picasso.with(context).load(days.get(position).getDish().getImageId()).into(dayDishImage);
-            dayDishImage.setImageResource(days.get(position).getDish().getImageId());
+            Picasso.with(context).load(currentDays.get(position).getDish().getImageId()).into(dayDishImage);
+            dayDishImage.setImageResource(currentDays.get(position).getDish().getImageId());
             toggleComplete.setVisibility(View.VISIBLE);
-            toggleComplete.setChecked(days.get(position).getCompleted());
+            toggleComplete.setChecked(currentDays.get(position).isCompleted());
         }
 
         toggleComplete.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                ProgressFragment.days.get(position).setCompleted(isChecked);
+                int daysLength = ProgressFragment.user.getDays().size();
+                ProgressFragment.user.getDays().get(daysLength - itemCount + position).setCompleted(isChecked);
+                ProgressFragment.recheckCheckboxes();
             }
         });
     }
