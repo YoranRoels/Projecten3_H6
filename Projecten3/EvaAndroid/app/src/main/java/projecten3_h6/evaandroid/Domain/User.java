@@ -29,6 +29,12 @@ public class User {
 
         assignAchievements();
         countCompletedAchievements();
+        calculateStatistics();
+    }
+    public User(List<Achievement> achievements) {
+        this.achievements = achievements;
+
+        assignAchievements();
     }
 
     public List<Achievement> getAchievements() {
@@ -94,8 +100,7 @@ public class User {
         this.longestStreak = longestStreak;
     }
 
-    public void assignAchievements() {
-        System.out.println(achievements);
+    private void assignAchievements() {
         bronzeAchievements.clear();
         silverAchievements.clear();
         goldAchievements.clear();
@@ -111,7 +116,7 @@ public class User {
         }
     }
 
-    public void countCompletedAchievements() {
+    private void countCompletedAchievements() {
         int temporaryCompletedAchievementsCount = 0;
 
         for (Achievement a : achievements) {
@@ -121,5 +126,34 @@ public class User {
         }
 
         completedAchievementsCount = temporaryCompletedAchievementsCount;
+    }
+
+    public void calculateStatistics() {
+        calculateTotalVeganDays();
+        calculateLongestStreak();
+    }
+
+    private void calculateTotalVeganDays() {
+        totalVeganDays = 0;
+        for(Day day: days) {
+            if(day.isCompleted()) {
+                totalVeganDays+=1;
+            }
+        }
+    }
+
+    private void calculateLongestStreak() {
+        longestStreak = 0;
+        int streak = 0;
+        for(Day day: days) {
+            if(day.isCompleted()) {
+                streak+=1;
+            } else {
+                if(streak > longestStreak) {
+                    longestStreak = streak;
+                }
+                streak = 0;
+            }
+        }
     }
 }

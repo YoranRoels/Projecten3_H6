@@ -106,25 +106,18 @@ public class TodayFragment extends Fragment {
 
     public void setCorrectDish() {
         List<Day> days = user.getDays();
-        System.out.println(days);
         int daysLength = days.size();
-        System.out.println(daysLength);
 
         Calendar c = Calendar.getInstance();
         SimpleDateFormat df = new SimpleDateFormat("d/M/yyyy", Locale.ENGLISH);
         String formattedDate = df.format(c.getTime());
 
         Day day1 = days.get(daysLength-3);
-        String dayDate1 = day1.getDayOfTheMonth()+"/"+day1.getMonth()+"/"+day1.getYear();
+        String dayDate1 = day1.getDayOfTheMonth()+"/"+(day1.getMonth()+1)+"/"+day1.getYear();
         Day day2 = days.get(daysLength-2);
-        String dayDate2 = day2.getDayOfTheMonth()+"/"+day2.getMonth()+"/"+day2.getYear();
+        String dayDate2 = day2.getDayOfTheMonth()+"/"+(day2.getMonth()+1)+"/"+day2.getYear();
         Day day3 = days.get(daysLength-1);
-        String dayDate3 = day3.getDayOfTheMonth()+"/"+day3.getMonth()+"/"+day3.getYear();
-
-        System.out.println(formattedDate);
-        System.out.println(dayDate1);
-        System.out.println(dayDate2);
-        System.out.println(dayDate3);
+        String dayDate3 = day3.getDayOfTheMonth()+"/"+(day3.getMonth()+1)+"/"+day3.getYear();
 
         if(formattedDate.equals(dayDate1)) {
             dish = day1.getDish();

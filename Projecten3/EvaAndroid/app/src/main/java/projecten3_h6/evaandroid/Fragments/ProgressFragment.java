@@ -71,6 +71,8 @@ public class ProgressFragment extends Fragment implements ProgressPickerDialog.D
     @BindView(R.id.progressMotivationTextView) TextView progressMotivationTextView;
     @BindView(R.id.progressRecyclerView) RecyclerView mRecyclerView;
 
+    @BindView(R.id.finishSegment) Button finishSegment;
+
     public static ProgressOnclickListener progressOnclickListener;
     protected RecyclerView.LayoutManager mLayoutManager;
     private ProgressAdapter adapter;
@@ -92,28 +94,18 @@ public class ProgressFragment extends Fragment implements ProgressPickerDialog.D
         user = app.getUser();
         days = user.getDays();
 
-        lastThreeDays.add(days.get(days.size()-3));
-        lastThreeDays.add(days.get(days.size()-2));
-        lastThreeDays.add(days.get(days.size()-1));
-
         progressBoxes = new ImageView[]{progressBox1, progressBox2, progressBox3, progressBox4, progressBox5, progressBox6,
                 progressBox7, progressBox8, progressBox9, progressBox10, progressBox11, progressBox12, progressBox13,
-                progressBox14, progressBox14, progressBox15, progressBox16, progressBox17, progressBox18, progressBox19,
+                progressBox14, progressBox15, progressBox16, progressBox17, progressBox18, progressBox19,
                 progressBox20, progressBox21};
 
-        // Doesn't work
-        progressBoxes[0].setImageResource(R.drawable.checkbox_completed);
-        // Works
-        progressBox2.setImageResource(R.drawable.checkbox_completed);
-
-
         if(user.getDays().isEmpty()) {
-            startFirstSegment();
             progressTextView.setText("Welcome to Carrot!");
             progressMotivationTextView.setText("Start tapping the cards to select dishes.");
+            startFirstSegment();
         } else {
-            progressTextView.setText("You've completed 17 days of this season. We believe in you!");
-            progressMotivationTextView.setText("You've been vegan now for 5 days straight.");
+            checkSegmentButtonEnabled();
+            setMotivationTextViews();
         }
 
         recheckCheckboxes();
@@ -127,8 +119,16 @@ public class ProgressFragment extends Fragment implements ProgressPickerDialog.D
     }
 
     public void reloadCards(){
+        refreshLastThreeDays();
         adapter = new ProgressAdapter(lastThreeDays);
         mRecyclerView.setAdapter(adapter);
+    }
+
+    private void refreshLastThreeDays() {
+        lastThreeDays.clear();
+        lastThreeDays.add(days.get(days.size()-3));
+        lastThreeDays.add(days.get(days.size()-2));
+        lastThreeDays.add(days.get(days.size()-1));
     }
 
     public static void recheckCheckboxes() {
@@ -142,17 +142,25 @@ public class ProgressFragment extends Fragment implements ProgressPickerDialog.D
         }
     }
 
-    public void startFirstSegment(){
+    public void setMotivationTextViews() {
+        progressTextView.setText("You've completed " + user.getTotalVeganDays() + " days this season.");
+        if(user.getTotalVeganDays() == user.getLongestStreak()) {
+            progressMotivationTextView.setText("You didn't skip a single day. We admire you.");
+        }
+        progressMotivationTextView.setText("Don't give up, keep the vegan streaks coming!");
+    }
+
+    private void startFirstSegment(){
         Calendar cal = Calendar.getInstance();
         cal.getTime();
 
         for(int i = 0; i < segmentSize; i++) {
-            user.getDays().add(new Day(cal.get(Calendar.YEAR), cal.get(Calendar.MONTH), cal.get(Calendar.DAY_OF_MONTH), cal.get(Calendar.DAY_OF_WEEK)));
+            user.getDays().add(new Day(cal.get(Calendar.YEAR), cal.get(Calendar.MONTH), cal.get(Calendar.DAY_OF_MONTH), cal.get(Calendar.DAY_OF_WEEK),cal.get(Calendar.DAY_OF_YEAR)));
             cal.add(Calendar.DAY_OF_YEAR, 1);
         }
     }
 
-    public void startNewSegment() {
+    private void startNewSegment() {
         int lastDayIndex = user.getDays().size()-1;
         Day lastDay = user.getDays().get(lastDayIndex);
 
@@ -161,19 +169,29 @@ public class ProgressFragment extends Fragment implements ProgressPickerDialog.D
 
         for(int i = 0; i < segmentSize; i++) {
             cal.add(Calendar.DAY_OF_YEAR, 1);
-            user.getDays().add(new Day(cal.get(Calendar.YEAR), cal.get(Calendar.MONTH), cal.get(Calendar.DAY_OF_MONTH), cal.get(Calendar.DAY_OF_WEEK)));
+            user.getDays().add(new Day(cal.get(Calendar.YEAR), cal.get(Calendar.MONTH), cal.get(Calendar.DAY_OF_MONTH), cal.get(Calendar.DAY_OF_WEEK), cal.get(Calendar.DAY_OF_YEAR)));
         }
     }
 
+    private void checkSegmentButtonEnabled() {
+        // Now
+        Calendar c1 = Calendar.getInstance();
+        // Last Date
+        int daysLength = days.size();
+        Day lastDay = days.get(daysLength-1);
+        // Check
+        if(c1.get(Calendar.DAY_OF_YEAR) >= lastDay.getDayOfTheYear()){
+            finishSegment.setVisibility(View.VISIBLE);
+        } else {
+            finishSegment.setVisibility(View.INVISIBLE);
+        }
+    }
 
     @OnClick(R.id.finishSegment)
     public void finishSegment() {
         startNewSegment();
-        lastThreeDays.clear();
-        lastThreeDays.add(days.get(days.size()-3));
-        lastThreeDays.add(days.get(days.size()-2));
-        lastThreeDays.add(days.get(days.size()-1));
         reloadCards();
+        checkSegmentButtonEnabled();
     }
 
     @Override

@@ -13,26 +13,29 @@ public class Day {
     private int dayOfTheMonth;
     private int dayOfTheWeek;
     private String dayOfTheWeekString;
+    private int dayOfTheYear;
     private Dish dish;
     private String tip;
     private Boolean completed;
 
-    public Day(int year, int month, int dayOfTheMonth, int dayOfTheWeek, Dish dish, String tip) {
+    public Day(int year, int month, int dayOfTheMonth, int dayOfTheWeek, int dayOfTheYear, Dish dish, String tip) {
         this.year = year;
         this.month = month;
         this.dayOfTheMonth = dayOfTheMonth;
         this.dayOfTheWeek = dayOfTheWeek;
+        this.dayOfTheYear = dayOfTheYear;
         this.dish = dish;
         this.tip = tip;
         completed = false;
         setDayOfTheWeekString();
     }
 
-    public Day(int year, int month, int dayOfTheMonth, int dayOfTheWeek) {
+    public Day(int year, int month, int dayOfTheMonth, int dayOfTheWeek, int dayOfTheYear) {
         this.year = year;
         this.month = month;
         this.dayOfTheMonth = dayOfTheMonth;
         this.dayOfTheWeek = dayOfTheWeek;
+        this.dayOfTheYear = dayOfTheYear;
         completed = false;
         setDayOfTheWeekString();
     }
@@ -89,6 +92,10 @@ public class Day {
                 dayOfTheWeekString = "Sunday";
                 break;
         }
+    }
+
+    public int getDayOfTheYear() {
+        return dayOfTheYear;
     }
 
     public Dish getDish() {

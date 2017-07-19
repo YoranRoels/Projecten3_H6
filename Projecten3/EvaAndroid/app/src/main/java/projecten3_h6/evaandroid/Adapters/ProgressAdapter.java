@@ -12,6 +12,7 @@ import android.widget.ToggleButton;
 
 import com.squareup.picasso.Picasso;
 
+import java.util.Calendar;
 import java.util.List;
 
 import butterknife.BindView;
@@ -47,6 +48,7 @@ public class ProgressAdapter extends RecyclerView.Adapter<ProgressAdapter.Progre
         TextView progressDishTitle = holder.progressDishTitle;
         ToggleButton toggleComplete = holder.toggleComplete;
         ImageView dayDishImage = holder.dayDishImage;
+        Calendar cal = Calendar.getInstance();
 
         progressDayOfTheWeek.setText(currentDays.get(position).getDayOfTheWeekString());
         if(currentDays.get(position).getDish() != null) {
@@ -54,8 +56,10 @@ public class ProgressAdapter extends RecyclerView.Adapter<ProgressAdapter.Progre
             Context context = holder.dayDishImage.getContext();
             Picasso.with(context).load(currentDays.get(position).getDish().getImageId()).into(dayDishImage);
             dayDishImage.setImageResource(currentDays.get(position).getDish().getImageId());
-            toggleComplete.setVisibility(View.VISIBLE);
             toggleComplete.setChecked(currentDays.get(position).isCompleted());
+            if(cal.get(Calendar.DAY_OF_YEAR) >= currentDays.get(position).getDayOfTheYear()) {
+                toggleComplete.setVisibility(View.VISIBLE);
+            }
         }
 
         toggleComplete.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -63,6 +67,7 @@ public class ProgressAdapter extends RecyclerView.Adapter<ProgressAdapter.Progre
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 int daysLength = ProgressFragment.user.getDays().size();
                 ProgressFragment.user.getDays().get(daysLength - itemCount + position).setCompleted(isChecked);
+                ProgressFragment.user.calculateStatistics();
                 ProgressFragment.recheckCheckboxes();
             }
         });
