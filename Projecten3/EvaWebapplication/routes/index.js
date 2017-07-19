@@ -23,16 +23,8 @@ router.get('/dishes', function(req, res, next) {
 router.get('/random',function(req , res, next){
     Dish.find(function(err,dishes){
         if(err){ return next(err); }
-        
-        console.log("trying 3 dishes");
-        var array = dishes;
-        console.log("array aanmaken");
-        var arr = underscore.sample(array,3);
-        console.log("3 kiezen")
-            res.json(arr);
-     
-        
-        
+        var arr = underscore.sample(dishes,3);
+        res.json(arr);
     });    
 });
 
