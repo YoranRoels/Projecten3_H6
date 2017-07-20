@@ -59,33 +59,6 @@ public class TodayFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_today, container, false);
         ButterKnife.bind(this,v);
 
-        //todo delete test code
-        //test
-        Calls caller = Config.getRetrofit().create(Calls.class);
-        Call<List<Dish>> call = caller.getDishes();
-        call.enqueue(new Callback<List<Dish>>() {
-            @Override
-            public void onResponse(Call<List<Dish>> call, Response<List<Dish>> response) {
-                System.out.println("api call" + response.body());
-                dishes = response.body();
-                Log.e("APICALL", " call successful");
-                Toast.makeText(getActivity().getApplicationContext(),"call successful",Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onFailure(Call<List<Dish>> call, Throwable t) {
-                Log.e("APICALL", "failed to call "+ t.getMessage());
-                //Toast.makeText(getActivity().getApplicationContext(),"geen internet verbinding!",Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        System.out.println(dishes);
-
-
-
-        //test
-
-
         // Get User
         Context context = getContext();
         EvaApplication app = (EvaApplication)context.getApplicationContext();

@@ -34,4 +34,7 @@ public interface Calls {
 
     @GET("ingredients/{name}")
     Call<Ingredient> getIngredient(@Path("name") String name);
+  
+    @GET("dishes/three-random")
+    Call<List<Dish>> getThreeRandomDishes();
 }
