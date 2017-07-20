@@ -11,19 +11,23 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import projecten3_h6.evaandroid.Adapters.ProgressAdapter;
 import projecten3_h6.evaandroid.Domain.CookingTime;
 import projecten3_h6.evaandroid.Domain.Day;
@@ -39,10 +43,6 @@ import projecten3_h6.evaandroid.R;
  */
 
 public class ProgressFragment extends Fragment implements ProgressPickerDialog.DialogListener{
-
-    @BindView(R.id.progressRecyclerView) RecyclerView mRecyclerView;
-    @BindView(R.id.progressTextView) TextView progressTextView;
-    @BindView(R.id.progressMotivationTextView) TextView progressMotivationTextView;
     @BindView(R.id.progressBox1) ImageView progressBox1;
     @BindView(R.id.progressBox2) ImageView progressBox2;
     @BindView(R.id.progressBox3) ImageView progressBox3;
@@ -65,15 +65,23 @@ public class ProgressFragment extends Fragment implements ProgressPickerDialog.D
     @BindView(R.id.progressBox20) ImageView progressBox20;
     @BindView(R.id.progressBox21) ImageView progressBox21;
 
+    public static ImageView progressBoxes[];
+
+    @BindView(R.id.progressTextView) TextView progressTextView;
+    @BindView(R.id.progressMotivationTextView) TextView progressMotivationTextView;
+    @BindView(R.id.progressRecyclerView) RecyclerView mRecyclerView;
+
+    @BindView(R.id.finishSegment) Button finishSegment;
 
     public static ProgressOnclickListener progressOnclickListener;
     protected RecyclerView.LayoutManager mLayoutManager;
     private ProgressAdapter adapter;
-    public static List<Day> days = new ArrayList<>();
-    public static List<Dish> choices ;
+    public static List<Dish> choices;
     public static int pos;
-    private User user;
-    private Calendar date;
+    public static User user;
+    private List<Day> days;
+    public static List<Day> lastThreeDays = new ArrayList<>();
+    public static int segmentSize = 3;
 
     @Nullable
     @Override
@@ -84,73 +92,107 @@ public class ProgressFragment extends Fragment implements ProgressPickerDialog.D
         Context context = getContext();
         EvaApplication app = (EvaApplication)context.getApplicationContext();
         user = app.getUser();
+        days = user.getDays();
+
+        progressBoxes = new ImageView[]{progressBox1, progressBox2, progressBox3, progressBox4, progressBox5, progressBox6,
+                progressBox7, progressBox8, progressBox9, progressBox10, progressBox11, progressBox12, progressBox13,
+                progressBox14, progressBox15, progressBox16, progressBox17, progressBox18, progressBox19,
+                progressBox20, progressBox21};
+
+        if(user.getDays().isEmpty()) {
+            progressTextView.setText("Welcome to Carrot!");
+            progressMotivationTextView.setText("Start tapping the cards to select dishes.");
+            startFirstSegment();
+        } else {
+            checkSegmentButtonEnabled();
+            setMotivationTextViews();
+        }
+
+        recheckCheckboxes();
 
         progressOnclickListener = new ProgressOnclickListener(getContext());
         mLayoutManager = new LinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(mLayoutManager);
 
-        date = Calendar.getInstance();
-
-        // todo adapt to user
-        if(days.isEmpty() ==  true){
-            //initemptydata();
-        }
-
-        progressTextView.setText("You've completed 4 days. Keep it up!");
-        progressMotivationTextView.setText("It's ok that you've missed a day, it's our secret.");
-
-        adapter = new ProgressAdapter(days);
-        mRecyclerView.setAdapter(adapter);
+        reloadCards();
         return v;
     }
 
     public void reloadCards(){
-        adapter = new ProgressAdapter(days);
+        refreshLastThreeDays();
+        adapter = new ProgressAdapter(lastThreeDays);
         mRecyclerView.setAdapter(adapter);
     }
 
-    public void initemptydata() {
-        int dayOfWeek = date.get(Calendar.DAY_OF_WEEK);
+    private void refreshLastThreeDays() {
+        lastThreeDays.clear();
+        lastThreeDays.add(days.get(days.size()-3));
+        lastThreeDays.add(days.get(days.size()-2));
+        lastThreeDays.add(days.get(days.size()-1));
+    }
 
-        switch (dayOfWeek){
-            case Calendar.SUNDAY:
-                user.getDays().add(new Day("Sunday"));
-                user.getDays().add(new Day("Monday"));
-                user.getDays().add(new Day("Tuesday"));
-                break;
-            case Calendar.MONDAY:
-                user.getDays().add(new Day("Monday"));
-                user.getDays().add(new Day("Tuesday"));
-                user.getDays().add(new Day("Wednesday"));
-                break;
-            case Calendar.TUESDAY:
-                user.getDays().add(new Day("Tuesday"));
-                user.getDays().add(new Day("Wednesday"));
-                user.getDays().add(new Day("Thursday"));
-                break;
-            case Calendar.WEDNESDAY:
-                user.getDays().add(new Day("Wednesday"));
-                user.getDays().add(new Day("Thursday"));
-                user.getDays().add(new Day("Friday"));
-                break;
-            case Calendar.THURSDAY:
-                user.getDays().add(new Day("Thursday"));
-                user.getDays().add(new Day("Friday"));
-                user.getDays().add(new Day("Saturday"));
-                break;
-            case Calendar.FRIDAY:
-                user.getDays().add(new Day("Friday"));
-                user.getDays().add(new Day("Saturday"));
-                user.getDays().add(new Day("Sunday"));
-                break;
-            case Calendar.SATURDAY:
-                user.getDays().add(new Day("Saturday"));
-                user.getDays().add(new Day("Sunday"));
-                user.getDays().add(new Day("Monday"));
-                break;
-
+    public static void recheckCheckboxes() {
+        for(int i = 0; i < user.getDays().size(); i++) {
+            if(user.getDays().get(i).isCompleted())
+            {
+                progressBoxes[i].setImageResource(R.drawable.checkbox_completed);
+            } else {
+                progressBoxes[i].setImageResource(R.drawable.checkbox);
+            }
         }
+    }
 
+    public void setMotivationTextViews() {
+        progressTextView.setText("You've completed " + user.getTotalVeganDays() + " days this season.");
+        if(user.getTotalVeganDays() == user.getLongestStreak()) {
+            progressMotivationTextView.setText("You didn't skip a single day. We admire you.");
+        } else {
+            progressMotivationTextView.setText("Don't give up, keep the vegan streaks coming!");
+        }
+    }
+
+    private void startFirstSegment(){
+        Calendar cal = Calendar.getInstance();
+        cal.getTime();
+
+        for(int i = 0; i < segmentSize; i++) {
+            user.getDays().add(new Day(cal.get(Calendar.YEAR), cal.get(Calendar.MONTH), cal.get(Calendar.DAY_OF_MONTH), cal.get(Calendar.DAY_OF_WEEK),cal.get(Calendar.DAY_OF_YEAR)));
+            cal.add(Calendar.DAY_OF_YEAR, 1);
+        }
+    }
+
+    private void startNewSegment() {
+        int lastDayIndex = user.getDays().size()-1;
+        Day lastDay = user.getDays().get(lastDayIndex);
+
+        Calendar cal = Calendar.getInstance();
+        cal.set(lastDay.getYear(), lastDay.getMonth(), lastDay.getDayOfTheMonth());
+
+        for(int i = 0; i < segmentSize; i++) {
+            cal.add(Calendar.DAY_OF_YEAR, 1);
+            user.getDays().add(new Day(cal.get(Calendar.YEAR), cal.get(Calendar.MONTH), cal.get(Calendar.DAY_OF_MONTH), cal.get(Calendar.DAY_OF_WEEK), cal.get(Calendar.DAY_OF_YEAR)));
+        }
+    }
+
+    private void checkSegmentButtonEnabled() {
+        // Now
+        Calendar c1 = Calendar.getInstance();
+        // Last Date
+        int daysLength = days.size();
+        Day lastDay = days.get(daysLength-1);
+        // Check
+        if(c1.get(Calendar.DAY_OF_YEAR) >= lastDay.getDayOfTheYear()){
+            finishSegment.setVisibility(View.VISIBLE);
+        } else {
+            finishSegment.setVisibility(View.INVISIBLE);
+        }
+    }
+
+    @OnClick(R.id.finishSegment)
+    public void finishSegment() {
+        startNewSegment();
+        reloadCards();
+        checkSegmentButtonEnabled();
     }
 
     @Override
@@ -176,9 +218,9 @@ public class ProgressFragment extends Fragment implements ProgressPickerDialog.D
             pos = mRecyclerView.getChildAdapterPosition(v) ;
             FragmentManager fm = getActivity().getSupportFragmentManager();
             choices = initchoices();
-
-            //todo adapt to user
-            if(days.get(pos).getDish() == null) {
+            Calendar c = Calendar.getInstance();
+            Day tappedDay = user.getDays().get(days.size() - segmentSize + pos);
+            if(tappedDay.getDish() == null && tappedDay.getDayOfTheYear() >= c.get(Calendar.DAY_OF_YEAR)) {
                 ProgressPickerDialog ppd = new ProgressPickerDialog();
                 ppd.show(fm, "food picker");
             }

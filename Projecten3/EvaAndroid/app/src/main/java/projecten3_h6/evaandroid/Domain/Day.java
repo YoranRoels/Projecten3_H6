@@ -1,30 +1,46 @@
 package projecten3_h6.evaandroid.Domain;
 
+import java.util.Calendar;
+import java.util.Date;
+
 /**
  * Created by Mafken on 4/07/2017.
  */
 
 public class Day {
-    private String dateOfTheWeek;
-    private String date;
+    private int year;
+    private int month;
+    private int dayOfTheMonth;
+    private int dayOfTheWeek;
+    private String dayOfTheWeekString;
+    private int dayOfTheYear;
     private Dish dish;
     private String tip;
     private Boolean completed;
 
-    public Day(String dateOfTheWeek, String date, Dish dish, String tip) {
-        this.dateOfTheWeek = dateOfTheWeek;
-        this.date = date;
+    public Day(int year, int month, int dayOfTheMonth, int dayOfTheWeek, int dayOfTheYear, Dish dish, String tip) {
+        this.year = year;
+        this.month = month;
+        this.dayOfTheMonth = dayOfTheMonth;
+        this.dayOfTheWeek = dayOfTheWeek;
+        this.dayOfTheYear = dayOfTheYear;
         this.dish = dish;
         this.tip = tip;
         completed = false;
+        setDayOfTheWeekString();
     }
 
-    public Day(String dateOfTheWeek) {
-        this.dateOfTheWeek = dateOfTheWeek;
+    public Day(int year, int month, int dayOfTheMonth, int dayOfTheWeek, int dayOfTheYear) {
+        this.year = year;
+        this.month = month;
+        this.dayOfTheMonth = dayOfTheMonth;
+        this.dayOfTheWeek = dayOfTheWeek;
+        this.dayOfTheYear = dayOfTheYear;
         completed = false;
+        setDayOfTheWeekString();
     }
 
-    public Boolean getCompleted() {
+    public Boolean isCompleted() {
         return completed;
     }
 
@@ -32,20 +48,54 @@ public class Day {
         this.completed = completed;
     }
 
-    public String getDateOfTheWeek() {
-        return dateOfTheWeek;
+    public int getYear() {
+        return year;
     }
 
-    public void setDateOfTheWeek(String dateOfTheWeek) {
-        this.dateOfTheWeek = dateOfTheWeek;
+    public int getMonth() {
+        return month;
     }
 
-    public String getDate() {
-        return date;
+    public int getDayOfTheMonth() {
+        return dayOfTheMonth;
     }
 
-    public void setDate(String date) {
-        this.date = date;
+    public int getDayOfTheWeek() {
+        return dayOfTheWeek;
+    }
+
+    public String getDayOfTheWeekString() {
+        return dayOfTheWeekString;
+    }
+
+    private void setDayOfTheWeekString() {
+        switch(dayOfTheWeek) {
+            case Calendar.MONDAY:
+                dayOfTheWeekString = "Monday";
+                break;
+            case Calendar.TUESDAY:
+                dayOfTheWeekString = "Tuesday";
+                break;
+            case Calendar.WEDNESDAY:
+                dayOfTheWeekString = "Wednesday";
+                break;
+            case Calendar.THURSDAY:
+                dayOfTheWeekString = "Thursday";
+                break;
+            case Calendar.FRIDAY:
+                dayOfTheWeekString = "Friday";
+                break;
+            case Calendar.SATURDAY:
+                dayOfTheWeekString = "Saturday";
+                break;
+            case Calendar.SUNDAY:
+                dayOfTheWeekString = "Sunday";
+                break;
+        }
+    }
+
+    public int getDayOfTheYear() {
+        return dayOfTheYear;
     }
 
     public Dish getDish() {

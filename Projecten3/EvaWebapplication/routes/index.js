@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 
 var mongoose = require('mongoose');
+var underscore = require('underscore');
 var Dish = mongoose.model('Dish');
 var Ingredient = mongoose.model('Ingredient');
 var Achievement = mongoose.model('Achievement');
@@ -15,10 +16,19 @@ router.get('/', function(req, res, next) {
 router.get('/dishes', function(req, res, next) {
     Dish.find(function(err, dishes){
         if(err){ return next(err); }
-
         res.json(dishes);
     });
 });
+
+router.get('/dishes/three-random',function(req , res, next){
+    Dish.find(function(err,dishes){
+        if(err){ return next(err); }
+        var arr = underscore.sample(dishes,3);
+        res.json(arr);
+    });    
+});
+
+
 
 router.get('/dishes/:dish', function(req, res) {
     req.dish.populate('ingredients', function(err, dish) {
