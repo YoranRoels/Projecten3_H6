@@ -95,6 +95,8 @@ public class ProgressFragment extends Fragment implements ProgressPickerDialog.D
         View v = inflater.inflate(R.layout.fragment_progress, container, false);
         ButterKnife.bind(this,v);
 
+
+
         Context context = getContext();
         EvaApplication app = (EvaApplication)context.getApplicationContext();
         user = app.getUser();
@@ -114,6 +116,10 @@ public class ProgressFragment extends Fragment implements ProgressPickerDialog.D
             setMotivationTextViews();
         }
 
+        if(days.isEmpty()){
+            initChoices();
+        }
+
         recheckCheckboxes();
 
         progressOnclickListener = new ProgressOnclickListener(getContext());
@@ -125,6 +131,7 @@ public class ProgressFragment extends Fragment implements ProgressPickerDialog.D
     }
 
     public void reloadCards(){
+        initChoices();
         refreshLastThreeDays();
         adapter = new ProgressAdapter(lastThreeDays);
         mRecyclerView.setAdapter(adapter);
@@ -206,6 +213,28 @@ public class ProgressFragment extends Fragment implements ProgressPickerDialog.D
         super.onViewCreated(view, savedInstanceState);
     }
 
+    public void initChoices(){
+        Calls caller = Config.getRetrofit().create(Calls.class);
+        Call<List<Dish>> call = caller.getThreeRandomDishes();
+        call.enqueue(new Callback<List<Dish>>() {
+            @Override
+            public void onResponse(Call<List<Dish>> call, Response<List<Dish>> response) {
+                choices = response.body();
+                Log.e("BackendCall", " call successful three random dishes");
+            }
+
+            @Override
+            public void onFailure(Call<List<Dish>> call, Throwable t) {
+                if(choices.isEmpty()){
+                    choices.add(new Dish(R.drawable.winterovenschotel, "failed api call", CookingTime.LONG, "moeilijk", DishType.APPETIZER,
+                            null, ""));
+                }
+                Log.e("BackendCAll", "failed to call three random dishes "+ t.getMessage());
+            }
+        });
+
+    }
+
     @Override
     public void onDialogClick(DialogFragment dialog) {
         reloadCards();
@@ -223,7 +252,6 @@ public class ProgressFragment extends Fragment implements ProgressPickerDialog.D
         public void onClick(View v) {
             pos = mRecyclerView.getChildAdapterPosition(v) ;
             FragmentManager fm = getActivity().getSupportFragmentManager();
-            initChoices();
             Calendar c = Calendar.getInstance();
             Day tappedDay = user.getDays().get(days.size() - segmentSize + pos);
             if(tappedDay.getDish() == null && tappedDay.getDayOfTheYear() >= c.get(Calendar.DAY_OF_YEAR)) {
@@ -233,22 +261,6 @@ public class ProgressFragment extends Fragment implements ProgressPickerDialog.D
 
         }
 
-        public void initChoices(){
-            Calls caller = Config.getRetrofit().create(Calls.class);
-            Call<List<Dish>> call = caller.getThreeRandomDishes();
-            call.enqueue(new Callback<List<Dish>>() {
-                @Override
-                public void onResponse(Call<List<Dish>> call, Response<List<Dish>> response) {
-                    choices = response.body();
-                    Log.e("BackendCall", " call successful three random dishes");
-                }
 
-                @Override
-                public void onFailure(Call<List<Dish>> call, Throwable t) {
-                    Log.e("BackendCAll", "failed to call three random dishes "+ t.getMessage());
-                }
-            });
-
-        }
     }
 }
