@@ -146,8 +146,9 @@ public class ProgressFragment extends Fragment implements ProgressPickerDialog.D
         progressTextView.setText("You've completed " + user.getTotalVeganDays() + " days this season.");
         if(user.getTotalVeganDays() == user.getLongestStreak()) {
             progressMotivationTextView.setText("You didn't skip a single day. We admire you.");
+        } else {
+            progressMotivationTextView.setText("Don't give up, keep the vegan streaks coming!");
         }
-        progressMotivationTextView.setText("Don't give up, keep the vegan streaks coming!");
     }
 
     private void startFirstSegment(){
