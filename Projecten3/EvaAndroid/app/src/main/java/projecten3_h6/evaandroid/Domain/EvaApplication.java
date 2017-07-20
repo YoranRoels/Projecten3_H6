@@ -46,7 +46,7 @@ public class EvaApplication extends Application {
         achievements.add(new Achievement(R.drawable.gold_streak_25_completed, R.drawable.gold_streak_25, "Vegan Master Streak", "Achieve a 25-day vegan streak.",
                 AchievementRanking.GOLD, true));
 
-        List<Ingredient> ingredients = new ArrayList<>();
+        /*List<Ingredient> ingredients = new ArrayList<>();
         ingredients.add(new Ingredient("Carrots", "2kg"));
         ingredients.add(new Ingredient("Tomatoes", "500g"));
         ingredients.add(new Ingredient("Eggs", "12"));
@@ -56,7 +56,7 @@ public class EvaApplication extends Application {
         ShoppingList shoppingList = new ShoppingList(ingredients);
 
         List<Day> days = new ArrayList<>();
-        days.add(new Day("Saturday", "15/07/2017", new Dish(R.drawable.winterovenschotel, "Winterovenschotel met Le Puy-linzen (SATURDAY)", CookingTime.MEDIUM, "Beginner", DishType.MAINDISH,
+        days.add(new Day(2017,6,18,4,199, new Dish(R.drawable.winterovenschotel, "Winterovenschotel met Le Puy-linzen (Tuesday)", CookingTime.MEDIUM, "Beginner", DishType.MAINDISH,
                 ingredients,
                 "1. Kook de linzen gaar in de groentenbouillon samen met een blaadje laurier," +
                         " een halve ui en 1/2 tl gedroogde tijm.\n" +
@@ -73,7 +73,7 @@ public class EvaApplication extends Application {
                         " Leg bovenop een laagje van het broodkruim en bak de schotel zo'n 10 minuten in de oven," +
                         " tot het korstje licht verkleurt."), ""));
 
-        days.add(new Day("Sunday", "16/07/2017", new Dish(R.drawable.winterovenschotel, "Winterovenschotel met Le Puy-linzen (SUNDAY)", CookingTime.MEDIUM, "Beginner", DishType.MAINDISH,
+        days.add(new Day(2017,6,19,5,200, new Dish(R.drawable.winterovenschotel, "Winterovenschotel met Le Puy-linzen (Wednesday)", CookingTime.MEDIUM, "Beginner", DishType.MAINDISH,
                 ingredients,
                 "1. Kook de linzen gaar in de groentenbouillon samen met een blaadje laurier," +
                         " een halve ui en 1/2 tl gedroogde tijm.\n" +
@@ -90,7 +90,7 @@ public class EvaApplication extends Application {
                         " Leg bovenop een laagje van het broodkruim en bak de schotel zo'n 10 minuten in de oven," +
                         " tot het korstje licht verkleurt."), ""));
 
-        days.add(new Day("Monday", "17/07/2017", new Dish(R.drawable.winterovenschotel, "Winterovenschotel met Le Puy-linzen (MONDAY)", CookingTime.MEDIUM, "Beginner", DishType.MAINDISH,
+        days.add(new Day(2017,6,20,6,201, new Dish(R.drawable.winterovenschotel, "Winterovenschotel met Le Puy-linzen (Thursday)", CookingTime.MEDIUM, "Beginner", DishType.MAINDISH,
                 ingredients,
                 "1. Kook de linzen gaar in de groentenbouillon samen met een blaadje laurier," +
                         " een halve ui en 1/2 tl gedroogde tijm.\n" +
@@ -105,9 +105,9 @@ public class EvaApplication extends Application {
                         "4. Meng de gekookte linzen (haal de halve ui en het laurierblad eruit)," +
                         " de groenten en de noten onder elkaar in de ovenschotel." +
                         " Leg bovenop een laagje van het broodkruim en bak de schotel zo'n 10 minuten in de oven," +
-                        " tot het korstje licht verkleurt."), ""));
+                        " tot het korstje licht verkleurt."), ""));*/
 
-        filledInUser = new User(achievements, days, shoppingList, 15, 34);
+        filledInUser = new User(achievements);
         // }
         return filledInUser;
     }
