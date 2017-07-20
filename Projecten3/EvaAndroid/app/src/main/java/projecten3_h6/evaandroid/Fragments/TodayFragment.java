@@ -32,6 +32,9 @@ import projecten3_h6.evaandroid.Domain.User;
 import projecten3_h6.evaandroid.Network.Calls;
 import projecten3_h6.evaandroid.Network.Config;
 import projecten3_h6.evaandroid.R;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * Created by jensleirens on 05/07/2017.
