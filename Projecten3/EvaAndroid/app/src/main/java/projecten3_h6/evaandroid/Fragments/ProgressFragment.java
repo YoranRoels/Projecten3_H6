@@ -8,6 +8,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,7 +37,12 @@ import projecten3_h6.evaandroid.Domain.EvaApplication;
 import projecten3_h6.evaandroid.Domain.Ingredient;
 import projecten3_h6.evaandroid.Domain.DishType;
 import projecten3_h6.evaandroid.Domain.User;
+import projecten3_h6.evaandroid.Network.Calls;
+import projecten3_h6.evaandroid.Network.Config;
 import projecten3_h6.evaandroid.R;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * Created by Yoran on 07/07/2017.
@@ -217,7 +223,7 @@ public class ProgressFragment extends Fragment implements ProgressPickerDialog.D
         public void onClick(View v) {
             pos = mRecyclerView.getChildAdapterPosition(v) ;
             FragmentManager fm = getActivity().getSupportFragmentManager();
-            choices = initchoices();
+            initChoices();
             Calendar c = Calendar.getInstance();
             Day tappedDay = user.getDays().get(days.size() - segmentSize + pos);
             if(tappedDay.getDish() == null && tappedDay.getDayOfTheYear() >= c.get(Calendar.DAY_OF_YEAR)) {
@@ -227,69 +233,22 @@ public class ProgressFragment extends Fragment implements ProgressPickerDialog.D
 
         }
 
-        public List<Dish> initchoices(){
-            List<Dish> choices = new ArrayList<>();
-            List<Ingredient> ingredients = new ArrayList<>();
+        public void initChoices(){
+            Calls caller = Config.getRetrofit().create(Calls.class);
+            Call<List<Dish>> call = caller.getThreeRandomDishes();
+            call.enqueue(new Callback<List<Dish>>() {
+                @Override
+                public void onResponse(Call<List<Dish>> call, Response<List<Dish>> response) {
+                    choices = response.body();
+                    Log.e("BackendCall", " call successful three random dishes");
+                }
 
-            ingredients.add(new Ingredient("Wortelen","10"));
-            ingredients.add(new Ingredient("Tomaten","10"));
-            ingredients.add(new Ingredient("Ajuin","2"));
-            ingredients.add(new Ingredient("Prei","5"));
-            ingredients.add(new Ingredient("Zout","200g"));
-            ingredients.add(new Ingredient("Wortelen","10"));
+                @Override
+                public void onFailure(Call<List<Dish>> call, Throwable t) {
+                    Log.e("BackendCAll", "failed to call three random dishes "+ t.getMessage());
+                }
+            });
 
-            choices.add(new Dish(R.drawable.winterovenschotel,"Winterovenschotel met Le Puy-linzen Winterovenschotel Winterovenschotel Winterovenschotel", CookingTime.MEDIUM, "Beginner", DishType.MAINDISH,
-                    ingredients,
-                    "1. Kook de linzen gaar in de groentenbouillon samen met een blaadje laurier," +
-                            " een halve ui en 1/2 tl gedroogde tijm.\n" +
-                            "\n" +
-                            "2. Versnipper de rest van de uit en stoof ze aan in 3 el olijfolie." +
-                            " Voeg de look, groenten, wat zout en de gemengde mediterraanse kruiden toe en laat alles zo goed als gaar stoven" +
-                            " met het deksel op de pan. Voeg eventueel wat water toe als de groenten dreigen aan te branden.\n" +
-                            "\n" +
-                            "3. Warm de oven voor op 18°C en vet een ovenschaal in. Meng het broodkruim met de boter," +
-                            " 2 teentjes fijngehakte knoflook, de verse kruiden, zout en peper.\n" +
-                            "\n" +
-                            "4. Meng de gekookte linzen (haal de halve ui en het laurierblad eruit)," +
-                            " de groenten en de noten onder elkaar in de ovenschotel." +
-                            " Leg bovenop een laagje van het broodkruim en bak de schotel zo'n 10 minuten in de oven," +
-                            " tot het korstje licht verkleurt."));
-
-            choices.add(new Dish(R.drawable.winterovenschotel,"Lasagna with vegetables", CookingTime.SHORT, "Beginner", DishType.MAINDISH,
-                    ingredients,
-                    "1. Kook de linzen gaar in de groentenbouillon samen met een blaadje laurier," +
-                            " een halve ui en 1/2 tl gedroogde tijm.\n" +
-                            "\n" +
-                            "2. Versnipper de rest van de uit en stoof ze aan in 3 el olijfolie." +
-                            " Voeg de look, groenten, wat zout en de gemengde mediterraanse kruiden toe en laat alles zo goed als gaar stoven" +
-                            " met het deksel op de pan. Voeg eventueel wat water toe als de groenten dreigen aan te branden.\n" +
-                            "\n" +
-                            "3. Warm de oven voor op 18°C en vet een ovenschaal in. Meng het broodkruim met de boter," +
-                            " 2 teentjes fijngehakte knoflook, de verse kruiden, zout en peper.\n" +
-                            "\n" +
-                            "4. Meng de gekookte linzen (haal de halve ui en het laurierblad eruit)," +
-                            " de groenten en de noten onder elkaar in de ovenschotel." +
-                            " Leg bovenop een laagje van het broodkruim en bak de schotel zo'n 10 minuten in de oven," +
-                            " tot het korstje licht verkleurt."));
-
-            choices.add(new Dish(R.drawable.winterovenschotel,"Veggie Pizza", CookingTime.LONG, "Professional", DishType.MAINDISH,
-                    ingredients,
-                    "1. Kook de linzen gaar in de groentenbouillon samen met een blaadje laurier," +
-                            " een halve ui en 1/2 tl gedroogde tijm.\n" +
-                            "\n" +
-                            "2. Versnipper de rest van de uit en stoof ze aan in 3 el olijfolie." +
-                            " Voeg de look, groenten, wat zout en de gemengde mediterraanse kruiden toe en laat alles zo goed als gaar stoven" +
-                            " met het deksel op de pan. Voeg eventueel wat water toe als de groenten dreigen aan te branden.\n" +
-                            "\n" +
-                            "3. Warm de oven voor op 18°C en vet een ovenschaal in. Meng het broodkruim met de boter," +
-                            " 2 teentjes fijngehakte knoflook, de verse kruiden, zout en peper.\n" +
-                            "\n" +
-                            "4. Meng de gekookte linzen (haal de halve ui en het laurierblad eruit)," +
-                            " de groenten en de noten onder elkaar in de ovenschotel." +
-                            " Leg bovenop een laagje van het broodkruim en bak de schotel zo'n 10 minuten in de oven," +
-                            " tot het korstje licht verkleurt."));
-
-            return choices;
         }
     }
 }

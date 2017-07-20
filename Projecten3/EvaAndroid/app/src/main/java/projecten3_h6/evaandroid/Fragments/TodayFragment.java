@@ -32,9 +32,6 @@ import projecten3_h6.evaandroid.Domain.User;
 import projecten3_h6.evaandroid.Network.Calls;
 import projecten3_h6.evaandroid.Network.Config;
 import projecten3_h6.evaandroid.R;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 /**
  * Created by jensleirens on 05/07/2017.
@@ -58,33 +55,6 @@ public class TodayFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_today, container, false);
         ButterKnife.bind(this,v);
-
-        //todo delete test code
-        //test
-        Calls caller = Config.getRetrofit().create(Calls.class);
-        Call<List<Dish>> call = caller.getDishes();
-        call.enqueue(new Callback<List<Dish>>() {
-            @Override
-            public void onResponse(Call<List<Dish>> call, Response<List<Dish>> response) {
-                System.out.println("api call" + response.body());
-                dishes = response.body();
-                Log.e("APICALL", " call successful");
-                Toast.makeText(getActivity().getApplicationContext(),"call successful",Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onFailure(Call<List<Dish>> call, Throwable t) {
-                Log.e("APICALL", "failed to call "+ t.getMessage());
-                //Toast.makeText(getActivity().getApplicationContext(),"geen internet verbinding!",Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        System.out.println(dishes);
-
-
-
-        //test
-
 
         // Get User
         Context context = getContext();

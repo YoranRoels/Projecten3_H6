@@ -1,7 +1,16 @@
 package projecten3_h6.evaandroid.Domain;
 
+import android.util.Log;
+
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+
+import projecten3_h6.evaandroid.Network.Calls;
+import projecten3_h6.evaandroid.Network.Config;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * Created by jensleirens on 11/07/2017.
@@ -10,6 +19,7 @@ import java.util.List;
 public class User {
 
     private List<Achievement> achievements;
+    private List<Achievement> remoteAchievement;
     private int completedAchievementsCount = 0;
     private List<Achievement> bronzeAchievements = new ArrayList<>();
     private List<Achievement> silverAchievements = new ArrayList<>();
@@ -31,6 +41,7 @@ public class User {
         countCompletedAchievements();
         calculateStatistics();
     }
+
     public User(List<Achievement> achievements) {
         this.achievements = achievements;
 
@@ -40,6 +51,7 @@ public class User {
     public List<Achievement> getAchievements() {
         return achievements;
     }
+
     public void setAchievements(List<Achievement> achievements) {
         this.achievements = achievements;
     }
@@ -47,6 +59,7 @@ public class User {
     public int getCompletedAchievementsCount() {
         return completedAchievementsCount;
     }
+
     public void setCompletedAchievementsCount(int completedAchievementsCount) {
         this.completedAchievementsCount = completedAchievementsCount;
     }
@@ -54,6 +67,7 @@ public class User {
     public List<Achievement> getBronzeAchievements() {
         return bronzeAchievements;
     }
+
     public void setBronzeAchievements(List<Achievement> bronzeAchievements) {
         this.bronzeAchievements = bronzeAchievements;
     }
@@ -61,6 +75,7 @@ public class User {
     public List<Achievement> getSilverAchievements() {
         return silverAchievements;
     }
+
     public void setSilverAchievements(List<Achievement> silverAchievements) {
         this.silverAchievements = silverAchievements;
     }
@@ -68,6 +83,7 @@ public class User {
     public List<Achievement> getGoldAchievements() {
         return goldAchievements;
     }
+
     public void setGoldAchievements(List<Achievement> goldAchievements) {
         this.goldAchievements = goldAchievements;
     }
@@ -75,6 +91,7 @@ public class User {
     public List<Day> getDays() {
         return days;
     }
+
     public void setDays(List<Day> days) {
         this.days = days;
     }
@@ -82,6 +99,7 @@ public class User {
     public ShoppingList getShoppingList() {
         return shoppingList;
     }
+
     public void setShoppingList(ShoppingList shoppingList) {
         this.shoppingList = shoppingList;
     }
@@ -89,6 +107,7 @@ public class User {
     public int getTotalVeganDays() {
         return totalVeganDays;
     }
+
     public void setTotalVeganDays(int totalVeganDays) {
         this.totalVeganDays = totalVeganDays;
     }
@@ -96,6 +115,7 @@ public class User {
     public int getLongestStreak() {
         return longestStreak;
     }
+
     public void setLongestStreak(int longestStreak) {
         this.longestStreak = longestStreak;
     }
@@ -155,5 +175,35 @@ public class User {
                 streak = 0;
             }
         }
+    }
+
+    public void getRemoteAchievements(){
+
+        Calls caller = Config.getRetrofit().create(Calls.class);
+        Call<List<Achievement>> call = caller.getAchievements();
+        call.enqueue(new Callback<List<Achievement>>() {
+            @Override
+            public void onResponse(Call<List<Achievement>> call, Response<List<Achievement>> response) {
+                remoteAchievement = response.body();
+                Log.e("BackendCall", " call successful get all achievements");
+            }
+
+            @Override
+            public void onFailure(Call<List<Achievement>> call, Throwable t) {
+                Log.e("BackendCAll", "failed to call get all achievements "+ t.getMessage());
+            }
+        });
+
+        compareAchievements();
+
+    }
+
+    private void compareAchievements(){
+        for (Achievement a : remoteAchievement) {
+            if (!achievements.contains(a)) {
+                achievements.add(a);
+            }
+        }
+
     }
 }
