@@ -20,7 +20,7 @@ router.get('/dishes', function(req, res, next) {
     });
 });
 
-router.get('/random',function(req , res, next){
+router.get('/dishes/three-random',function(req , res, next){
     Dish.find(function(err,dishes){
         if(err){ return next(err); }
         var arr = underscore.sample(dishes,3);
