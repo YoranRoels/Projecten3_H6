@@ -16,19 +16,18 @@ router.get('/', function(req, res, next) {
 router.get('/dishes', function(req, res, next) {
     Dish.find(function(err, dishes){
         if(err){ return next(err); }
+
         res.json(dishes);
-    });
+    }).populate('ingredients');
 });
 
 router.get('/dishes/three-random',function(req , res, next){
     Dish.find(function(err,dishes){
         if(err){ return next(err); }
-        var arr = underscore.sample(dishes,3);
+        var arr = underscore.sample(dishes, 3);
         res.json(arr);
-    });    
+    }).populate('ingredients');
 });
-
-
 
 router.get('/dishes/:dish', function(req, res) {
     req.dish.populate('ingredients', function(err, dish) {
