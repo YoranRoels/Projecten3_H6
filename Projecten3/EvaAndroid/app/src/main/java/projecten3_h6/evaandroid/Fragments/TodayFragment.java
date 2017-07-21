@@ -1,9 +1,11 @@
 package projecten3_h6.evaandroid.Fragments;
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,7 +29,12 @@ import projecten3_h6.evaandroid.Domain.EvaApplication;
 import projecten3_h6.evaandroid.Domain.Ingredient;
 import projecten3_h6.evaandroid.Domain.DishType;
 import projecten3_h6.evaandroid.Domain.User;
+import projecten3_h6.evaandroid.Network.Calls;
+import projecten3_h6.evaandroid.Network.Config;
 import projecten3_h6.evaandroid.R;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * Created by jensleirens on 05/07/2017.
@@ -44,12 +51,14 @@ public class TodayFragment extends Fragment {
     @BindView(R.id.todayDishName)TextView dishName;
     private Dish dish;
     User user;
+    List<Dish> dishes = new ArrayList<>();
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_today, container, false);
         ButterKnife.bind(this,v);
+
         // Get User
         Context context = getContext();
         EvaApplication app = (EvaApplication)context.getApplicationContext();
