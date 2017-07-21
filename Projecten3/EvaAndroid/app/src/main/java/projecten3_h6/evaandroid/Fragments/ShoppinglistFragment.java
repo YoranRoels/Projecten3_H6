@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.github.brnunes.swipeablerecyclerview.SwipeableRecyclerViewTouchListener;
@@ -19,6 +20,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import projecten3_h6.evaandroid.Adapters.ShoppinglistAdapter;
+import projecten3_h6.evaandroid.Domain.Achievement;
 import projecten3_h6.evaandroid.Domain.EvaApplication;
 import projecten3_h6.evaandroid.Domain.Ingredient;
 import projecten3_h6.evaandroid.Domain.User;
@@ -51,7 +53,6 @@ public class ShoppinglistFragment extends Fragment {
         EvaApplication app = (EvaApplication)context.getApplicationContext();
         user = app.getUser();
         ingredients = user.getShoppingList().getIngredients();
-
 
         SwipeableRecyclerViewTouchListener swipeTouchListener =
                 new SwipeableRecyclerViewTouchListener(mRecyclerView,
@@ -93,6 +94,7 @@ public class ShoppinglistFragment extends Fragment {
         mRecyclerView.setLayoutManager(mLayoutManager);
 
         initCard();
+        checkIfAchievementsEarned(inflater, container);
         return v;
     }
 
@@ -120,5 +122,29 @@ public class ShoppinglistFragment extends Fragment {
     public void initCard(){
         adapter = new ShoppinglistAdapter(ingredients);
         mRecyclerView.setAdapter(adapter);
+    }
+
+    public void checkIfAchievementsEarned(LayoutInflater inflater, ViewGroup container) {
+
+
+        // ------------- We're Just Getting Started ------------- //
+        Achievement shoppingListTabAchievement = null;
+        for(Achievement a: user.getAchievements()) {
+            if(a.getTitle().equals("No More Pen and Paper")) {
+                shoppingListTabAchievement = a;
+                if(!shoppingListTabAchievement.isCompleted()){
+                    a.setCompleted(true);
+                    View view = inflater.inflate(R.layout.achievement_earned_alert, container, false);
+                    TextView achievementTitleTextView = (TextView)view.findViewById(R.id.earnedAchievementTitle);
+                    achievementTitleTextView.setText(a.getTitle());
+                    ImageView achievementImageView = (ImageView)view.findViewById(R.id.earnedAchievementIcon);
+                    achievementImageView.setImageResource(a.getCompletedImageId());
+                    Toast toast = new Toast(getContext());
+                    toast.setDuration(Toast.LENGTH_LONG);
+                    toast.setView(view);
+                    toast.show();
+                }
+            }
+        }
     }
 }
