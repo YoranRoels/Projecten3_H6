@@ -29,6 +29,7 @@ public class ProgressAdapter extends RecyclerView.Adapter<ProgressAdapter.Progre
 
     private int itemCount;
     private List<Day> currentDays;
+    ViewGroup parent;
 
     public ProgressAdapter(List<Day> currentDays) {
         this.currentDays = currentDays;
@@ -38,6 +39,7 @@ public class ProgressAdapter extends RecyclerView.Adapter<ProgressAdapter.Progre
     @Override
     public ProgressAdapter.ProgressViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_progress,parent,false);
+        this.parent = parent;
         v.setOnClickListener(ProgressFragment.progressOnclickListener);
         return new ProgressAdapter.ProgressViewHolder(v);
     }
@@ -72,6 +74,8 @@ public class ProgressAdapter extends RecyclerView.Adapter<ProgressAdapter.Progre
                 ProgressFragment.user.getDays().get(daysLength - itemCount + position).setCompleted(isChecked);
                 ProgressFragment.user.calculateStatistics();
                 ProgressFragment.recheckCheckboxes();
+                // Achievement earned
+                ProgressFragment.app.earnAchievement(parent.getContext(), LayoutInflater.from(parent.getContext()), parent, "Vegan Rookie");
             }
         });
     }

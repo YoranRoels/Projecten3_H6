@@ -83,14 +83,21 @@ public class ProgressFragment extends Fragment implements ProgressPickerDialog.D
     public static List<Day> lastThreeDays = new ArrayList<>();
     public static int segmentSize = 3;
 
+    // Achievements
+    public static EvaApplication app;
+    private LayoutInflater inflater;
+    private ViewGroup container;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_progress, container, false);
+        this.inflater = inflater;
+        this.container = container;
         ButterKnife.bind(this,v);
 
         Context context = getContext();
-        EvaApplication app = (EvaApplication)context.getApplicationContext();
+        app = (EvaApplication)context.getApplicationContext();
         user = app.getUser();
         days = user.getDays();
 
@@ -115,11 +122,14 @@ public class ProgressFragment extends Fragment implements ProgressPickerDialog.D
         mRecyclerView.setLayoutManager(mLayoutManager);
 
         reloadCards();
+        // Achievement earned
+        app.earnAchievement(getContext(), inflater, container, "I’m On a Regime");
         return v;
     }
 
     public void reloadCards(){
         refreshLastThreeDays();
+        checkSegmentButtonEnabled();
         adapter = new ProgressAdapter(lastThreeDays);
         mRecyclerView.setAdapter(adapter);
     }
@@ -190,9 +200,25 @@ public class ProgressFragment extends Fragment implements ProgressPickerDialog.D
 
     @OnClick(R.id.finishSegment)
     public void finishSegment() {
+        // Achievements
+        if(days.get(days.size()-segmentSize).isCompleted()
+                && days.get(days.size()-segmentSize + 1).isCompleted() &&
+                days.get(days.size()-segmentSize + 2).isCompleted()) {
+            app.earnAchievement(getContext(), inflater, container, "Making Progress");
+        } else {
+            app.earnAchievement(getContext(), inflater, container, "Cheat Day");
+        }
+        if(user.getLongestStreak() >= 25) {
+            app.earnAchievement(getContext(), inflater, container, "Vegan Pro Streak");
+        } else if(user.getLongestStreak() >= 10) {
+            app.earnAchievement(getContext(), inflater, container, "Vegan Master Streak");
+        }
+        if(user.getTotalVeganDays() >= 100) {
+            app.earnAchievement(getContext(), inflater, container, "Vegan Master");
+        }
+
         startNewSegment();
         reloadCards();
-        checkSegmentButtonEnabled();
     }
 
     @Override

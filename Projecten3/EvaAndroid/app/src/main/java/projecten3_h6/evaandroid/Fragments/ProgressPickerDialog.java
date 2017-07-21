@@ -14,6 +14,7 @@ import java.util.List;
 import butterknife.ButterKnife;
 import projecten3_h6.evaandroid.Adapters.ProgressPickerAdapter;
 import projecten3_h6.evaandroid.Domain.Day;
+import projecten3_h6.evaandroid.Domain.EvaApplication;
 import projecten3_h6.evaandroid.R;
 import butterknife.BindView;
 
@@ -31,10 +32,20 @@ public class ProgressPickerDialog extends DialogFragment {
     DialogFragment df;
     DialogListener mListener;
 
+    // Achievement
+    EvaApplication app;
+    LayoutInflater inflater;
+    ViewGroup container;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_progress_picker, container,false);
+        this.inflater = inflater;
+        this.container = container;
         ButterKnife.bind(this,v);
+
+        Context context = getContext();
+        app = (EvaApplication)context.getApplicationContext();
 
         df = this;
         progressPickerOnclickListener = new ProgressPickerOnclickListener(getContext());
@@ -73,9 +84,13 @@ public class ProgressPickerDialog extends DialogFragment {
 
             List<Day> days = ProgressFragment.user.getDays();
             days.get(days.size() - ProgressFragment.segmentSize + ProgressFragment.pos).setDish(ProgressFragment.choices.get(posOfDish));
+            if(days.get(days.size() - ProgressFragment.segmentSize).getDish() != null &&
+                    days.get(days.size() - ProgressFragment.segmentSize + 1).getDish() != null &&
+                    days.get(days.size() - ProgressFragment.segmentSize + 2).getDish() != null) {
+                app.earnAchievement(getContext(), inflater, container, "Planning Ahead");
+            }
             mListener.onDialogClick(df);
             dismiss();
-
         }
     }
 }

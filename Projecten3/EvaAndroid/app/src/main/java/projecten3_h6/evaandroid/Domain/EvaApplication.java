@@ -1,6 +1,13 @@
 package projecten3_h6.evaandroid.Domain;
 
 import android.app.Application;
+import android.content.Context;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -32,8 +39,8 @@ public class EvaApplication extends Application {
         List<Achievement> achievements = new ArrayList<>();
 
         // Bronze (8)
-        achievements.add(new Achievement(R.drawable.bronze_app_completed, R.drawable.bronze_app, "We're Just Getting Started", "Launch the app.",
-                AchievementRanking.BRONZE));
+        /*achievements.add(new Achievement(R.drawable.bronze_app_completed, R.drawable.bronze_app, "We're Just Getting Started", "Launch the app.",
+                AchievementRanking.BRONZE));*/
         achievements.add(new Achievement(R.drawable.bronze_calendar_completed, R.drawable.bronze_calendar, "I’m On a Regime", "Open the ‘Progress’ tab.",
                 AchievementRanking.BRONZE));
         achievements.add(new Achievement(R.drawable.bronze_cooking_completed, R.drawable.bronze_cooking, "What’s For Dinner?", "Open the ‘Today’ tab.",
@@ -67,5 +74,27 @@ public class EvaApplication extends Application {
         filledInUser = new User(achievements);
         // }
         return filledInUser;
+    }
+
+    public void earnAchievement(Context context, LayoutInflater inflater, ViewGroup container, String achievementTitle) {
+        Achievement shoppingListTabAchievement = null;
+        for(Achievement a: user.getAchievements()) {
+            if(a.getTitle().equals(achievementTitle)) {
+                shoppingListTabAchievement = a;
+                if(!shoppingListTabAchievement.isCompleted()){
+                    a.setCompleted(true);
+                    View view = inflater.inflate(R.layout.achievement_earned_alert, container, false);
+                    TextView achievementTitleTextView = (TextView)view.findViewById(R.id.earnedAchievementTitle);
+                    achievementTitleTextView.setText(a.getTitle());
+                    ImageView achievementImageView = (ImageView)view.findViewById(R.id.earnedAchievementIcon);
+                    achievementImageView.setImageResource(a.getCompletedImageId());
+                    Toast toast = new Toast(context);
+                    toast.setDuration(Toast.LENGTH_LONG);
+                    toast.setView(view);
+                    toast.show();
+                }
+            }
+        }
+        user.countCompletedAchievements();
     }
 }

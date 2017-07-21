@@ -41,19 +41,30 @@ public class ShoppinglistFragment extends Fragment {
     User user;
     List<Ingredient> ingredients = new ArrayList<>();
 
+    // Achievement
+    private EvaApplication app;
+    private LayoutInflater layoutInflater;
+    private ViewGroup vgContainer;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        //returning our layout file
-        //change R.layout.yourlayoutfilename for each of your fragments
+        // Inflate
         View v = inflater.inflate(R.layout.fragment_shoppinglist, container, false);
+        layoutInflater = inflater;
+        vgContainer = container;
         ButterKnife.bind(this,v);
 
+        // Get global data
         Context context = getContext();
-        EvaApplication app = (EvaApplication)context.getApplicationContext();
+        app = (EvaApplication)context.getApplicationContext();
         user = app.getUser();
         ingredients = user.getShoppingList().getIngredients();
 
+        // Achievement earned
+        app.earnAchievement(getContext(), inflater, container, "No More Pen and Paper");
+
+        // Swiping actions
         SwipeableRecyclerViewTouchListener swipeTouchListener =
                 new SwipeableRecyclerViewTouchListener(mRecyclerView,
                         new SwipeableRecyclerViewTouchListener.SwipeListener() {
@@ -85,16 +96,12 @@ public class ShoppinglistFragment extends Fragment {
                                 initCard();
                             }
                         });
-
         mRecyclerView.addOnItemTouchListener(swipeTouchListener);
-
-
-
         mLayoutManager = new LinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(mLayoutManager);
 
+        // Init Shopping List entries
         initCard();
-        checkIfAchievementsEarned(inflater, container);
         return v;
     }
 
@@ -116,35 +123,13 @@ public class ShoppinglistFragment extends Fragment {
             Toast.makeText(getActivity(), "\"" + itemName + "\"" + " has been added to the list", Toast.LENGTH_LONG).show();
             addShoppingListItemNametxt.setText("");
             addShoppingListItemAmounttxt.setText("");
+
+            app.earnAchievement(getContext(), layoutInflater, vgContainer, "Manual Labor");
         }
     }
 
     public void initCard(){
         adapter = new ShoppinglistAdapter(ingredients);
         mRecyclerView.setAdapter(adapter);
-    }
-
-    public void checkIfAchievementsEarned(LayoutInflater inflater, ViewGroup container) {
-
-
-        // ------------- We're Just Getting Started ------------- //
-        Achievement shoppingListTabAchievement = null;
-        for(Achievement a: user.getAchievements()) {
-            if(a.getTitle().equals("No More Pen and Paper")) {
-                shoppingListTabAchievement = a;
-                if(!shoppingListTabAchievement.isCompleted()){
-                    a.setCompleted(true);
-                    View view = inflater.inflate(R.layout.achievement_earned_alert, container, false);
-                    TextView achievementTitleTextView = (TextView)view.findViewById(R.id.earnedAchievementTitle);
-                    achievementTitleTextView.setText(a.getTitle());
-                    ImageView achievementImageView = (ImageView)view.findViewById(R.id.earnedAchievementIcon);
-                    achievementImageView.setImageResource(a.getCompletedImageId());
-                    Toast toast = new Toast(getContext());
-                    toast.setDuration(Toast.LENGTH_LONG);
-                    toast.setView(view);
-                    toast.show();
-                }
-            }
-        }
     }
 }

@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -18,6 +19,7 @@ import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import projecten3_h6.evaandroid.Domain.Achievement;
 import projecten3_h6.evaandroid.Domain.CookingTime;
 import projecten3_h6.evaandroid.Domain.Day;
 import projecten3_h6.evaandroid.Domain.Dish;
@@ -59,6 +61,8 @@ public class TodayFragment extends Fragment {
             setTextAndVisuals();
         }
 
+        // Achievement earned
+        app.earnAchievement(getContext(), inflater, container, "What’s For Dinner?");
         return v;
     }
 
@@ -95,7 +99,7 @@ public class TodayFragment extends Fragment {
         }
         cookingTime.setText(time);
 
-        // The Rests
+        // Rest
         preparationView.setText(dish.getPreparation());
         recipeImage.setPadding(0,0,0,0);
         recipeImage.setImageResource(dish.getImageId());
