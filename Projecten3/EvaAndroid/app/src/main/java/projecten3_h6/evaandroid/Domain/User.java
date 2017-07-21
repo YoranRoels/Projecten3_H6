@@ -22,8 +22,11 @@ public class User {
     private List<Achievement> remoteAchievement;
     private int completedAchievementsCount = 0;
     private List<Achievement> bronzeAchievements = new ArrayList<>();
+    private int completedBronzeAchievementsCount = 0;
     private List<Achievement> silverAchievements = new ArrayList<>();
+    private int completedSilverAchievementsCount = 0;
     private List<Achievement> goldAchievements = new ArrayList<>();
+    private int completedGoldAchievementsCount = 0;
     private List<Day> days = new ArrayList<>();
     private ShoppingList shoppingList = new ShoppingList();
     private int totalVeganDays = 0;
@@ -52,40 +55,32 @@ public class User {
         return achievements;
     }
 
-    public void setAchievements(List<Achievement> achievements) {
-        this.achievements = achievements;
-    }
-
     public int getCompletedAchievementsCount() {
         return completedAchievementsCount;
-    }
-
-    public void setCompletedAchievementsCount(int completedAchievementsCount) {
-        this.completedAchievementsCount = completedAchievementsCount;
     }
 
     public List<Achievement> getBronzeAchievements() {
         return bronzeAchievements;
     }
 
-    public void setBronzeAchievements(List<Achievement> bronzeAchievements) {
-        this.bronzeAchievements = bronzeAchievements;
+    public int getCompletedBronzeAchievementsCount() {
+        return completedBronzeAchievementsCount;
     }
 
     public List<Achievement> getSilverAchievements() {
         return silverAchievements;
     }
-
-    public void setSilverAchievements(List<Achievement> silverAchievements) {
-        this.silverAchievements = silverAchievements;
+  
+    public int getCompletedSilverAchievementsCount() {
+        return completedSilverAchievementsCount;
     }
 
     public List<Achievement> getGoldAchievements() {
         return goldAchievements;
     }
-
-    public void setGoldAchievements(List<Achievement> goldAchievements) {
-        this.goldAchievements = goldAchievements;
+  
+    public int getCompletedGoldAchievementsCount() {
+        return completedGoldAchievementsCount;
     }
 
     public List<Day> getDays() {
@@ -136,16 +131,33 @@ public class User {
         }
     }
 
-    private void countCompletedAchievements() {
+    public void countCompletedAchievements() {
         int temporaryCompletedAchievementsCount = 0;
+        int temporaryBronzeCompletedAchievementsCount = 0;
+        int temporarySilverCompletedAchievementsCount = 0;
+        int temporaryGoldCompletedAchievementsCount = 0;
 
         for (Achievement a : achievements) {
             if (a.isCompleted()) {
-                temporaryCompletedAchievementsCount++;
+                temporaryCompletedAchievementsCount+=1;
+                switch(a.getAchievementRanking()) {
+                    case BRONZE:
+                        temporaryBronzeCompletedAchievementsCount+=1;
+                        break;
+                    case SILVER:
+                        temporarySilverCompletedAchievementsCount+=1;
+                        break;
+                    case GOLD:
+                        temporaryGoldCompletedAchievementsCount+=1;
+                        break;
+                }
             }
         }
 
         completedAchievementsCount = temporaryCompletedAchievementsCount;
+        completedBronzeAchievementsCount = temporaryBronzeCompletedAchievementsCount;
+        completedSilverAchievementsCount = temporarySilverCompletedAchievementsCount;
+        completedGoldAchievementsCount = temporaryGoldCompletedAchievementsCount;
     }
 
     public void calculateStatistics() {

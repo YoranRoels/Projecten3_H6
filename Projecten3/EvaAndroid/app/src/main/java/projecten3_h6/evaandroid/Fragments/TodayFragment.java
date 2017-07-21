@@ -70,6 +70,8 @@ public class TodayFragment extends Fragment {
             setTextAndVisuals();
         }
 
+        // Achievement earned
+        app.earnAchievement(getContext(), inflater, container, "What’s For Dinner?");
         return v;
     }
 
@@ -106,7 +108,7 @@ public class TodayFragment extends Fragment {
         }
         cookingTime.setText(time);
 
-        // The Rests
+        // Rest
         preparationView.setText(dish.getPreparation());
         recipeImage.setPadding(0,0,0,0);
         recipeImage.setImageResource(dish.getImageId());

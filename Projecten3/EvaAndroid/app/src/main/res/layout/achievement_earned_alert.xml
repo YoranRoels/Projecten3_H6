@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/earnedAchievementLL"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/earned_achievement_background"
+    android:layout_marginBottom="10dp">
+    <ImageView
+        android:id="@+id/earnedAchievementIcon"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_gravity="center_vertical"
+        android:src="@drawable/carrot_trophy_gold"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"/>
+    <TextView
+        android:id="@+id/earnedAchievementTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:text="We’re Just Getting Started"
+        android:textColor="@color/contentColor"
+        android:textSize="16sp"
+        android:layout_marginRight="20dp"
+        android:layout_marginEnd="20dp"/>
+</LinearLayout>

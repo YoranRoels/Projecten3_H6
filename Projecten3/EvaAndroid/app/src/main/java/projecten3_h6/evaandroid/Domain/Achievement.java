@@ -11,15 +11,14 @@ public class Achievement {
     private String title;
     private String description;
     private AchievementRanking achievementRanking;
-    private boolean completed;
+    private boolean completed = false;
 
-    public Achievement(int completedImageId,int imageId, String title, String description, AchievementRanking achievementRanking, boolean completed ) {
+    public Achievement(int completedImageId,int imageId, String title, String description, AchievementRanking achievementRanking) {
         this.completedImageId = completedImageId;
         this.imageId = imageId;
         this.title = title;
         this.description = description;
         this.achievementRanking = achievementRanking;
-        this.completed = completed;
     }
 
     public int getCompletedImageId() {

@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.github.brnunes.swipeablerecyclerview.SwipeableRecyclerViewTouchListener;
@@ -19,6 +20,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import projecten3_h6.evaandroid.Adapters.ShoppinglistAdapter;
+import projecten3_h6.evaandroid.Domain.Achievement;
 import projecten3_h6.evaandroid.Domain.EvaApplication;
 import projecten3_h6.evaandroid.Domain.Ingredient;
 import projecten3_h6.evaandroid.Domain.User;
@@ -39,20 +41,30 @@ public class ShoppinglistFragment extends Fragment {
     User user;
     List<Ingredient> ingredients = new ArrayList<>();
 
+    // Achievement
+    private EvaApplication app;
+    private LayoutInflater layoutInflater;
+    private ViewGroup vgContainer;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        //returning our layout file
-        //change R.layout.yourlayoutfilename for each of your fragments
+        // Inflate
         View v = inflater.inflate(R.layout.fragment_shoppinglist, container, false);
+        layoutInflater = inflater;
+        vgContainer = container;
         ButterKnife.bind(this,v);
 
+        // Get global data
         Context context = getContext();
-        EvaApplication app = (EvaApplication)context.getApplicationContext();
+        app = (EvaApplication)context.getApplicationContext();
         user = app.getUser();
         ingredients = user.getShoppingList().getIngredients();
 
+        // Achievement earned
+        app.earnAchievement(getContext(), inflater, container, "No More Pen and Paper");
 
+        // Swiping actions
         SwipeableRecyclerViewTouchListener swipeTouchListener =
                 new SwipeableRecyclerViewTouchListener(mRecyclerView,
                         new SwipeableRecyclerViewTouchListener.SwipeListener() {
@@ -84,14 +96,11 @@ public class ShoppinglistFragment extends Fragment {
                                 initCard();
                             }
                         });
-
         mRecyclerView.addOnItemTouchListener(swipeTouchListener);
-
-
-
         mLayoutManager = new LinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(mLayoutManager);
 
+        // Init Shopping List entries
         initCard();
         return v;
     }
@@ -114,6 +123,8 @@ public class ShoppinglistFragment extends Fragment {
             Toast.makeText(getActivity(), "\"" + itemName + "\"" + " has been added to the list", Toast.LENGTH_LONG).show();
             addShoppingListItemNametxt.setText("");
             addShoppingListItemAmounttxt.setText("");
+
+            app.earnAchievement(getContext(), layoutInflater, vgContainer, "Manual Labor");
         }
     }
 

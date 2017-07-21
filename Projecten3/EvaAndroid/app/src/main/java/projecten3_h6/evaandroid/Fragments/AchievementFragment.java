@@ -96,9 +96,9 @@ public class AchievementFragment extends Fragment {
         totalProgressBar.setMax(achievementsCount);
         totalAchievements.setText(achievementsEarned);
 
-        totalBronze.setText(String.valueOf(user.getBronzeAchievements().size()));
-        totalSilver.setText(String.valueOf(user.getSilverAchievements().size()));
-        totalGold.setText(String.valueOf(user.getGoldAchievements().size()));
+        totalBronze.setText(String.valueOf(user.getCompletedBronzeAchievementsCount()));
+        totalSilver.setText(String.valueOf(user.getCompletedSilverAchievementsCount()));
+        totalGold.setText(String.valueOf(user.getCompletedGoldAchievementsCount()));
     }
 
     @Override
