@@ -32,7 +32,7 @@ public class EvaApplication extends Application {
         this.user = user;
     }
 
-    public void fillInUser() {
+    public User createNewUser() {
         User filledInUser;
 
         List<Achievement> achievements = new ArrayList<>();
@@ -68,9 +68,7 @@ public class EvaApplication extends Application {
                 AchievementRanking.GOLD));
 
         filledInUser = new User(achievements);
-        user = filledInUser;
-
-
+        return filledInUser;
     }
 
     public void earnAchievement(Context context, LayoutInflater inflater, ViewGroup container, String achievementTitle) {

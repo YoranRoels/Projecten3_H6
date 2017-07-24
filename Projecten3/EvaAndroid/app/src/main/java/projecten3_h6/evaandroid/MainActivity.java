@@ -73,8 +73,13 @@ public class MainActivity extends AppCompatActivity
 
         } catch (Exception e) {
             Log.e("FileInputStream " , e.toString());
+            user = app.createNewUser();
         }
 
+        if(user == null ){
+            user = app.createNewUser();
+        }
+        
         return user;
     }
 
