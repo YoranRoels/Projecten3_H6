@@ -11,7 +11,6 @@ import java.util.Date;
 public class Day implements Serializable{
 
     private static final long serialVersionUID = 2;
-    private long userId;
     private int year;
     private int month;
     private int dayOfTheMonth;
@@ -115,14 +114,6 @@ public class Day implements Serializable{
         this.tip = tip;
     }
 
-    public long getUserId() {
-        return this.userId;
-    }
-
-    public void setUserId(long userId) {
-        this.userId = userId;
-    }
-
     public void setYear(int year) {
         this.year = year;
     }
@@ -150,7 +141,7 @@ public class Day implements Serializable{
     public Boolean getCompleted() {
         return this.completed;
     }
-    
+
     public void setDish(Dish dish) {
         this.dish = dish;
     }
