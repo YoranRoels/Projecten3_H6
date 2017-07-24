@@ -88,6 +88,7 @@ public class ProgressFragment extends Fragment implements ProgressPickerDialog.D
     private List<Day> days;
     public static List<Day> lastThreeDays = new ArrayList<>();
     public static int segmentSize = 3;
+    public boolean internetConnection = false;
 
     // Achievements
     public static EvaApplication app;
@@ -247,15 +248,12 @@ public class ProgressFragment extends Fragment implements ProgressPickerDialog.D
             public void onResponse(Call<List<Dish>> call, Response<List<Dish>> response) {
                 choices = response.body();
                 Log.e("BackendCall", " call successful three random dishes");
+                internetConnection = true;
             }
 
             @Override
             public void onFailure(Call<List<Dish>> call, Throwable t) {
-                if(choices == null ){ // todo fix proper response so app does not crash
-                    choices = new ArrayList<Dish>();
-                    choices.add(new Dish(R.drawable.winterovenschotel, "failed api call or no internet", CookingTime.LONG, "moeilijk", DishType.APPETIZER,
-                            null, ""));
-                }
+                internetConnection = false ;
                 Log.e("BackendCAll", "failed to call three random dishes "+ t.getMessage());
             }
         });
@@ -277,15 +275,20 @@ public class ProgressFragment extends Fragment implements ProgressPickerDialog.D
 
         @Override
         public void onClick(View v) {
-            pos = mRecyclerView.getChildAdapterPosition(v) ;
-            FragmentManager fm = getActivity().getSupportFragmentManager();
-            Calendar c = Calendar.getInstance();
-            Day tappedDay = user.getDays().get(days.size() - segmentSize + pos);
-            if(tappedDay.getDish() == null && tappedDay.getDayOfTheYear() >= c.get(Calendar.DAY_OF_YEAR)) {
-                ProgressPickerDialog ppd = new ProgressPickerDialog();
-                ppd.show(fm, "food picker");
-            }
+            if(internetConnection) {
+                pos = mRecyclerView.getChildAdapterPosition(v);
+                FragmentManager fm = getActivity().getSupportFragmentManager();
+                Calendar c = Calendar.getInstance();
+                Day tappedDay = user.getDays().get(days.size() - segmentSize + pos);
+                if (tappedDay.getDish() == null && tappedDay.getDayOfTheYear() >= c.get(Calendar.DAY_OF_YEAR)) {
+                    ProgressPickerDialog ppd = new ProgressPickerDialog();
+                    ppd.show(fm, "food picker");
+                }
 
+            } else
+            {
+                Toast.makeText(getContext(),"No internet connection",Toast.LENGTH_LONG).show();
+            }
         }
 
 

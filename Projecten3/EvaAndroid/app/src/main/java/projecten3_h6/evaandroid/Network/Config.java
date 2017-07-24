@@ -8,7 +8,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 
 public class Config {
-    public static final String BASE_URL = "http://10.0.2.2:3000/";
+    public static final String BASE_URL = "http://eva-webapplication.herokuapp.com/";
     private static Retrofit retrofit = null;
 
     public static Retrofit getRetrofit() {

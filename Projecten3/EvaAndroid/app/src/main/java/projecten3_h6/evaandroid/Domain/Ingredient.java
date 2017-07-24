@@ -8,7 +8,6 @@ import java.io.Serializable;
 public class Ingredient implements Serializable{
 
     private static final long serialVersionUID = 5;
-    private long shoppinglistId;
     private String name;
     private String amount;
 
@@ -31,13 +30,5 @@ public class Ingredient implements Serializable{
 
     public void setAmount(String amount) {
         this.amount = amount;
-    }
-
-    public long getShoppinglistId() {
-        return this.shoppinglistId;
-    }
-
-    public void setShoppinglistId(long shoppinglistId) {
-        this.shoppinglistId = shoppinglistId;
     }
 }
