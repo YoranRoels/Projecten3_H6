@@ -1,5 +1,6 @@
 package projecten3_h6.evaandroid.Domain;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,7 +8,9 @@ import java.util.List;
  * Created by Mafken on 4/07/2017.
  */
 
-public class Dish {
+public class Dish implements Serializable{
+
+    private static final long serialVersionUID = 3;
     private int imageId;
     private String name;
     private CookingTime cookingTime;
@@ -82,4 +85,5 @@ public class Dish {
     public void setPreparation(String preparation) {
         this.preparation = preparation;
     }
+
 }

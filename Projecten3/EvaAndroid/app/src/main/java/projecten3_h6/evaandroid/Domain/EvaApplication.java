@@ -2,6 +2,7 @@ package projecten3_h6.evaandroid.Domain;
 
 import android.app.Application;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,26 +22,22 @@ import projecten3_h6.evaandroid.R;
 
 public class EvaApplication extends Application {
 
-    private User user = fillInUser();
+    private User user;
 
     public User getUser() {
         return user;
     }
 
-    private User fillInUser() {
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public User createNewUser() {
         User filledInUser;
-        // if(user in local storage)
-        //{
-        // Fill user from Local Storage
-        //}
-        // else
-        // {
 
         List<Achievement> achievements = new ArrayList<>();
 
         // Bronze (8)
-        /*achievements.add(new Achievement(R.drawable.bronze_app_completed, R.drawable.bronze_app, "We're Just Getting Started", "Launch the app.",
-                AchievementRanking.BRONZE));*/
         achievements.add(new Achievement(R.drawable.bronze_calendar_completed, R.drawable.bronze_calendar, "I’m On a Regime", "Open the ‘Progress’ tab.",
                 AchievementRanking.BRONZE));
         achievements.add(new Achievement(R.drawable.bronze_cooking_completed, R.drawable.bronze_cooking, "What’s For Dinner?", "Open the ‘Today’ tab.",
@@ -70,9 +67,7 @@ public class EvaApplication extends Application {
         achievements.add(new Achievement(R.drawable.gold_calendar_100_completed, R.drawable.gold_calendar_100, "Vegan Master", "Have a total of 100 vegan days.",
                 AchievementRanking.GOLD));
 
-
         filledInUser = new User(achievements);
-        // }
         return filledInUser;
     }
 

@@ -1,7 +1,10 @@
 package projecten3_h6.evaandroid.Domain;
 
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.util.Log;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -16,9 +19,10 @@ import retrofit2.Response;
  * Created by jensleirens on 11/07/2017.
  */
 
-public class User {
+public class User implements Serializable{
 
-    private List<Achievement> achievements;
+    private static final long serialVersionUID = 4;
+    private List<Achievement> achievements = new ArrayList<>();
     private List<Achievement> remoteAchievement;
     private int completedAchievementsCount = 0;
     private List<Achievement> bronzeAchievements = new ArrayList<>();
@@ -51,34 +55,22 @@ public class User {
         assignAchievements();
     }
 
+    public User() {
+    }
+
+
     public List<Achievement> getAchievements() {
         return achievements;
-    }
-
-    public int getCompletedAchievementsCount() {
-        return completedAchievementsCount;
-    }
-
-    public List<Achievement> getBronzeAchievements() {
-        return bronzeAchievements;
     }
 
     public int getCompletedBronzeAchievementsCount() {
         return completedBronzeAchievementsCount;
     }
 
-    public List<Achievement> getSilverAchievements() {
-        return silverAchievements;
-    }
-  
     public int getCompletedSilverAchievementsCount() {
         return completedSilverAchievementsCount;
     }
 
-    public List<Achievement> getGoldAchievements() {
-        return goldAchievements;
-    }
-  
     public int getCompletedGoldAchievementsCount() {
         return completedGoldAchievementsCount;
     }
@@ -87,16 +79,8 @@ public class User {
         return days;
     }
 
-    public void setDays(List<Day> days) {
-        this.days = days;
-    }
-
     public ShoppingList getShoppingList() {
         return shoppingList;
-    }
-
-    public void setShoppingList(ShoppingList shoppingList) {
-        this.shoppingList = shoppingList;
     }
 
     public int getTotalVeganDays() {
@@ -129,6 +113,22 @@ public class User {
                 goldAchievements.add(a);
             }
         }
+    }
+
+    public List<Achievement> getRemoteAchievement() {
+        return remoteAchievement;
+    }
+
+    public List<Achievement> getBronzeAchievements() {
+        return bronzeAchievements;
+    }
+
+    public List<Achievement> getSilverAchievements() {
+        return silverAchievements;
+    }
+
+    public List<Achievement> getGoldAchievements() {
+        return goldAchievements;
     }
 
     public void countCompletedAchievements() {
@@ -218,4 +218,25 @@ public class User {
         }
 
     }
+
+    public void setCompletedAchievementsCount(int completedAchievementsCount) {
+        this.completedAchievementsCount = completedAchievementsCount;
+    }
+
+    public void setCompletedBronzeAchievementsCount(int completedBronzeAchievementsCount) {
+        this.completedBronzeAchievementsCount = completedBronzeAchievementsCount;
+    }
+
+    public void setCompletedSilverAchievementsCount(int completedSilverAchievementsCount) {
+        this.completedSilverAchievementsCount = completedSilverAchievementsCount;
+    }
+
+    public void setCompletedGoldAchievementsCount(int completedGoldAchievementsCount) {
+        this.completedGoldAchievementsCount = completedGoldAchievementsCount;
+    }
+
+    public int getCompletedAchievementsCount() {
+        return completedAchievementsCount;
+    }
+
 }

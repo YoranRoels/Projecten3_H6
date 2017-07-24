@@ -1,5 +1,7 @@
 package projecten3_h6.evaandroid;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -9,8 +11,15 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -19,12 +28,16 @@ import projecten3_h6.evaandroid.Fragments.ProgressFragment;
 import projecten3_h6.evaandroid.Fragments.ShoppinglistFragment;
 import projecten3_h6.evaandroid.Fragments.TodayFragment;
 
+import projecten3_h6.evaandroid.Domain.*;
+
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     @BindView(R.id.toolbar)Toolbar toolbar;
     @BindView(R.id.drawer_layout) DrawerLayout drawer;
     @BindView(R.id.nav_view)NavigationView navigationView;
+
+    public static EvaApplication app;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,9 +51,36 @@ public class MainActivity extends AppCompatActivity
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
+
+        app = (EvaApplication)getApplicationContext();
+        //getting the user from the saved file
+        app.setUser(getUserOutOfFile());
+
         displaySelectedScreen(R.id.nav_progress);
 
         navigationView.setNavigationItemSelectedListener(this);
+
+    }
+
+    private User getUserOutOfFile(){
+        User user = new User();
+        try {
+            FileInputStream fis = getApplicationContext().openFileInput("EvaApplicationUserStorage");
+            ObjectInputStream is = new ObjectInputStream(fis);
+            user = (User) is.readObject();
+            is.close();
+            fis.close();
+
+        } catch (Exception e) {
+            Log.e("FileInputStream " , e.toString());
+            user = app.createNewUser();
+        }
+
+        if(user == null ){
+            user = app.createNewUser();
+        }
+        
+        return user;
     }
 
     @Override
@@ -108,6 +148,24 @@ public class MainActivity extends AppCompatActivity
         }
 
         drawer.closeDrawer(GravityCompat.START);
+
+    }
+
+    @Override
+    protected void onStop(){
+        super.onStop();
+
+        // save the user to a file
+        try {
+            FileOutputStream fos = getApplicationContext().openFileOutput("EvaApplicationUserStorage",Context.MODE_PRIVATE);
+            ObjectOutputStream os = new ObjectOutputStream(fos);
+            os.writeObject(app.getUser());
+            os.close();
+            fos.close();
+        }
+        catch (Exception e){
+            Log.e("FileOutputStream", e.toString());
+        }
 
     }
 }

@@ -1,5 +1,6 @@
 package projecten3_h6.evaandroid.Domain;
 
+import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -7,7 +8,10 @@ import java.util.Date;
  * Created by Mafken on 4/07/2017.
  */
 
-public class Day {
+public class Day implements Serializable{
+
+    private static final long serialVersionUID = 2;
+    private long userId;
     private int year;
     private int month;
     private int dayOfTheMonth;
@@ -98,12 +102,9 @@ public class Day {
         return dayOfTheYear;
     }
 
+
     public Dish getDish() {
         return dish;
-    }
-
-    public void setDish(Dish dish) {
-        this.dish = dish;
     }
 
     public String getTip() {
@@ -112,5 +113,45 @@ public class Day {
 
     public void setTip(String tip) {
         this.tip = tip;
+    }
+
+    public long getUserId() {
+        return this.userId;
+    }
+
+    public void setUserId(long userId) {
+        this.userId = userId;
+    }
+
+    public void setYear(int year) {
+        this.year = year;
+    }
+
+    public void setMonth(int month) {
+        this.month = month;
+    }
+
+    public void setDayOfTheMonth(int dayOfTheMonth) {
+        this.dayOfTheMonth = dayOfTheMonth;
+    }
+
+    public void setDayOfTheWeek(int dayOfTheWeek) {
+        this.dayOfTheWeek = dayOfTheWeek;
+    }
+
+    public void setDayOfTheWeekString(String dayOfTheWeekString) {
+        this.dayOfTheWeekString = dayOfTheWeekString;
+    }
+
+    public void setDayOfTheYear(int dayOfTheYear) {
+        this.dayOfTheYear = dayOfTheYear;
+    }
+
+    public Boolean getCompleted() {
+        return this.completed;
+    }
+    
+    public void setDish(Dish dish) {
+        this.dish = dish;
     }
 }
