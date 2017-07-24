@@ -1,10 +1,14 @@
 package projecten3_h6.evaandroid.Domain;
 
+import java.io.Serializable;
+
 /**
  * Created by Mafken on 4/07/2017.
  */
+public class Ingredient implements Serializable{
 
-public class Ingredient {
+    private static final long serialVersionUID = 5;
+    private long shoppinglistId;
     private String name;
     private String amount;
 
@@ -27,5 +31,13 @@ public class Ingredient {
 
     public void setAmount(String amount) {
         this.amount = amount;
+    }
+
+    public long getShoppinglistId() {
+        return this.shoppinglistId;
+    }
+
+    public void setShoppinglistId(long shoppinglistId) {
+        this.shoppinglistId = shoppinglistId;
     }
 }

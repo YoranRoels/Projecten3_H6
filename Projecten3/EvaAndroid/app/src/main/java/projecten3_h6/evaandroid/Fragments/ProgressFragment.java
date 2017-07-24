@@ -251,8 +251,9 @@ public class ProgressFragment extends Fragment implements ProgressPickerDialog.D
 
             @Override
             public void onFailure(Call<List<Dish>> call, Throwable t) {
-                if(choices.isEmpty()){
-                    choices.add(new Dish(R.drawable.winterovenschotel, "failed api call", CookingTime.LONG, "moeilijk", DishType.APPETIZER,
+                if(choices == null ){ // todo fix proper response so app does not crash
+                    choices = new ArrayList<Dish>();
+                    choices.add(new Dish(R.drawable.winterovenschotel, "failed api call or no internet", CookingTime.LONG, "moeilijk", DishType.APPETIZER,
                             null, ""));
                 }
                 Log.e("BackendCAll", "failed to call three random dishes "+ t.getMessage());
