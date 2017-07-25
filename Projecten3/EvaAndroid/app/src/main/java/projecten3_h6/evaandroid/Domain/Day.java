@@ -19,7 +19,7 @@ public class Day implements Serializable{
     private int dayOfTheYear;
     private Dish dish;
     private String tip;
-    private Boolean completed;
+    private boolean completed;
 
     public Day(int year, int month, int dayOfTheMonth, int dayOfTheWeek, int dayOfTheYear, Dish dish, String tip) {
         this.year = year;
@@ -43,7 +43,7 @@ public class Day implements Serializable{
         setDayOfTheWeekString();
     }
 
-    public Boolean isCompleted() {
+    public boolean isCompleted() {
         return completed;
     }
 
@@ -138,7 +138,7 @@ public class Day implements Serializable{
         this.dayOfTheYear = dayOfTheYear;
     }
 
-    public Boolean getCompleted() {
+    public boolean getCompleted() {
         return this.completed;
     }
 
