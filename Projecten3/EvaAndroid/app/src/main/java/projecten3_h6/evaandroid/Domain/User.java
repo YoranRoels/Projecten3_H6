@@ -35,6 +35,7 @@ public class User implements Serializable{
     private ShoppingList shoppingList = new ShoppingList();
     private int totalVeganDays = 0;
     private int longestStreak = 0;
+    private List<Challenge> challenges = new ArrayList<>();
 
     public User(List<Achievement> achievements, List<Day> days, ShoppingList shoppingList,
                 int totalVeganDays, int longestStreak) {
@@ -113,10 +114,6 @@ public class User implements Serializable{
                 goldAchievements.add(a);
             }
         }
-    }
-
-    public List<Achievement> getRemoteAchievement() {
-        return remoteAchievement;
     }
 
     public List<Achievement> getBronzeAchievements() {
@@ -239,4 +236,15 @@ public class User implements Serializable{
         return completedAchievementsCount;
     }
 
+    public void getRemoteChallenges(){
+        //todo implement with backend
+        challenges.add(new Challenge("No dairy for me!","don't use milk in the daily dish",ChallengeType.EASY));
+        challenges.add(new Challenge("Gather some Carroters","prepare a vegan dinner with friends",ChallengeType.MEDIUM));
+        challenges.add(new Challenge("More vegans!","convert a friend to eat vegan!",ChallengeType.HARD));
+
+    }
+
+    public List<Challenge> getChallenges() {
+        return challenges;
+    }
 }
