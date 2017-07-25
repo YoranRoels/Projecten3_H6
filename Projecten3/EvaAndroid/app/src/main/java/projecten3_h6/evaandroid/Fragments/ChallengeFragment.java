@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import butterknife.BindView;
@@ -19,6 +20,7 @@ import projecten3_h6.evaandroid.Adapters.AchievementDetailAdapter;
 import projecten3_h6.evaandroid.Adapters.ChallengeAdapter;
 import projecten3_h6.evaandroid.Domain.Achievement;
 import projecten3_h6.evaandroid.Domain.Challenge;
+import projecten3_h6.evaandroid.Domain.Day;
 import projecten3_h6.evaandroid.Domain.EvaApplication;
 import projecten3_h6.evaandroid.Domain.User;
 import projecten3_h6.evaandroid.R;
@@ -34,6 +36,8 @@ public class ChallengeFragment extends Fragment {
     List<Challenge> challenges = new ArrayList<>();
     protected RecyclerView.LayoutManager mLayoutManager;
     private ChallengeAdapter adapter;
+    public static EvaApplication app;
+    private static Day today = null;
 
     @Nullable
     @Override
@@ -45,16 +49,32 @@ public class ChallengeFragment extends Fragment {
         mRecycler.setLayoutManager(mLayoutManager);
 
         Context context = getContext();
-        EvaApplication app = (EvaApplication)context.getApplicationContext();
+        app = (EvaApplication)context.getApplicationContext();
         User user = app.getUser();
 
-        user.getRemoteChallenges();
-        challenges = user.getChallenges();
+        getToday();
+
+        today.getRemoteChallenges();
+        challenges = today.getChallenges();
 
         adapter = new ChallengeAdapter(challenges);
         mRecycler.setAdapter(adapter);
 
         return v;
+    }
+
+    public static int getToday(){
+
+        Calendar todayCalendar = Calendar.getInstance();
+        int index = 0;
+        for(Day d: ProgressFragment.lastThreeDays) {
+            if( d.getDayOfTheYear() == Integer.valueOf(todayCalendar.get(Calendar.DAY_OF_YEAR))) {
+                today = d;
+                break;
+            }else
+            index += 1;
+        }
+        return index;
     }
 
     @Override

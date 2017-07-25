@@ -12,6 +12,7 @@ public class Challenge implements Serializable{
     private String title;
     private String description;
     private ChallengeType challengeType;
+    private boolean completed;
 
     public Challenge(String title, String description, ChallengeType challengeType) {
         this.title = title;
@@ -41,5 +42,13 @@ public class Challenge implements Serializable{
 
     public void setChallengeType(ChallengeType challengeType) {
         this.challengeType = challengeType;
+    }
+
+    public boolean isCompleted() {
+        return completed;
+    }
+
+    public void setCompleted(boolean completed) {
+        this.completed = completed;
     }
 }

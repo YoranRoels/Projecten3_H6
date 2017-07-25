@@ -5,8 +5,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.ToggleButton;
 
 import com.squareup.picasso.Picasso;
 
@@ -18,6 +20,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import projecten3_h6.evaandroid.Domain.Achievement;
 import projecten3_h6.evaandroid.Domain.Challenge;
+import projecten3_h6.evaandroid.Fragments.ChallengeFragment;
+import projecten3_h6.evaandroid.Fragments.ProgressFragment;
 import projecten3_h6.evaandroid.R;
 
 /**
@@ -41,12 +45,25 @@ public class ChallengeAdapter extends RecyclerView.Adapter<ChallengeAdapter.Chal
     }
 
     @Override
-    public void onBindViewHolder(ChallengeAdapter.ChallengeViewHolder holder, int position) {
+    public void onBindViewHolder(ChallengeAdapter.ChallengeViewHolder holder, final int position) {
         TextView challengeTitle = holder.challengeTitle;
         TextView challengeDescription = holder.challengeDescription;
+        ToggleButton toggleComplete = holder.toggleComplete;
 
         challengeTitle.setText(challenges.get(position).getTitle());
         challengeDescription.setText(challenges.get(position).getDescription());
+
+        //if challenge is already completed check toggleButton
+        //todo set challenge completed
+        //toggleComplete.setChecked(ProgressFragment.lastThreeDays.get(ChallengeFragment.getToday()).getChallenges().get(position).isCompleted());
+
+        toggleComplete.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                //todo set challenge completed
+                //ProgressFragment.lastThreeDays.get(ChallengeFragment.getToday()).getChallenges().get(position).setCompleted(isChecked);
+            }
+        });
     }
 
     @Override
@@ -61,6 +78,9 @@ public class ChallengeAdapter extends RecyclerView.Adapter<ChallengeAdapter.Chal
 
         @BindView(R.id.challengeDescription)
         public TextView challengeDescription;
+
+        @BindView(R.id.challengeToggleComplete)
+        public ToggleButton toggleComplete;
 
         public ChallengeViewHolder(View itemView) {
             super(itemView);

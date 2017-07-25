@@ -13,6 +13,7 @@
     <string name="navigation_drawer_item2">Today</string>
     <string name="navigation_drawer_item3">Shopping list</string>
     <string name="navigation_drawer_item4">Achievements</string>
+    <string name="navigation_drawer_item5">Challenges</string>
 
     <!-- Progress Strings -->
     <string name="finish_segment">Finish This Segment</string>

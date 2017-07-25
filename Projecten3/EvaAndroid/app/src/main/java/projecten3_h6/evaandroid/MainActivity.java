@@ -23,7 +23,10 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
+import butterknife.OnItemClick;
 import projecten3_h6.evaandroid.Fragments.AchievementFragment;
+import projecten3_h6.evaandroid.Fragments.ChallengeFragment;
 import projecten3_h6.evaandroid.Fragments.ProgressFragment;
 import projecten3_h6.evaandroid.Fragments.ShoppinglistFragment;
 import projecten3_h6.evaandroid.Fragments.TodayFragment;
@@ -50,6 +53,8 @@ public class MainActivity extends AppCompatActivity
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
+
+        onCreateOptionsMenu(toolbar.getMenu());
 
 
         app = (EvaApplication)getApplicationContext();
@@ -138,6 +143,9 @@ public class MainActivity extends AppCompatActivity
         } else if (itemId == R.id.nav_achievements) {
             fragment = new AchievementFragment();
             toolbar.setTitle("Achievements");
+        } else if (itemId == R.id.nav_challenges) {
+        fragment = new ChallengeFragment();
+        toolbar.setTitle("Challenges");
         }
 
         //replacing the fragment
