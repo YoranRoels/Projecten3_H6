@@ -1,8 +1,10 @@
 package projecten3_h6.evaandroid.Domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by Mafken on 4/07/2017.
@@ -19,7 +21,8 @@ public class Day implements Serializable{
     private int dayOfTheYear;
     private Dish dish;
     private String tip;
-    private Boolean completed;
+    private boolean completed;
+    private List<Challenge> challenges = new ArrayList<>();
 
     public Day(int year, int month, int dayOfTheMonth, int dayOfTheWeek, int dayOfTheYear, Dish dish, String tip) {
         this.year = year;
@@ -43,7 +46,7 @@ public class Day implements Serializable{
         setDayOfTheWeekString();
     }
 
-    public Boolean isCompleted() {
+    public boolean isCompleted() {
         return completed;
     }
 
@@ -138,11 +141,35 @@ public class Day implements Serializable{
         this.dayOfTheYear = dayOfTheYear;
     }
 
-    public Boolean getCompleted() {
+    public boolean getCompleted() {
         return this.completed;
     }
 
     public void setDish(Dish dish) {
         this.dish = dish;
+    }
+
+    public void getRemoteChallenges(){
+        //todo implement with backend
+        Calendar cal = Calendar.getInstance();
+        List<Challenge> challengeList = new ArrayList<>();
+        if(cal.get(Calendar.DAY_OF_YEAR) >= dayOfTheYear) {
+            challengeList.add(new Challenge("No dairy for me!","don't use milk in the daily dish",ChallengeType.EASY));
+            challengeList.add(new Challenge("Gather some Carroters","prepare a vegan dinner with friends",ChallengeType.MEDIUM));
+            challengeList.add(new Challenge("More vegans!","convert a friend to be vegan!",ChallengeType.HARD));
+            challenges = challengeList;
+        }
+        if(challenges == null ){
+            challengeList.add(new Challenge("No dairy for me!","don't use milk in the daily dish",ChallengeType.EASY));
+            challengeList.add(new Challenge("Gather some Carroters","prepare a vegan dinner with friends",ChallengeType.MEDIUM));
+            challengeList.add(new Challenge("More vegans!","convert a friend to be vegan!",ChallengeType.HARD));
+            challenges = challengeList;
+        }
+
+
+    }
+
+    public List<Challenge> getChallenges() {
+        return challenges;
     }
 }

@@ -31,7 +31,10 @@ import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
+import butterknife.OnItemClick;
 import projecten3_h6.evaandroid.Fragments.AchievementFragment;
+import projecten3_h6.evaandroid.Fragments.ChallengeFragment;
 import projecten3_h6.evaandroid.Fragments.ProgressFragment;
 import projecten3_h6.evaandroid.Fragments.SettingsFragment;
 import projecten3_h6.evaandroid.Fragments.ShoppinglistFragment;
@@ -167,6 +170,9 @@ public class MainActivity extends AppCompatActivity
         } else if (itemId == R.id.nav_achievements) {
             fragment = new AchievementFragment();
             toolbar.setTitle("Achievements");
+        } else if (itemId == R.id.nav_challenges) {
+        fragment = new ChallengeFragment();
+        toolbar.setTitle("Challenges");
         }
 
         // Replace the fragment.
