@@ -50,7 +50,7 @@ public class ProgressAdapter extends RecyclerView.Adapter<ProgressAdapter.Progre
         TextView progressDishTitle = holder.progressDishTitle;
         ToggleButton toggleComplete = holder.toggleComplete;
         ImageView dayDishImage = holder.dayDishImage;
-        Calendar cal = Calendar.getInstance();
+        Calendar today = Calendar.getInstance();
 
         progressDayOfTheWeek.setText(currentDays.get(position).getDayOfTheWeekString());
 
@@ -60,10 +60,10 @@ public class ProgressAdapter extends RecyclerView.Adapter<ProgressAdapter.Progre
             Picasso.with(context).load(currentDays.get(position).getDish().getImageId()).into(dayDishImage);
             dayDishImage.setImageResource(currentDays.get(position).getDish().getImageId());
             toggleComplete.setChecked(currentDays.get(position).isCompleted());
-            if(cal.get(Calendar.DAY_OF_YEAR) >= currentDays.get(position).getDayOfTheYear()) {
+            if(today.get(Calendar.DAY_OF_YEAR) >= currentDays.get(position).getDayOfTheYear()) {
                 toggleComplete.setVisibility(View.VISIBLE);
             }
-        } else if (cal.get(Calendar.DAY_OF_YEAR) > currentDays.get(position).getDayOfTheYear()) {
+        } else if (today.get(Calendar.DAY_OF_YEAR) > currentDays.get(position).getDayOfTheYear()) {
             progressDishTitle.setText("You forgot to pick a dish.");
         }
 
