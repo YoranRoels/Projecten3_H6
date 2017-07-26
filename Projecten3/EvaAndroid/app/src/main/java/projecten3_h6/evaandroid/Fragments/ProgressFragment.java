@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -70,6 +71,9 @@ public class ProgressFragment extends Fragment implements ProgressPickerDialog.D
     @BindView(R.id.progressBox19) ImageView progressBox19;
     @BindView(R.id.progressBox20) ImageView progressBox20;
     @BindView(R.id.progressBox21) ImageView progressBox21;
+    @BindView(R.id.progressBox22) ImageView progressBox22;
+    @BindView(R.id.progressBox23) ImageView progressBox23;
+    @BindView(R.id.progressBox24) ImageView progressBox24;
 
     public static ImageView progressBoxes[];
 
@@ -103,8 +107,6 @@ public class ProgressFragment extends Fragment implements ProgressPickerDialog.D
         this.container = container;
         ButterKnife.bind(this,v);
 
-
-
         Context context = getContext();
         app = (EvaApplication)context.getApplicationContext();
         user = app.getUser();
@@ -113,11 +115,11 @@ public class ProgressFragment extends Fragment implements ProgressPickerDialog.D
         progressBoxes = new ImageView[]{progressBox1, progressBox2, progressBox3, progressBox4, progressBox5, progressBox6,
                 progressBox7, progressBox8, progressBox9, progressBox10, progressBox11, progressBox12, progressBox13,
                 progressBox14, progressBox15, progressBox16, progressBox17, progressBox18, progressBox19,
-                progressBox20, progressBox21};
+                progressBox20, progressBox21, progressBox22, progressBox23, progressBox24};
 
         if(user.getDays().isEmpty()) {
-            progressTextView.setText("Welcome to Carrot!");
-            progressMotivationTextView.setText("Start tapping the cards to select dishes.");
+            progressTextView.setText(R.string.welcome);
+            progressMotivationTextView.setText(R.string.welcome_advice);
             startFirstSegment();
         } else {
             checkSegmentButtonEnabled();
@@ -156,8 +158,19 @@ public class ProgressFragment extends Fragment implements ProgressPickerDialog.D
     }
 
     public static void recheckCheckboxes() {
-        for(int i = 0; i < user.getDays().size(); i++) {
-            if(user.getDays().get(i).isCompleted())
+        int checkBoxCount = progressBoxes.length;
+        int daysCount = user.getDays().size();
+        int startingDayIndex;
+        int sizeToCheck;
+        if(daysCount > checkBoxCount) {
+            startingDayIndex = daysCount - checkBoxCount;
+            sizeToCheck = checkBoxCount;
+        } else {
+            startingDayIndex = 0;
+            sizeToCheck = daysCount;
+        }
+        for(int i = 0; i < sizeToCheck; i++) {
+            if(user.getDays().get(i + startingDayIndex).isCompleted())
             {
                 progressBoxes[i].setImageResource(R.drawable.checkbox_completed);
             } else {
@@ -167,11 +180,11 @@ public class ProgressFragment extends Fragment implements ProgressPickerDialog.D
     }
 
     public void setMotivationTextViews() {
-        progressTextView.setText("You've completed " + user.getTotalVeganDays() + " days this season.");
+        progressTextView.setText("You've had " + user.getTotalVeganDays() + " vegan days.");
         if(user.getTotalVeganDays() == user.getLongestStreak()) {
-            progressMotivationTextView.setText("You didn't skip a single day. We admire you.");
+            progressMotivationTextView.setText(R.string.no_skipped_days);
         } else {
-            progressMotivationTextView.setText("Don't give up, keep the vegan streaks coming!");
+            progressMotivationTextView.setText(R.string.skipped_days);
         }
     }
 
@@ -233,6 +246,7 @@ public class ProgressFragment extends Fragment implements ProgressPickerDialog.D
 
         startNewSegment();
         reloadCards();
+        recheckCheckboxes();
     }
 
     @Override
@@ -247,14 +261,14 @@ public class ProgressFragment extends Fragment implements ProgressPickerDialog.D
             @Override
             public void onResponse(Call<List<Dish>> call, Response<List<Dish>> response) {
                 choices = response.body();
-                Log.e("BackendCall", " call successful three random dishes");
                 internetConnection = true;
+                Log.e("Backend call: ", "call successful (three random dishes)");
             }
 
             @Override
             public void onFailure(Call<List<Dish>> call, Throwable t) {
-                internetConnection = false ;
-                Log.e("BackendCAll", "failed to call three random dishes "+ t.getMessage());
+                internetConnection = false;
+                Log.e("Backend call: ", "call failed (three random dishes) "+ t.getMessage());
             }
         });
 
