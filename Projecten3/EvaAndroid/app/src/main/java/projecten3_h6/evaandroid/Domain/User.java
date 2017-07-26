@@ -41,6 +41,8 @@ public class User implements Serializable{
 
     // Days
     private List<Day> days = new ArrayList<>();
+    private List<Day> lastThreeDays;
+    private Day today;
 
     // Shopping List
     private ShoppingList shoppingList = new ShoppingList();
@@ -113,6 +115,35 @@ public class User implements Serializable{
 
     public List<Day> getDays() {
         return days;
+    }
+
+    public List<Day> getLastThreeDays() {
+        lastThreeDays = new ArrayList<>();
+        lastThreeDays.add(days.get(days.size()-3));
+        lastThreeDays.add(days.get(days.size()-2));
+        lastThreeDays.add(days.get(days.size()-1));
+        return lastThreeDays;
+    }
+
+    public Day getToday() {
+        Calendar todayCalendar = Calendar.getInstance();
+        // Here we need the last four days for when you already start a new segment
+        // but 'today' is still the last day of the previous segment
+        List<Day> lastFourDays = new ArrayList<>();
+        lastFourDays.add(days.get(days.size()-4));
+        lastFourDays.add(days.get(days.size()-3));
+        lastFourDays.add(days.get(days.size()-2));
+        lastFourDays.add(days.get(days.size()-1));
+        for(Day day: lastFourDays) {
+            // Int casts are needed here to avoid errors.
+            if(day.getDayOfTheYear() == (int) todayCalendar.get(Calendar.DAY_OF_YEAR) &&
+                    day.getYear() == (int) todayCalendar.get(Calendar.YEAR)) {
+                today = day;
+                break;
+            }
+        }
+
+        return today;
     }
 
     public ShoppingList getShoppingList() {

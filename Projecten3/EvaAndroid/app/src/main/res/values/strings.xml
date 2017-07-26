@@ -29,6 +29,7 @@
     <string name="no_skipped_days">You didn\'t skip a single day. We admire you.</string>
     <string name="skipped_days">Don\'t give up, keep the vegan streaks coming!</string>
     <string name="finish_segment">Finish This Segment</string>
+    <string name="forgot_dish">You forgot to pick a dish.</string>
 
     <!-- Today String -->
     <string name="no_dish">You have not chosen a dish yet.</string>

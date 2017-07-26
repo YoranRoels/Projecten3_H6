@@ -39,6 +39,9 @@ public class ProgressPickerDialog extends DialogFragment {
     LayoutInflater inflater;
     ViewGroup container;
 
+    // Segment size
+    private int segmentSize;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_progress_picker, container,false);
@@ -48,6 +51,7 @@ public class ProgressPickerDialog extends DialogFragment {
 
         Context context = getContext();
         app = (EvaApplication)context.getApplicationContext();
+        segmentSize = app.getSegmentSize();
 
         df = this;
         progressPickerOnclickListener = new ProgressPickerOnclickListener(getContext());
@@ -81,12 +85,12 @@ public class ProgressPickerDialog extends DialogFragment {
 
         @Override
         public void onClick(View v) {
-            List<Day> days = ProgressFragment.user.getDays();
+            List<Day> days = ProgressFragment.app.getUser().getDays();
             int posOfDish;
             posOfDish = mRecyclerView.getChildAdapterPosition(v);
 
             // Set correct Dish
-            Day clickedDay = days.get(days.size() - ProgressFragment.segmentSize + ProgressFragment.pos);
+            Day clickedDay = days.get(days.size() - segmentSize + ProgressFragment.pos);
             clickedDay.setDish(ProgressFragment.choices.get(posOfDish));
 
             // Add ingredients to ShoppingList
@@ -98,9 +102,9 @@ public class ProgressPickerDialog extends DialogFragment {
                 Toast.makeText(getActivity(), "The ingredients for " + "\"" + clickedDay.getDish().getName() + "\"" + " have been added to the list.", Toast.LENGTH_LONG).show();
             }
             // Achievement
-            if(days.get(days.size() - ProgressFragment.segmentSize).getDish() != null &&
-                    days.get(days.size() - ProgressFragment.segmentSize + 1).getDish() != null &&
-                    days.get(days.size() - ProgressFragment.segmentSize + 2).getDish() != null) {
+            if(days.get(days.size() - segmentSize).getDish() != null &&
+                    days.get(days.size() - segmentSize + 1).getDish() != null &&
+                    days.get(days.size() - segmentSize + 2).getDish() != null) {
                 app.earnAchievement(getContext(), inflater, container, "Planning Ahead");
             }
             mListener.onDialogClick(df);

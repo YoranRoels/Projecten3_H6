@@ -115,7 +115,7 @@ public class ShoppinglistFragment extends Fragment {
         String itemName = addShoppingListItemNametxt.getText().toString();
         String itemAmount = addShoppingListItemAmounttxt.getText().toString();
         if(!itemName.trim().equals("")) {
-            ingredients.add(new Ingredient(itemName, itemAmount)); //als je het aantal ook apart wil laten tonen hier inserten dan
+            ingredients.add(new Ingredient(itemName, itemAmount));
 
             // view verversen voor nieuw item te tonen
             initCard();

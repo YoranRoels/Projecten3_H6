@@ -50,8 +50,7 @@ public class TodayFragment extends Fragment {
     @BindView(R.id.todayType)TextView type;
     @BindView(R.id.todayDishName)TextView dishName;
     private Dish dish;
-    User user;
-    List<Dish> dishes = new ArrayList<>();
+    private User user;
 
     @Nullable
     @Override
@@ -64,7 +63,7 @@ public class TodayFragment extends Fragment {
         EvaApplication app = (EvaApplication)context.getApplicationContext();
         user = app.getUser();
         // Set correct today's dish.
-        setCorrectDish();
+        dish = user.getToday().getDish();
         // Set the TextViews and ImageView for this dish.
         if(dish != null) {
             setTextAndVisuals();
@@ -115,30 +114,6 @@ public class TodayFragment extends Fragment {
         difficulty.setText(dish.getDifficulty());
         dishName.setText(dish.getName());
 
-    }
-
-    public void setCorrectDish() {
-        List<Day> days = user.getDays();
-        int daysLength = days.size();
-
-        Calendar c = Calendar.getInstance();
-        SimpleDateFormat df = new SimpleDateFormat("d/M/yyyy", Locale.ENGLISH);
-        String formattedDate = df.format(c.getTime());
-
-        Day day1 = days.get(daysLength-3);
-        String dayDate1 = day1.getDayOfTheMonth()+"/"+(day1.getMonth()+1)+"/"+day1.getYear();
-        Day day2 = days.get(daysLength-2);
-        String dayDate2 = day2.getDayOfTheMonth()+"/"+(day2.getMonth()+1)+"/"+day2.getYear();
-        Day day3 = days.get(daysLength-1);
-        String dayDate3 = day3.getDayOfTheMonth()+"/"+(day3.getMonth()+1)+"/"+day3.getYear();
-
-        if(formattedDate.equals(dayDate1)) {
-            dish = day1.getDish();
-        } else if(formattedDate.equals(dayDate2)) {
-            dish = day2.getDish();
-        } else if(formattedDate.equals(dayDate3)) {
-            dish = day3.getDish();
-        }
     }
 
     @Override
