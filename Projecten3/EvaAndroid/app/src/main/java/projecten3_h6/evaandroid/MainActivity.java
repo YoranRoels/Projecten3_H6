@@ -11,15 +11,23 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.AttributeSet;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
+
+import org.w3c.dom.Text;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -28,6 +36,7 @@ import butterknife.OnItemClick;
 import projecten3_h6.evaandroid.Fragments.AchievementFragment;
 import projecten3_h6.evaandroid.Fragments.ChallengeFragment;
 import projecten3_h6.evaandroid.Fragments.ProgressFragment;
+import projecten3_h6.evaandroid.Fragments.SettingsFragment;
 import projecten3_h6.evaandroid.Fragments.ShoppinglistFragment;
 import projecten3_h6.evaandroid.Fragments.TodayFragment;
 
@@ -46,25 +55,25 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        setSupportActionBar(toolbar);
         ButterKnife.bind(this);
+        setSupportActionBar(toolbar);
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
-        onCreateOptionsMenu(toolbar.getMenu());
-
-
         app = (EvaApplication)getApplicationContext();
-        //getting the user from the saved file
+        // Get the user from the saved file.
         app.setUser(getUserOutOfFile());
+
+        View navView =  navigationView.getHeaderView(0);
+        TextView bottomHeaderTextView = (TextView)navView.findViewById(R.id.bottomHeaderTextView);
+        bottomHeaderTextView.setText(String.format(getString(R.string.navigation_drawer_header_bottom),app.getUser().getStartingDate()));
 
         displaySelectedScreen(R.id.nav_progress);
 
         navigationView.setNavigationItemSelectedListener(this);
-
     }
 
     private User getUserOutOfFile(){
@@ -88,6 +97,14 @@ public class MainActivity extends AppCompatActivity
         return user;
     }
 
+    private void setDrawerTopTextView(){
+        View navView =  navigationView.getHeaderView(0);
+        TextView topHeaderTextView = (TextView)navView.findViewById(R.id.topHeaderTextView);
+        Calendar c = Calendar.getInstance();
+        SimpleDateFormat df = new SimpleDateFormat("EEEE, d MMMM", Locale.ENGLISH);
+        topHeaderTextView.setText(df.format(c.getTime()));
+    }
+
     @Override
     public void onBackPressed() {
         if (drawer.isDrawerOpen(GravityCompat.START)) {
@@ -109,11 +126,20 @@ public class MainActivity extends AppCompatActivity
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
+        Fragment fragment = null;
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
+        // Noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            return true;
+            fragment = new SettingsFragment();
+            toolbar.setTitle("Settings");
+        }
+
+        // Replacing the fragment.
+        if (fragment != null) {
+            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+            ft.replace(R.id.content_frame, fragment);
+            ft.commit();
         }
 
         return super.onOptionsItemSelected(item);
@@ -129,6 +155,7 @@ public class MainActivity extends AppCompatActivity
 
     public void displaySelectedScreen(int itemId) {
         // Handle navigation view item clicks here.
+        setDrawerTopTextView();
         Fragment fragment = null;
 
         if (itemId == R.id.nav_progress) {
@@ -148,8 +175,9 @@ public class MainActivity extends AppCompatActivity
         toolbar.setTitle("Challenges");
         }
 
-        //replacing the fragment
+        // Replace the fragment.
         if (fragment != null) {
+            // Make sure options show
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
             ft.replace(R.id.content_frame, fragment);
             ft.commit();
@@ -163,7 +191,7 @@ public class MainActivity extends AppCompatActivity
     protected void onStop(){
         super.onStop();
 
-        // save the user to a file
+        // Save the user to a file.
         try {
             FileOutputStream fos = getApplicationContext().openFileOutput("EvaApplicationUserStorage",Context.MODE_PRIVATE);
             ObjectOutputStream os = new ObjectOutputStream(fos);

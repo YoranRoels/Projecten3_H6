@@ -1,13 +1,13 @@
 package projecten3_h6.evaandroid.Domain;
 
-import android.os.Parcel;
-import android.os.Parcelable;
 import android.util.Log;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
 
 import projecten3_h6.evaandroid.Network.Calls;
 import projecten3_h6.evaandroid.Network.Config;
@@ -21,7 +21,14 @@ import retrofit2.Response;
 
 public class User implements Serializable{
 
+    // ----- Variables -----
+    // Serializable
     private static final long serialVersionUID = 4;
+
+    // Starting date to show in Drawer
+    private String startingDate = createStartingDate();
+
+    // Achievements
     private List<Achievement> achievements = new ArrayList<>();
     private List<Achievement> remoteAchievement;
     private int completedAchievementsCount = 0;
@@ -31,24 +38,22 @@ public class User implements Serializable{
     private int completedSilverAchievementsCount = 0;
     private List<Achievement> goldAchievements = new ArrayList<>();
     private int completedGoldAchievementsCount = 0;
+
+    // Days
     private List<Day> days = new ArrayList<>();
+
+    // Shopping List
     private ShoppingList shoppingList = new ShoppingList();
+
+    // Statistics
     private int totalVeganDays = 0;
     private int longestStreak = 0;
 
-    public User(List<Achievement> achievements, List<Day> days, ShoppingList shoppingList,
-                int totalVeganDays, int longestStreak) {
-        this.achievements = achievements;
-        this.days = days;
-        this.shoppingList = shoppingList;
-        this.totalVeganDays = totalVeganDays;
-        this.longestStreak = longestStreak;
+    // Settings
+    private boolean automaticShoppingEnabled = true;
 
-        assignAchievements();
-        countCompletedAchievements();
-        calculateStatistics();
-    }
 
+    // ----- Constructors -----
     public User(List<Achievement> achievements) {
         this.achievements = achievements;
 
@@ -58,6 +63,17 @@ public class User implements Serializable{
     public User() {
     }
 
+
+    // ----- Getters & Setters -----
+    private String createStartingDate() {
+        Calendar c = Calendar.getInstance();
+        SimpleDateFormat df = new SimpleDateFormat("d MMMM yyyy", Locale.ENGLISH);
+        return df.format(c.getTime());
+    }
+
+    public String getStartingDate() {
+        return startingDate;
+    }
 
     public List<Achievement> getAchievements() {
         return achievements;
@@ -73,6 +89,26 @@ public class User implements Serializable{
 
     public int getCompletedGoldAchievementsCount() {
         return completedGoldAchievementsCount;
+    }
+
+    public int getCompletedAchievementsCount() {
+        return completedAchievementsCount;
+    }
+
+    public List<Achievement> getRemoteAchievement() {
+        return remoteAchievement;
+    }
+
+    public List<Achievement> getBronzeAchievements() {
+        return bronzeAchievements;
+    }
+
+    public List<Achievement> getSilverAchievements() {
+        return silverAchievements;
+    }
+
+    public List<Achievement> getGoldAchievements() {
+        return goldAchievements;
     }
 
     public List<Day> getDays() {
@@ -99,6 +135,15 @@ public class User implements Serializable{
         this.longestStreak = longestStreak;
     }
 
+    public boolean isAutomaticShoppingEnabled() {
+        return automaticShoppingEnabled;
+    }
+
+    public void setAutomaticShoppingEnabled(boolean automaticShoppingEnabled) {
+        this.automaticShoppingEnabled = automaticShoppingEnabled;
+    }
+
+    // ----- Methods -----
     private void assignAchievements() {
         bronzeAchievements.clear();
         silverAchievements.clear();
@@ -113,18 +158,6 @@ public class User implements Serializable{
                 goldAchievements.add(a);
             }
         }
-    }
-
-    public List<Achievement> getBronzeAchievements() {
-        return bronzeAchievements;
-    }
-
-    public List<Achievement> getSilverAchievements() {
-        return silverAchievements;
-    }
-
-    public List<Achievement> getGoldAchievements() {
-        return goldAchievements;
     }
 
     public void countCompletedAchievements() {
@@ -213,26 +246,6 @@ public class User implements Serializable{
             }
         }
 
-    }
-
-    public void setCompletedAchievementsCount(int completedAchievementsCount) {
-        this.completedAchievementsCount = completedAchievementsCount;
-    }
-
-    public void setCompletedBronzeAchievementsCount(int completedBronzeAchievementsCount) {
-        this.completedBronzeAchievementsCount = completedBronzeAchievementsCount;
-    }
-
-    public void setCompletedSilverAchievementsCount(int completedSilverAchievementsCount) {
-        this.completedSilverAchievementsCount = completedSilverAchievementsCount;
-    }
-
-    public void setCompletedGoldAchievementsCount(int completedGoldAchievementsCount) {
-        this.completedGoldAchievementsCount = completedGoldAchievementsCount;
-    }
-
-    public int getCompletedAchievementsCount() {
-        return completedAchievementsCount;
     }
 
 }

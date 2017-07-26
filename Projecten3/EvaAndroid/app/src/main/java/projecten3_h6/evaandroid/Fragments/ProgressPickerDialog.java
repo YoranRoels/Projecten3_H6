@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -15,6 +16,7 @@ import butterknife.ButterKnife;
 import projecten3_h6.evaandroid.Adapters.ProgressPickerAdapter;
 import projecten3_h6.evaandroid.Domain.Day;
 import projecten3_h6.evaandroid.Domain.EvaApplication;
+import projecten3_h6.evaandroid.Domain.Ingredient;
 import projecten3_h6.evaandroid.R;
 import butterknife.BindView;
 
@@ -79,11 +81,23 @@ public class ProgressPickerDialog extends DialogFragment {
 
         @Override
         public void onClick(View v) {
+            List<Day> days = ProgressFragment.user.getDays();
             int posOfDish;
             posOfDish = mRecyclerView.getChildAdapterPosition(v);
 
-            List<Day> days = ProgressFragment.user.getDays();
-            days.get(days.size() - ProgressFragment.segmentSize + ProgressFragment.pos).setDish(ProgressFragment.choices.get(posOfDish));
+            // Set correct Dish
+            Day clickedDay = days.get(days.size() - ProgressFragment.segmentSize + ProgressFragment.pos);
+            clickedDay.setDish(ProgressFragment.choices.get(posOfDish));
+
+            // Add ingredients to ShoppingList
+            if(app.getUser().isAutomaticShoppingEnabled()) {
+                List<Ingredient> shoppingListIngredients = app.getUser().getShoppingList().getIngredients();
+                for (Ingredient i : clickedDay.getDish().getIngredients()) {
+                    shoppingListIngredients.add(i);
+                }
+                Toast.makeText(getActivity(), "The ingredients for " + "\"" + clickedDay.getDish().getName() + "\"" + " have been added to the list.", Toast.LENGTH_LONG).show();
+            }
+            // Achievement
             if(days.get(days.size() - ProgressFragment.segmentSize).getDish() != null &&
                     days.get(days.size() - ProgressFragment.segmentSize + 1).getDish() != null &&
                     days.get(days.size() - ProgressFragment.segmentSize + 2).getDish() != null) {
