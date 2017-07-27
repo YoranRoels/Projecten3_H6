@@ -78,6 +78,7 @@ public class ProgressAdapter extends RecyclerView.Adapter<ProgressAdapter.Progre
                 ProgressFragment.app.getUser().getDays().get(daysLength - itemCount + holderPosition).setCompleted(isChecked);
                 ProgressFragment.app.getUser().calculateStatistics();
                 ProgressFragment.recheckCheckboxes();
+                ProgressFragment.setMotivationTextViews();
                 // Achievement earned
                 ProgressFragment.app.earnAchievement(parent.getContext(), LayoutInflater.from(parent.getContext()), parent, "Vegan Rookie");
             }

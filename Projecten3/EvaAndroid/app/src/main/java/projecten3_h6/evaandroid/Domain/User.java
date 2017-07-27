@@ -129,12 +129,16 @@ public class User implements Serializable{
         Calendar todayCalendar = Calendar.getInstance();
         // Here we need the last four days for when you already start a new segment
         // but 'today' is still the last day of the previous segment
-        List<Day> lastFourDays = new ArrayList<>();
-        lastFourDays.add(days.get(days.size()-4));
-        lastFourDays.add(days.get(days.size()-3));
-        lastFourDays.add(days.get(days.size()-2));
-        lastFourDays.add(days.get(days.size()-1));
-        for(Day day: lastFourDays) {
+        List<Day> lastThreeOrFourDays = new ArrayList<>();
+        if(days.size() < 4) {
+            lastThreeOrFourDays = days;
+        } else {
+            lastThreeOrFourDays.add(days.get(days.size() - 4));
+            lastThreeOrFourDays.add(days.get(days.size() - 3));
+            lastThreeOrFourDays.add(days.get(days.size() - 2));
+            lastThreeOrFourDays.add(days.get(days.size() - 1));
+        }
+        for(Day day: lastThreeOrFourDays) {
             // Int casts are needed here to avoid errors.
             if(day.getDayOfTheYear() == (int) todayCalendar.get(Calendar.DAY_OF_YEAR) &&
                     day.getYear() == (int) todayCalendar.get(Calendar.YEAR)) {

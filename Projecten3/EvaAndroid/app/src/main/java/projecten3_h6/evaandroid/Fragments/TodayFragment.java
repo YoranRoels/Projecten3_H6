@@ -63,9 +63,9 @@ public class TodayFragment extends Fragment {
         EvaApplication app = (EvaApplication)context.getApplicationContext();
         user = app.getUser();
         // Set correct today's dish.
-        dish = user.getToday().getDish();
-        // Set the TextViews and ImageView for this dish.
-        if(dish != null) {
+        if(user.getToday() != null && user.getToday().getDish() != null) {
+            dish = user.getToday().getDish();
+            // Set the TextViews and ImageView for this dish.
             setTextAndVisuals();
         }
 

@@ -80,6 +80,7 @@ public class ProgressFragment extends Fragment implements ProgressPickerDialog.D
     // Top Textviews
     @BindView(R.id.progressTextView) TextView progressTextView;
     @BindView(R.id.progressMotivationTextView) TextView progressMotivationTextView;
+    public static TextView progressTextViews[];
 
     // Recyclerview
     @BindView(R.id.progressRecyclerView) RecyclerView mRecyclerView;
@@ -124,6 +125,8 @@ public class ProgressFragment extends Fragment implements ProgressPickerDialog.D
                 progressBox7, progressBox8, progressBox9, progressBox10, progressBox11, progressBox12, progressBox13,
                 progressBox14, progressBox15, progressBox16, progressBox17, progressBox18, progressBox19,
                 progressBox20, progressBox21, progressBox22, progressBox23, progressBox24};
+
+        progressTextViews = new TextView[]{progressTextView, progressMotivationTextView};
 
         if(days.isEmpty()) {
             progressTextView.setText(R.string.welcome);
@@ -176,12 +179,12 @@ public class ProgressFragment extends Fragment implements ProgressPickerDialog.D
         }
     }
 
-    public void setMotivationTextViews() {
-        progressTextView.setText("You've had " + app.getUser().getTotalVeganDays() + " vegan days.");
+    public static void setMotivationTextViews() {
+        progressTextViews[0].setText("You've had " + app.getUser().getTotalVeganDays() + " vegan days.");
         if(app.getUser().getTotalVeganDays() == app.getUser().getLongestStreak()) {
-            progressMotivationTextView.setText(R.string.no_skipped_days);
+            progressTextViews[1].setText(R.string.no_skipped_days);
         } else {
-            progressMotivationTextView.setText(R.string.skipped_days);
+            progressTextViews[1].setText(R.string.skipped_days);
         }
     }
 
