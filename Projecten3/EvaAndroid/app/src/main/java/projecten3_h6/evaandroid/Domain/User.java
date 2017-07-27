@@ -41,7 +41,6 @@ public class User implements Serializable{
 
     // Days
     private List<Day> days = new ArrayList<>();
-    private List<Day> lastThreeDays;
     private Day today;
 
     // Shopping List
@@ -117,14 +116,6 @@ public class User implements Serializable{
         return days;
     }
 
-    public List<Day> getLastThreeDays() {
-        lastThreeDays = new ArrayList<>();
-        lastThreeDays.add(days.get(days.size()-3));
-        lastThreeDays.add(days.get(days.size()-2));
-        lastThreeDays.add(days.get(days.size()-1));
-        return lastThreeDays;
-    }
-
     public Day getToday() {
         Calendar todayCalendar = Calendar.getInstance();
         // Here we need the last four days for when you already start a new segment
@@ -179,6 +170,16 @@ public class User implements Serializable{
     }
 
     // ----- Methods -----
+    // Days
+    public List<Day> getLastThreeDays() {
+        List<Day> lastThreeDays = new ArrayList<>();
+        lastThreeDays.add(days.get(days.size()-3));
+        lastThreeDays.add(days.get(days.size()-2));
+        lastThreeDays.add(days.get(days.size()-1));
+        return lastThreeDays;
+    }
+
+    // Achievements
     private void assignAchievements() {
         bronzeAchievements.clear();
         silverAchievements.clear();
@@ -224,6 +225,36 @@ public class User implements Serializable{
         completedGoldAchievementsCount = temporaryGoldCompletedAchievementsCount;
     }
 
+    private void compareAchievements(){
+        for (Achievement a : remoteAchievement) {
+            if (!achievements.contains(a)) {
+                achievements.add(a);
+            }
+        }
+
+    }
+
+    public void getRemoteAchievements(){
+
+        Calls caller = Config.getRetrofit().create(Calls.class);
+        Call<List<Achievement>> call = caller.getAchievements();
+        call.enqueue(new Callback<List<Achievement>>() {
+            @Override
+            public void onResponse(Call<List<Achievement>> call, Response<List<Achievement>> response) {
+                remoteAchievement = response.body();
+                Log.e("BackendCall", " call successful get all achievements");
+            }
+
+            @Override
+            public void onFailure(Call<List<Achievement>> call, Throwable t) {
+                Log.e("BackendCAll", "failed to call get all achievements "+ t.getMessage());
+            }
+        });
+
+        compareAchievements();
+    }
+
+    // Statistics
     public void calculateStatistics() {
         calculateTotalVeganDays();
         calculateLongestStreak();
@@ -253,34 +284,6 @@ public class User implements Serializable{
         }
     }
 
-    public void getRemoteAchievements(){
 
-        Calls caller = Config.getRetrofit().create(Calls.class);
-        Call<List<Achievement>> call = caller.getAchievements();
-        call.enqueue(new Callback<List<Achievement>>() {
-            @Override
-            public void onResponse(Call<List<Achievement>> call, Response<List<Achievement>> response) {
-                remoteAchievement = response.body();
-                Log.e("BackendCall", " call successful get all achievements");
-            }
-
-            @Override
-            public void onFailure(Call<List<Achievement>> call, Throwable t) {
-                Log.e("BackendCAll", "failed to call get all achievements "+ t.getMessage());
-            }
-        });
-
-        compareAchievements();
-
-    }
-
-    private void compareAchievements(){
-        for (Achievement a : remoteAchievement) {
-            if (!achievements.contains(a)) {
-                achievements.add(a);
-            }
-        }
-
-    }
 
 }
