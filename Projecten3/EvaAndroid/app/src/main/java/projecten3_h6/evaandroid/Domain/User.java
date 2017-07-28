@@ -25,7 +25,6 @@ public class User implements Serializable{
 
     // Achievements
     private List<Achievement> achievements = new ArrayList<>();
-    private List<Achievement> remoteAchievement;
     private int completedAchievementsCount = 0;
     private List<Achievement> bronzeAchievements = new ArrayList<>();
     private int completedBronzeAchievementsCount = 0;
@@ -33,6 +32,7 @@ public class User implements Serializable{
     private int completedSilverAchievementsCount = 0;
     private List<Achievement> goldAchievements = new ArrayList<>();
     private int completedGoldAchievementsCount = 0;
+    private List<Achievement> remoteAchievements = new ArrayList<>();
 
     // Days
     private List<Day> days = new ArrayList<>();
@@ -207,21 +207,21 @@ public class User implements Serializable{
     }
 
     private void compareAchievements(){
-        for (Achievement a : remoteAchievement) {
-            if (!achievements.contains(a)) {
-                achievements.add(a);
-            }
+        for (Achievement a : remoteAchievements) {
+        if (!achievements.contains(a)) {
+            achievements.add(a);
         }
     }
+}
 
     public void getRemoteAchievements(){
-
         Calls caller = Config.getRetrofit().create(Calls.class);
         Call<List<Achievement>> call = caller.getAchievements();
+
         call.enqueue(new Callback<List<Achievement>>() {
             @Override
             public void onResponse(Call<List<Achievement>> call, Response<List<Achievement>> response) {
-                remoteAchievement = response.body();
+                remoteAchievements = response.body();
                 Log.e("BackendCall", " call successful get all achievements");
                 compareAchievements();
             }
@@ -231,7 +231,6 @@ public class User implements Serializable{
                 Log.e("BackendCAll", "failed to call get all achievements "+ t.getMessage());
             }
         });
-
     }
 
     // Statistics
