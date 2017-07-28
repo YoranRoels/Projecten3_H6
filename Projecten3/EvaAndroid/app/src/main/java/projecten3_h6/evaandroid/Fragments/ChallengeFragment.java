@@ -25,19 +25,12 @@ import projecten3_h6.evaandroid.Domain.EvaApplication;
 import projecten3_h6.evaandroid.Domain.User;
 import projecten3_h6.evaandroid.R;
 
-/**
- * Created by jensleirens on 25/07/2017.
- */
-
 public class ChallengeFragment extends Fragment {
 
     @BindView(R.id.challengeRecyclerView)RecyclerView mRecycler;
 
-    List<Challenge> challenges = new ArrayList<>();
     protected RecyclerView.LayoutManager mLayoutManager;
-    private ChallengeAdapter adapter;
-    public static EvaApplication app;
-    private static Day today = null;
+    public static EvaApplication app ;
 
     @Nullable
     @Override
@@ -48,33 +41,29 @@ public class ChallengeFragment extends Fragment {
         mLayoutManager = new LinearLayoutManager(getActivity());
         mRecycler.setLayoutManager(mLayoutManager);
 
-        Context context = getContext();
-        app = (EvaApplication)context.getApplicationContext();
-        User user = app.getUser();
-
-        getToday();
-
-        today.getRemoteChallenges();
-        challenges = today.getChallenges();
-
-        adapter = new ChallengeAdapter(challenges);
-        mRecycler.setAdapter(adapter);
-
-        return v;
-    }
-
-    public static int getToday(){
-
-        Calendar todayCalendar = Calendar.getInstance();
-        int index = 0;
-        for(Day d: ProgressFragment.lastThreeDays) {
-            if( d.getDayOfTheYear() == Integer.valueOf(todayCalendar.get(Calendar.DAY_OF_YEAR))) {
-                today = d;
-                break;
-            }else
-            index += 1;
+        //if its the first time the challengeFragment is loaded
+        if(app ==  null) {
+            Context context = getContext();
+            app = (EvaApplication) context.getApplicationContext();
         }
-        return index;
+
+        //if today is not yet set, set it
+        if(app.getUser().getToday() == null) {
+            app.getUser().getToday();
+            app.getUser().getToday().getRemoteChallenges();
+            System.out.println("today setted");
+        }
+
+        //if the daily challenges are not loaded yet
+        if(app.getUser().getToday().getChallenges().size() == 0){
+            //get the remote challenges of the backend
+            app.getUser().getToday().getRemoteChallenges();
+        }
+
+        ChallengeAdapter adapter;
+        adapter = new ChallengeAdapter(app.getUser().getToday().getChallenges());
+        mRecycler.setAdapter(adapter);
+        return v;
     }
 
     @Override
