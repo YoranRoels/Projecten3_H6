@@ -3,12 +3,7 @@ package projecten3_h6.evaandroid.Domain;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
-
-/**
- * Created by Mafken on 4/07/2017.
- */
 
 public class Day implements Serializable{
 
@@ -23,18 +18,6 @@ public class Day implements Serializable{
     private String tip;
     private boolean completed;
     private List<Challenge> challenges = new ArrayList<>();
-
-    public Day(int year, int month, int dayOfTheMonth, int dayOfTheWeek, int dayOfTheYear, Dish dish, String tip) {
-        this.year = year;
-        this.month = month;
-        this.dayOfTheMonth = dayOfTheMonth;
-        this.dayOfTheWeek = dayOfTheWeek;
-        this.dayOfTheYear = dayOfTheYear;
-        this.dish = dish;
-        this.tip = tip;
-        completed = false;
-        setDayOfTheWeekString();
-    }
 
     public Day(int year, int month, int dayOfTheMonth, int dayOfTheWeek, int dayOfTheYear) {
         this.year = year;
@@ -64,10 +47,6 @@ public class Day implements Serializable{
 
     public int getDayOfTheMonth() {
         return dayOfTheMonth;
-    }
-
-    public int getDayOfTheWeek() {
-        return dayOfTheWeek;
     }
 
     public String getDayOfTheWeekString() {
@@ -107,38 +86,6 @@ public class Day implements Serializable{
 
     public Dish getDish() {
         return dish;
-    }
-
-    public String getTip() {
-        return tip;
-    }
-
-    public void setTip(String tip) {
-        this.tip = tip;
-    }
-
-    public void setYear(int year) {
-        this.year = year;
-    }
-
-    public void setMonth(int month) {
-        this.month = month;
-    }
-
-    public void setDayOfTheMonth(int dayOfTheMonth) {
-        this.dayOfTheMonth = dayOfTheMonth;
-    }
-
-    public void setDayOfTheWeek(int dayOfTheWeek) {
-        this.dayOfTheWeek = dayOfTheWeek;
-    }
-
-    public void setDayOfTheWeekString(String dayOfTheWeekString) {
-        this.dayOfTheWeekString = dayOfTheWeekString;
-    }
-
-    public void setDayOfTheYear(int dayOfTheYear) {
-        this.dayOfTheYear = dayOfTheYear;
     }
 
     public boolean getCompleted() {

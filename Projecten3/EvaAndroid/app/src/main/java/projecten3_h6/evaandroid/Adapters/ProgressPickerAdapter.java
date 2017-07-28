@@ -5,38 +5,32 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.squareup.picasso.Picasso;
-
 import java.util.List;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import projecten3_h6.evaandroid.Domain.Dish;
 import projecten3_h6.evaandroid.Fragments.ProgressPickerDialog;
 import projecten3_h6.evaandroid.R;
 
-/**
- * Created by jensleirens on 11/07/2017.
- */
-
-public class ProgressPickerAdapter extends RecyclerView.Adapter<ProgressPickerAdapter.ProgressPickerViewHolder>{
+public class ProgressPickerAdapter extends RecyclerView.Adapter<ProgressPickerAdapter.ProgressPickerViewHolder> {
 
     private int itemCount;
     private List<Dish> choices;
+    private ProgressPickerDialog.ProgressPickerOnclickListener onclickListener;
 
-    public ProgressPickerAdapter(List<Dish> choices) {
+    public ProgressPickerAdapter(List<Dish> choices, ProgressPickerDialog.ProgressPickerOnclickListener onclickListener) {
         this.choices = choices;
         this.itemCount = choices.size();
+        this.onclickListener = onclickListener;
     }
 
     @Override
     public ProgressPickerAdapter.ProgressPickerViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_picker,parent,false);
-        v.setOnClickListener(ProgressPickerDialog.progressPickerOnclickListener);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_picker, parent, false);
+        v.setOnClickListener(onclickListener);
         return new ProgressPickerAdapter.ProgressPickerViewHolder(v);
     }
 
@@ -45,8 +39,7 @@ public class ProgressPickerAdapter extends RecyclerView.Adapter<ProgressPickerAd
         TextView pickerDishTitle = holder.pickerDishTitle;
         ImageView pickerDishImage = holder.pickerDishImage;
 
-        if(choices.get(position).getImageId() == 0 )
-        {
+        if (choices.get(position).getImageId() == 0) {
             choices.get(position).setImageId(R.drawable.dish_placeholder);
         }
         pickerDishTitle.setText(choices.get(position).getName());
@@ -72,7 +65,7 @@ public class ProgressPickerAdapter extends RecyclerView.Adapter<ProgressPickerAd
 
         public ProgressPickerViewHolder(View itemView) {
             super(itemView);
-            ButterKnife.bind(this,itemView);
+            ButterKnife.bind(this, itemView);
         }
     }
 }

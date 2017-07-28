@@ -9,35 +9,28 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.github.brnunes.swipeablerecyclerview.SwipeableRecyclerViewTouchListener;
 import java.util.ArrayList;
 import java.util.List;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import projecten3_h6.evaandroid.Adapters.ShoppinglistAdapter;
-import projecten3_h6.evaandroid.Domain.Achievement;
+import projecten3_h6.evaandroid.Adapters.ShoppingListAdapter;
 import projecten3_h6.evaandroid.Domain.EvaApplication;
 import projecten3_h6.evaandroid.Domain.Ingredient;
 import projecten3_h6.evaandroid.Domain.User;
 import projecten3_h6.evaandroid.R;
 
-/**
- * Created by Mafken on 4/07/2017.
- */
-
-public class ShoppinglistFragment extends Fragment {
+public class ShoppingListFragment extends Fragment {
 
     @BindView(R.id.shoppingListRecyclerView) RecyclerView mRecyclerView;
     @BindView(R.id.addShoppingListItemNametxt) TextView addShoppingListItemNametxt;
     @BindView(R.id.addShoppingListItemAmounttxt) TextView addShoppingListItemAmounttxt;
 
     protected RecyclerView.LayoutManager mLayoutManager;
-    ShoppinglistAdapter adapter;
+    ShoppingListAdapter adapter;
     User user;
     List<Ingredient> ingredients = new ArrayList<>();
 
@@ -129,7 +122,7 @@ public class ShoppinglistFragment extends Fragment {
     }
 
     public void initCard(){
-        adapter = new ShoppinglistAdapter(ingredients);
+        adapter = new ShoppingListAdapter(ingredients);
         mRecyclerView.setAdapter(adapter);
     }
 }
