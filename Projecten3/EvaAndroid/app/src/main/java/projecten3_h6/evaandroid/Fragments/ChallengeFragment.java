@@ -30,7 +30,7 @@ public class ChallengeFragment extends Fragment {
     @BindView(R.id.challengeRecyclerView)RecyclerView mRecycler;
 
     protected RecyclerView.LayoutManager mLayoutManager;
-    public static EvaApplication app ;
+    public EvaApplication app ;
 
     @Nullable
     @Override
