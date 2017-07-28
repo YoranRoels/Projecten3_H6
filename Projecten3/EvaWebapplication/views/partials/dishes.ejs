@@ -1,7 +1,18 @@
+
 <div class="page-header">
     <h1>Dishes</h1>
 </div>
 
 <div>
-    {{test}}
+<div >
+    <div ng-repeat="dish in dishes">
+        <span> naam : {{dish.name}}</span>
+        <span>type : {{dish.dishType}}</span>
+        <span>cooking time :  {{dish.cookingTime}}</span>
+        <span>difficulty :  {{dish.difficulty}}</span>
+        <button type = "submit">Bekijk</button>
+    </div>
+    </div>
+
+
 </div>

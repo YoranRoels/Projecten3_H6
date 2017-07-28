@@ -14,12 +14,22 @@ app.config([
             .state('dishes', {
                 url: '/dishes',
                 templateUrl: 'partials/dishes',
-                controller: 'DishesCtrl'
+                controller: 'DishesCtrl',
+                resolve: {
+					postPromise: ['data', function(data) {
+						return data.getAllDishes();
+					}]
+				}
             })
             .state('achievements', {
                 url: '/achievements',
                 templateUrl: 'partials/achievements',
-                controller: 'AchievementsCtrl'
+                controller: 'AchievementsCtrl',
+                resolve: {
+					postPromise: ['data', function(data) {
+						return data.getAllAchievements();
+					}]
+				}
             });
 
 
@@ -34,8 +44,17 @@ app.factory('data', ['$http', function($http){
     o.getAllDishes = function() {
         return $http.get('/dishes').success(function(data){
             angular.copy(data, o.dishes);
+            
         });
     };
+    o.createDish = function(dish){
+        return $http.post("/dishes").success(function(data){
+            o.dishes.push(data);
+        })
+    }
+    
+    
+    
     o.getAllAchievements = function() {
         return $http.get('/achievements').success(function(data){
             angular.copy(data, o.achievements);
@@ -48,18 +67,26 @@ app.controller('MainCtrl', [
     '$scope',
     function($scope){
         $scope.test = 'Hello world!';
+        
     }]);
 
 app.controller('DishesCtrl', [
-    '$scope',
-    function($scope){
-        $scope.test = 'Hello dishes!';
+    '$scope','data',
+    function($scope, dishes){
+        $scope.dishes = dishes.dishes;
+        
+        $scope.createDish = function(){
+            //todo
+        }
+       
+        
     }]);
 
 app.controller('AchievementsCtrl', [
-    '$scope',
-    function($scope){
-        $scope.test = 'Hello achievements!';
+    '$scope',,'data'
+    function($scope,achievements){
+       
+        $scope.achievements = achievements.achievements;
     }]);
 
 app.controller('NavCtrl', [
