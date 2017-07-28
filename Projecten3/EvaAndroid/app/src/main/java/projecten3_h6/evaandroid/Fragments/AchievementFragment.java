@@ -112,7 +112,6 @@ public class AchievementFragment extends Fragment {
         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.content_frame, achievementDetailFragment);
-        fragmentTransaction.addToBackStack(achievementDetailFragment.toString());
         fragmentTransaction.commit();
     }
 }
