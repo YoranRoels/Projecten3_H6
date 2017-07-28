@@ -1,23 +1,18 @@
 package projecten3_h6.evaandroid.Domain;
 
 import android.util.Log;
-
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
-
 import projecten3_h6.evaandroid.Network.Calls;
 import projecten3_h6.evaandroid.Network.Config;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-/**
- * Created by jensleirens on 11/07/2017.
- */
 
 public class User implements Serializable{
 
@@ -53,7 +48,6 @@ public class User implements Serializable{
     // Settings
     private boolean automaticShoppingEnabled = true;
 
-
     // ----- Constructors -----
     public User(List<Achievement> achievements) {
         this.achievements = achievements;
@@ -63,7 +57,6 @@ public class User implements Serializable{
 
     public User() {
     }
-
 
     // ----- Getters & Setters -----
     private String createStartingDate() {
@@ -145,16 +138,8 @@ public class User implements Serializable{
         return totalVeganDays;
     }
 
-    public void setTotalVeganDays(int totalVeganDays) {
-        this.totalVeganDays = totalVeganDays;
-    }
-
     public int getLongestStreak() {
         return longestStreak;
-    }
-
-    public void setLongestStreak(int longestStreak) {
-        this.longestStreak = longestStreak;
     }
 
     public boolean isAutomaticShoppingEnabled() {

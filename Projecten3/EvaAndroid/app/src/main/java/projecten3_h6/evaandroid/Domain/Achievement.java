@@ -1,11 +1,6 @@
 package projecten3_h6.evaandroid.Domain;
 
-
 import java.io.Serializable;
-
-/**
- * Created by jensleirens on 11/07/2017.
- */
 
 public class Achievement implements Serializable{
 
@@ -32,40 +27,20 @@ public class Achievement implements Serializable{
         return completedImageId;
     }
 
-    public void setCompletedImageId(int completedImageId) {
-        this.completedImageId = completedImageId;
-    }
-
     public int getImageId() {
         return imageId;
-    }
-
-    public void setImageId(int imageId) {
-        this.imageId = imageId;
     }
 
     public String getTitle() {
         return title;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
     public String getDescription() {
         return description;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
     public AchievementRanking getAchievementRanking() {
         return achievementRanking;
-    }
-
-    public void setAchievementRanking(AchievementRanking achievementRanking) {
-        this.achievementRanking = achievementRanking;
     }
 
     public boolean isCompleted() {
@@ -74,10 +49,6 @@ public class Achievement implements Serializable{
 
     public void setCompleted(boolean completed) {
         this.completed = completed;
-    }
-
-    public boolean getCompleted() {
-        return this.completed;
     }
 
 }

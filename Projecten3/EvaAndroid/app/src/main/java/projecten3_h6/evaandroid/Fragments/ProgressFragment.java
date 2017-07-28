@@ -6,7 +6,6 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -17,37 +16,21 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.List;
-import java.util.Locale;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import projecten3_h6.evaandroid.Adapters.ProgressAdapter;
-import projecten3_h6.evaandroid.Domain.CookingTime;
 import projecten3_h6.evaandroid.Domain.Day;
 import projecten3_h6.evaandroid.Domain.Dish;
 import projecten3_h6.evaandroid.Domain.EvaApplication;
-import projecten3_h6.evaandroid.Domain.Ingredient;
-import projecten3_h6.evaandroid.Domain.DishType;
-import projecten3_h6.evaandroid.Domain.User;
 import projecten3_h6.evaandroid.Network.Calls;
 import projecten3_h6.evaandroid.Network.Config;
 import projecten3_h6.evaandroid.R;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-
-/**
- * Created by Yoran on 07/07/2017.
- */
 
 public class ProgressFragment extends Fragment implements ProgressPickerDialog.DialogListener{
     // Progress checkboxes

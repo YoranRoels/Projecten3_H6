@@ -2,36 +2,25 @@ package projecten3_h6.evaandroid.Domain;
 
 import android.app.Application;
 import android.content.Context;
-import android.content.SharedPreferences;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
-
 import projecten3_h6.evaandroid.Network.Calls;
 import projecten3_h6.evaandroid.Network.Config;
 import projecten3_h6.evaandroid.R;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-
 import static projecten3_h6.evaandroid.R.string.achievements;
-
-/**
- * Created by Yoran on 16/07/2017.
- */
 
 public class EvaApplication extends Application {
 
     private User user;
-    private int segmentSize = 3;
 
     public User getUser() {
         return user;
@@ -43,6 +32,8 @@ public class EvaApplication extends Application {
     }
 
     public int getSegmentSize() {
+        int segmentSize;
+        segmentSize = 3 ;
         return segmentSize;
     }
 
@@ -90,7 +81,7 @@ public class EvaApplication extends Application {
     }
 
     public void earnAchievement(Context context, LayoutInflater inflater, ViewGroup container, String achievementTitle) {
-        Achievement shoppingListTabAchievement = null;
+        Achievement shoppingListTabAchievement;
         for(Achievement a: user.getAchievements()) {
             if(a.getTitle().equals(achievementTitle)) {
                 shoppingListTabAchievement = a;

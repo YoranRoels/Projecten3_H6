@@ -2,9 +2,6 @@ package projecten3_h6.evaandroid.Domain;
 
 import java.io.Serializable;
 
-/**
- * Created by Mafken on 4/07/2017.
- */
 public class Ingredient implements Serializable{
 
     private static final long serialVersionUID = 5;
@@ -26,9 +23,5 @@ public class Ingredient implements Serializable{
 
     public String getAmount() {
         return amount;
-    }
-
-    public void setAmount(String amount) {
-        this.amount = amount;
     }
 }

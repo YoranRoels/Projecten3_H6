@@ -2,10 +2,6 @@ package projecten3_h6.evaandroid.Domain;
 
 import java.io.Serializable;
 
-/**
- * Created by jensleirens on 25/07/2017.
- */
-
 public class Challenge implements Serializable{
 
     private static final long serialVersionUID = 7;
@@ -24,24 +20,12 @@ public class Challenge implements Serializable{
         return title;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
     public String getDescription() {
         return description;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
     public ChallengeType getChallengeType() {
         return challengeType;
-    }
-
-    public void setChallengeType(ChallengeType challengeType) {
-        this.challengeType = challengeType;
     }
 
     public boolean isCompleted() {

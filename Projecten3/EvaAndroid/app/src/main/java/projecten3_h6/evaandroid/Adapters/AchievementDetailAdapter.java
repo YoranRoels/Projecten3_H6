@@ -7,19 +7,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.squareup.picasso.Picasso;
-
 import java.util.List;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import projecten3_h6.evaandroid.Domain.Achievement;
 import projecten3_h6.evaandroid.R;
 
-/**
- * Created by jensleirens on 13/07/2017.
- */
 
 public class
 AchievementDetailAdapter extends RecyclerView.Adapter<AchievementDetailAdapter.AchievementDetailViewHolder> {
@@ -58,7 +52,6 @@ AchievementDetailAdapter extends RecyclerView.Adapter<AchievementDetailAdapter.A
 
         achievementTitle.setText(achievements.get(position).getTitle());
         achievementDescription.setText(achievements.get(position).getDescription());
-
     }
 
     @Override

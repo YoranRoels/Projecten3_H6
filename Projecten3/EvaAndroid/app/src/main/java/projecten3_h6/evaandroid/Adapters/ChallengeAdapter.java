@@ -1,35 +1,19 @@
 package projecten3_h6.evaandroid.Adapters;
 
-import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.ToggleButton;
-
-import com.squareup.picasso.Picasso;
-
-import org.w3c.dom.Text;
-
 import java.util.List;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import projecten3_h6.evaandroid.Domain.Achievement;
 import projecten3_h6.evaandroid.Domain.Challenge;
-import projecten3_h6.evaandroid.Domain.EvaApplication;
-import projecten3_h6.evaandroid.Fragments.ChallengeFragment;
-import projecten3_h6.evaandroid.Fragments.ProgressFragment;
 import projecten3_h6.evaandroid.R;
 
-/**
- * Created by jensleirens on 25/07/2017.
- */
-
-public class ChallengeAdapter extends RecyclerView.Adapter<ChallengeAdapter.ChallengeViewHolder>{
+public class ChallengeAdapter extends RecyclerView.Adapter<ChallengeAdapter.ChallengeViewHolder> {
 
     private int itemCount;
     private List<Challenge> challenges;
@@ -41,7 +25,7 @@ public class ChallengeAdapter extends RecyclerView.Adapter<ChallengeAdapter.Chal
 
     @Override
     public ChallengeAdapter.ChallengeViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_challenge,parent,false);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_challenge, parent, false);
         return new ChallengeAdapter.ChallengeViewHolder(v);
     }
 
@@ -72,7 +56,7 @@ public class ChallengeAdapter extends RecyclerView.Adapter<ChallengeAdapter.Chal
         return itemCount;
     }
 
-    public static class  ChallengeViewHolder extends RecyclerView.ViewHolder {
+    public static class ChallengeViewHolder extends RecyclerView.ViewHolder {
 
         @BindView(R.id.challengeTitle)
         public TextView challengeTitle;
@@ -85,7 +69,7 @@ public class ChallengeAdapter extends RecyclerView.Adapter<ChallengeAdapter.Chal
 
         public ChallengeViewHolder(View itemView) {
             super(itemView);
-            ButterKnife.bind(this,itemView);
+            ButterKnife.bind(this, itemView);
         }
     }
 }

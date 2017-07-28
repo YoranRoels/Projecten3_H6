@@ -14,23 +14,13 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-
-import java.util.ArrayList;
-import java.util.List;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import projecten3_h6.evaandroid.Adapters.AchievementAdapter;
-import projecten3_h6.evaandroid.Domain.Achievement;
-import projecten3_h6.evaandroid.Domain.AchievementRanking;
 import projecten3_h6.evaandroid.Domain.EvaApplication;
 import projecten3_h6.evaandroid.Domain.User;
 import projecten3_h6.evaandroid.R;
-
-/**
- * Created by jensleirens on 12/07/2017.
- */
 
 public class AchievementFragment extends Fragment {
 
@@ -50,9 +40,6 @@ public class AchievementFragment extends Fragment {
     protected RecyclerView.LayoutManager silverLayoutManager;
     protected RecyclerView.LayoutManager goldLayoutManager;
 
-    private AchievementAdapter bronzeAdapter;
-    private AchievementAdapter silverAdapter;
-    private AchievementAdapter goldAdapter;
     private User user;
 
     @Nullable
@@ -65,6 +52,10 @@ public class AchievementFragment extends Fragment {
         EvaApplication app = (EvaApplication)context.getApplicationContext();
         user = app.getUser();
         populateTextViews();
+
+        AchievementAdapter bronzeAdapter;
+        AchievementAdapter silverAdapter;
+        AchievementAdapter goldAdapter;
 
         bronzeLayoutManager = new LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL,false);
         silverLayoutManager = new LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL,false);

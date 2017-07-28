@@ -9,23 +9,16 @@ import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.ToggleButton;
-
 import com.squareup.picasso.Picasso;
-
 import java.util.Calendar;
 import java.util.List;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import projecten3_h6.evaandroid.Domain.Day;
 import projecten3_h6.evaandroid.Fragments.ProgressFragment;
 import projecten3_h6.evaandroid.R;
 
-/**
- * Created by jensleirens on 07/07/2017.
- */
-
-public class ProgressAdapter extends RecyclerView.Adapter<ProgressAdapter.ProgressViewHolder>{
+public class ProgressAdapter extends RecyclerView.Adapter<ProgressAdapter.ProgressViewHolder> {
 
     private int itemCount;
     private List<Day> currentDays;
@@ -40,7 +33,7 @@ public class ProgressAdapter extends RecyclerView.Adapter<ProgressAdapter.Progre
 
     @Override
     public ProgressAdapter.ProgressViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_progress,parent,false);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_progress, parent, false);
         this.parent = parent;
         v.setOnClickListener(progressOnclickListener);
         return new ProgressAdapter.ProgressViewHolder(v);
@@ -56,13 +49,13 @@ public class ProgressAdapter extends RecyclerView.Adapter<ProgressAdapter.Progre
         final int holderPosition = holder.getAdapterPosition();
         progressDayOfTheWeek.setText(currentDays.get(holderPosition).getDayOfTheWeekString());
 
-        if(currentDays.get(holderPosition).getDish() != null) {
+        if (currentDays.get(holderPosition).getDish() != null) {
             progressDishTitle.setText(currentDays.get(holderPosition).getDish().getName());
             Context context = holder.dayDishImage.getContext();
             Picasso.with(context).load(currentDays.get(holderPosition).getDish().getImageId()).into(dayDishImage);
             dayDishImage.setImageResource(currentDays.get(holderPosition).getDish().getImageId());
             toggleComplete.setChecked(currentDays.get(holderPosition).isCompleted());
-            if(today.get(Calendar.DAY_OF_YEAR) >= currentDays.get(holderPosition).getDayOfTheYear()
+            if (today.get(Calendar.DAY_OF_YEAR) >= currentDays.get(holderPosition).getDayOfTheYear()
                     || today.get(Calendar.YEAR) > currentDays.get(holderPosition).getYear()) {
                 toggleComplete.setVisibility(View.VISIBLE);
             }
@@ -107,7 +100,7 @@ public class ProgressAdapter extends RecyclerView.Adapter<ProgressAdapter.Progre
 
         public ProgressViewHolder(View itemView) {
             super(itemView);
-            ButterKnife.bind(this,itemView);
+            ButterKnife.bind(this, itemView);
         }
     }
 }

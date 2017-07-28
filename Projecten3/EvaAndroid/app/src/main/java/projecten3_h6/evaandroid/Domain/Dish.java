@@ -1,12 +1,7 @@
 package projecten3_h6.evaandroid.Domain;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
-
-/**
- * Created by Mafken on 4/07/2017.
- */
 
 public class Dish implements Serializable{
 
@@ -50,40 +45,19 @@ public class Dish implements Serializable{
         return cookingTime;
     }
 
-    public void setCookingTime(CookingTime cookingTime) {
-        this.cookingTime = cookingTime;
-    }
-
     public String getDifficulty() {
         return difficulty;
-    }
-
-    public void setDifficulty(String difficulty) {
-        this.difficulty = difficulty;
     }
 
     public DishType getType() {
         return type;
     }
 
-    public void setType(DishType type) {
-        this.type = type;
-    }
-
     public List<Ingredient> getIngredients() {
         return ingredients;
-    }
-
-    public void setIngredients(List<Ingredient> ingredients) {
-        this.ingredients = ingredients;
     }
 
     public String getPreparation() {
         return preparation;
     }
-
-    public void setPreparation(String preparation) {
-        this.preparation = preparation;
-    }
-
 }

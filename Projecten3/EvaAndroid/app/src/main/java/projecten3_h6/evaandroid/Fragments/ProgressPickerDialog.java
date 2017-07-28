@@ -9,9 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
-
 import java.util.List;
-
 import butterknife.ButterKnife;
 import projecten3_h6.evaandroid.Adapters.ProgressPickerAdapter;
 import projecten3_h6.evaandroid.Domain.Day;
@@ -20,13 +18,9 @@ import projecten3_h6.evaandroid.Domain.Ingredient;
 import projecten3_h6.evaandroid.R;
 import butterknife.BindView;
 
-/**
- * Created by jensleirens on 11/07/2017.
- */
-
 public class ProgressPickerDialog extends DialogFragment {
 
-    public static ProgressPickerOnclickListener progressPickerOnclickListener;
+    public ProgressPickerOnclickListener progressPickerOnclickListener;
     protected RecyclerView.LayoutManager mLayoutManager;
     public ProgressPickerAdapter adapter;
     @BindView(R.id.progressPickerRecyclerView)
@@ -58,7 +52,7 @@ public class ProgressPickerDialog extends DialogFragment {
 
         mLayoutManager = new LinearLayoutManager(this.getContext());
         mRecyclerView.setLayoutManager(mLayoutManager);
-        adapter = new ProgressPickerAdapter(ProgressFragment.choices);
+        adapter = new ProgressPickerAdapter(ProgressFragment.choices,progressPickerOnclickListener);
         mRecyclerView.setAdapter(adapter);
         return v;
     }
@@ -75,7 +69,7 @@ public class ProgressPickerDialog extends DialogFragment {
 
     }
 
-    private class ProgressPickerOnclickListener implements View.OnClickListener {
+    public class ProgressPickerOnclickListener implements View.OnClickListener {
 
         private final Context context;
 

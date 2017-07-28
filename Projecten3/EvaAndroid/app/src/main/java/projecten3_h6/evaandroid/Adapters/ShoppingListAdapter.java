@@ -6,37 +6,30 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.TextView;
-
-import java.util.ArrayList;
 import java.util.List;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import projecten3_h6.evaandroid.Domain.Ingredient;
 import projecten3_h6.evaandroid.R;
 
-/**
- * Created by Mafken on 4/07/2017.
- */
-
-public class ShoppinglistAdapter extends RecyclerView.Adapter<ShoppinglistAdapter.ShoppinglistViewHolder>{
+public class ShoppingListAdapter extends RecyclerView.Adapter<ShoppingListAdapter.ShoppinglistViewHolder> {
 
     private int itemCount;
     private List<Ingredient> shoppingList;
 
-    public ShoppinglistAdapter(List<Ingredient> shoppingList) {
+    public ShoppingListAdapter(List<Ingredient> shoppingList) {
         this.shoppingList = shoppingList;
         this.itemCount = shoppingList.size();
     }
 
     @Override
-    public ShoppinglistAdapter.ShoppinglistViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_shoppinglist,parent,false);
+    public ShoppingListAdapter.ShoppinglistViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_shoppinglist, parent, false);
         return new ShoppinglistViewHolder(v);
     }
 
     @Override
-    public void onBindViewHolder(ShoppinglistAdapter.ShoppinglistViewHolder holder, int position) {
+    public void onBindViewHolder(ShoppingListAdapter.ShoppinglistViewHolder holder, int position) {
         CheckBox shoppingslistItemName = holder.shoppinglistItemName;
         TextView shoppinglistItemCount = holder.shoppinglistItemCount;
 
@@ -59,7 +52,7 @@ public class ShoppinglistAdapter extends RecyclerView.Adapter<ShoppinglistAdapte
 
         public ShoppinglistViewHolder(View itemView) {
             super(itemView);
-            ButterKnife.bind(this,itemView);
+            ButterKnife.bind(this, itemView);
         }
     }
 }

@@ -9,22 +9,15 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import projecten3_h6.evaandroid.Adapters.AchievementDetailAdapter;
 import projecten3_h6.evaandroid.Domain.Achievement;
-import projecten3_h6.evaandroid.Domain.AchievementRanking;
 import projecten3_h6.evaandroid.Domain.EvaApplication;
 import projecten3_h6.evaandroid.Domain.User;
 import projecten3_h6.evaandroid.R;
-
-/**
- * Created by jensleirens on 13/07/2017.
- */
 
 public class AchievementDetailFragment extends Fragment {
 
@@ -32,7 +25,6 @@ public class AchievementDetailFragment extends Fragment {
 
     List<Achievement> achievements = new ArrayList<>();
     protected RecyclerView.LayoutManager mLayoutManager;
-    private AchievementDetailAdapter adapter;
 
     @Nullable
     @Override
@@ -48,6 +40,7 @@ public class AchievementDetailFragment extends Fragment {
         User user = app.getUser();
         achievements = user.getAchievements();
 
+        AchievementDetailAdapter adapter;
         adapter = new AchievementDetailAdapter(achievements);
         mRecycler.setAdapter(adapter);
 

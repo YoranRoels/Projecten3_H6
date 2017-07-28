@@ -12,17 +12,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 import android.widget.ToggleButton;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnCheckedChanged;
 import butterknife.OnClick;
 import projecten3_h6.evaandroid.Domain.EvaApplication;
 import projecten3_h6.evaandroid.R;
-
-/**
- * Created by Yoran on 25/07/2017.
- */
 
 public class SettingsFragment extends Fragment {
 
