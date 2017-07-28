@@ -10,6 +10,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import butterknife.BindView;
@@ -57,6 +58,7 @@ public class SettingsFragment extends Fragment {
         builder.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
                 app.setUser(app.createNewUser());
+                Toast.makeText(getContext(), R.string.progress_reset, Toast.LENGTH_LONG).show();
             }
         });
         builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {

@@ -41,6 +41,7 @@ public class User implements Serializable{
 
     // Days
     private List<Day> days = new ArrayList<>();
+    private Day today;
 
     // Shopping List
     private ShoppingList shoppingList = new ShoppingList();
@@ -115,6 +116,31 @@ public class User implements Serializable{
         return days;
     }
 
+    public Day getToday() {
+        Calendar todayCalendar = Calendar.getInstance();
+        // Here we need the last four days for when you already start a new segment
+        // but 'today' is still the last day of the previous segment
+        List<Day> lastThreeOrFourDays = new ArrayList<>();
+        if(days.size() < 4) {
+            lastThreeOrFourDays = days;
+        } else {
+            lastThreeOrFourDays.add(days.get(days.size() - 4));
+            lastThreeOrFourDays.add(days.get(days.size() - 3));
+            lastThreeOrFourDays.add(days.get(days.size() - 2));
+            lastThreeOrFourDays.add(days.get(days.size() - 1));
+        }
+        for(Day day: lastThreeOrFourDays) {
+            // Int casts are needed here to avoid errors.
+            if(day.getDayOfTheYear() == (int) todayCalendar.get(Calendar.DAY_OF_YEAR) &&
+                    day.getYear() == (int) todayCalendar.get(Calendar.YEAR)) {
+                today = day;
+                break;
+            }
+        }
+
+        return today;
+    }
+
     public ShoppingList getShoppingList() {
         return shoppingList;
     }
@@ -144,6 +170,16 @@ public class User implements Serializable{
     }
 
     // ----- Methods -----
+    // Days
+    public List<Day> getLastThreeDays() {
+        List<Day> lastThreeDays = new ArrayList<>();
+        lastThreeDays.add(days.get(days.size()-3));
+        lastThreeDays.add(days.get(days.size()-2));
+        lastThreeDays.add(days.get(days.size()-1));
+        return lastThreeDays;
+    }
+
+    // Achievements
     private void assignAchievements() {
         bronzeAchievements.clear();
         silverAchievements.clear();
@@ -189,6 +225,36 @@ public class User implements Serializable{
         completedGoldAchievementsCount = temporaryGoldCompletedAchievementsCount;
     }
 
+    private void compareAchievements(){
+        for (Achievement a : remoteAchievement) {
+            if (!achievements.contains(a)) {
+                achievements.add(a);
+            }
+        }
+
+    }
+
+    public void getRemoteAchievements(){
+
+        Calls caller = Config.getRetrofit().create(Calls.class);
+        Call<List<Achievement>> call = caller.getAchievements();
+        call.enqueue(new Callback<List<Achievement>>() {
+            @Override
+            public void onResponse(Call<List<Achievement>> call, Response<List<Achievement>> response) {
+                remoteAchievement = response.body();
+                Log.e("BackendCall", " call successful get all achievements");
+            }
+
+            @Override
+            public void onFailure(Call<List<Achievement>> call, Throwable t) {
+                Log.e("BackendCAll", "failed to call get all achievements "+ t.getMessage());
+            }
+        });
+
+        compareAchievements();
+    }
+
+    // Statistics
     public void calculateStatistics() {
         calculateTotalVeganDays();
         calculateLongestStreak();
@@ -218,34 +284,6 @@ public class User implements Serializable{
         }
     }
 
-    public void getRemoteAchievements(){
 
-        Calls caller = Config.getRetrofit().create(Calls.class);
-        Call<List<Achievement>> call = caller.getAchievements();
-        call.enqueue(new Callback<List<Achievement>>() {
-            @Override
-            public void onResponse(Call<List<Achievement>> call, Response<List<Achievement>> response) {
-                remoteAchievement = response.body();
-                Log.e("BackendCall", " call successful get all achievements");
-            }
-
-            @Override
-            public void onFailure(Call<List<Achievement>> call, Throwable t) {
-                Log.e("BackendCAll", "failed to call get all achievements "+ t.getMessage());
-            }
-        });
-
-        compareAchievements();
-
-    }
-
-    private void compareAchievements(){
-        for (Achievement a : remoteAchievement) {
-            if (!achievements.contains(a)) {
-                achievements.add(a);
-            }
-        }
-
-    }
 
 }

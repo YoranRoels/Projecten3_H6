@@ -23,6 +23,7 @@ import projecten3_h6.evaandroid.R;
 public class EvaApplication extends Application {
 
     private User user;
+    private int segmentSize = 3;
 
     public User getUser() {
         return user;
@@ -30,6 +31,10 @@ public class EvaApplication extends Application {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public int getSegmentSize() {
+        return segmentSize;
     }
 
     public User createNewUser() {

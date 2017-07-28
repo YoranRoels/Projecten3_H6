@@ -29,18 +29,20 @@ public class ProgressAdapter extends RecyclerView.Adapter<ProgressAdapter.Progre
 
     private int itemCount;
     private List<Day> currentDays;
-    ViewGroup parent;
+    private ViewGroup parent;
+    private ProgressFragment.ProgressOnclickListener progressOnclickListener;
 
-    public ProgressAdapter(List<Day> currentDays) {
+    public ProgressAdapter(List<Day> currentDays, ProgressFragment.ProgressOnclickListener progressOnclickListener) {
         this.currentDays = currentDays;
-        itemCount = ProgressFragment.segmentSize;
+        this.progressOnclickListener = progressOnclickListener;
+        itemCount = currentDays.size();
     }
 
     @Override
     public ProgressAdapter.ProgressViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_progress,parent,false);
         this.parent = parent;
-        v.setOnClickListener(ProgressFragment.progressOnclickListener);
+        v.setOnClickListener(progressOnclickListener);
         return new ProgressAdapter.ProgressViewHolder(v);
     }
 
@@ -51,29 +53,32 @@ public class ProgressAdapter extends RecyclerView.Adapter<ProgressAdapter.Progre
         ToggleButton toggleComplete = holder.toggleComplete;
         ImageView dayDishImage = holder.dayDishImage;
         Calendar today = Calendar.getInstance();
+        final int holderPosition = holder.getAdapterPosition();
+        progressDayOfTheWeek.setText(currentDays.get(holderPosition).getDayOfTheWeekString());
 
-        progressDayOfTheWeek.setText(currentDays.get(position).getDayOfTheWeekString());
-
-        if(currentDays.get(position).getDish() != null) {
-            progressDishTitle.setText(currentDays.get(position).getDish().getName());
+        if(currentDays.get(holderPosition).getDish() != null) {
+            progressDishTitle.setText(currentDays.get(holderPosition).getDish().getName());
             Context context = holder.dayDishImage.getContext();
-            Picasso.with(context).load(currentDays.get(position).getDish().getImageId()).into(dayDishImage);
-            dayDishImage.setImageResource(currentDays.get(position).getDish().getImageId());
-            toggleComplete.setChecked(currentDays.get(position).isCompleted());
-            if(today.get(Calendar.DAY_OF_YEAR) >= currentDays.get(position).getDayOfTheYear()) {
+            Picasso.with(context).load(currentDays.get(holderPosition).getDish().getImageId()).into(dayDishImage);
+            dayDishImage.setImageResource(currentDays.get(holderPosition).getDish().getImageId());
+            toggleComplete.setChecked(currentDays.get(holderPosition).isCompleted());
+            if(today.get(Calendar.DAY_OF_YEAR) >= currentDays.get(holderPosition).getDayOfTheYear()
+                    || today.get(Calendar.YEAR) > currentDays.get(holderPosition).getYear()) {
                 toggleComplete.setVisibility(View.VISIBLE);
             }
-        } else if (today.get(Calendar.DAY_OF_YEAR) > currentDays.get(position).getDayOfTheYear()) {
-            progressDishTitle.setText("You forgot to pick a dish.");
+        } else if (today.get(Calendar.DAY_OF_YEAR) > currentDays.get(holderPosition).getDayOfTheYear()
+                || today.get(Calendar.YEAR) > currentDays.get(holderPosition).getYear()) {
+            progressDishTitle.setText(R.string.forgot_dish);
         }
 
         toggleComplete.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                int daysLength = ProgressFragment.user.getDays().size();
-                ProgressFragment.user.getDays().get(daysLength - itemCount + position).setCompleted(isChecked);
-                ProgressFragment.user.calculateStatistics();
+                int daysLength = ProgressFragment.app.getUser().getDays().size();
+                ProgressFragment.app.getUser().getDays().get(daysLength - itemCount + holderPosition).setCompleted(isChecked);
+                ProgressFragment.app.getUser().calculateStatistics();
                 ProgressFragment.recheckCheckboxes();
+                ProgressFragment.setMotivationTextViews();
                 // Achievement earned
                 ProgressFragment.app.earnAchievement(parent.getContext(), LayoutInflater.from(parent.getContext()), parent, "Vegan Rookie");
             }
