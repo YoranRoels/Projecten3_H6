@@ -3,6 +3,7 @@ package projecten3_h6.evaandroid.Domain;
 import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +15,14 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import projecten3_h6.evaandroid.Network.Calls;
+import projecten3_h6.evaandroid.Network.Config;
 import projecten3_h6.evaandroid.R;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
+import static projecten3_h6.evaandroid.R.string.achievements;
 
 /**
  * Created by Yoran on 16/07/2017.
@@ -31,6 +39,7 @@ public class EvaApplication extends Application {
 
     public void setUser(User user) {
         this.user = user;
+
     }
 
     public int getSegmentSize() {
@@ -75,7 +84,8 @@ public class EvaApplication extends Application {
         filledInUser = new User(achievements);
 
         // getting the achievements from the backend
-        //filledInUser.getRemoteAchievements();
+        user.getRemoteAchievements();
+
         return filledInUser;
     }
 
