@@ -73,6 +73,9 @@ public class EvaApplication extends Application {
                 AchievementRanking.GOLD));
 
         filledInUser = new User(achievements);
+
+        // getting the achievements from the backend
+        //filledInUser.getRemoteAchievements();
         return filledInUser;
     }
 

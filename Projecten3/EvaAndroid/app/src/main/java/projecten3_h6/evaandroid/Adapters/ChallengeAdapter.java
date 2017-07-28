@@ -20,6 +20,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import projecten3_h6.evaandroid.Domain.Achievement;
 import projecten3_h6.evaandroid.Domain.Challenge;
+import projecten3_h6.evaandroid.Domain.EvaApplication;
 import projecten3_h6.evaandroid.Fragments.ChallengeFragment;
 import projecten3_h6.evaandroid.Fragments.ProgressFragment;
 import projecten3_h6.evaandroid.R;
@@ -49,19 +50,19 @@ public class ChallengeAdapter extends RecyclerView.Adapter<ChallengeAdapter.Chal
         TextView challengeTitle = holder.challengeTitle;
         TextView challengeDescription = holder.challengeDescription;
         ToggleButton toggleComplete = holder.toggleComplete;
+        final int holderPosition = holder.getAdapterPosition();
 
-        challengeTitle.setText(challenges.get(position).getTitle());
-        challengeDescription.setText(challenges.get(position).getDescription());
+        //setting the texts
+        challengeTitle.setText(challenges.get(holderPosition).getTitle());
+        challengeDescription.setText(challenges.get(holderPosition).getDescription());
 
         //if challenge is already completed check toggleButton
-        //todo set challenge completed
-        //toggleComplete.setChecked(ProgressFragment.lastThreeDays.get(ChallengeFragment.getToday()).getChallenges().get(position).isCompleted());
+        toggleComplete.setChecked(challenges.get(holderPosition).isCompleted());
 
         toggleComplete.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                //todo set challenge completed
-                //ProgressFragment.lastThreeDays.get(ChallengeFragment.getToday()).getChallenges().get(position).setCompleted(isChecked);
+                challenges.get(holderPosition).setCompleted(isChecked);
             }
         });
     }

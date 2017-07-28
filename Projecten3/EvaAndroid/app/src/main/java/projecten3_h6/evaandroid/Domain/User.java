@@ -96,10 +96,6 @@ public class User implements Serializable{
         return completedAchievementsCount;
     }
 
-    public List<Achievement> getRemoteAchievement() {
-        return remoteAchievement;
-    }
-
     public List<Achievement> getBronzeAchievements() {
         return bronzeAchievements;
     }
@@ -231,7 +227,6 @@ public class User implements Serializable{
                 achievements.add(a);
             }
         }
-
     }
 
     public void getRemoteAchievements(){
@@ -243,6 +238,7 @@ public class User implements Serializable{
             public void onResponse(Call<List<Achievement>> call, Response<List<Achievement>> response) {
                 remoteAchievement = response.body();
                 Log.e("BackendCall", " call successful get all achievements");
+                compareAchievements();
             }
 
             @Override
@@ -251,7 +247,6 @@ public class User implements Serializable{
             }
         });
 
-        compareAchievements();
     }
 
     // Statistics
