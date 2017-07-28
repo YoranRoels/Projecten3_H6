@@ -51,7 +51,6 @@ public class ChallengeFragment extends Fragment {
         if(app.getUser().getToday() == null) {
             app.getUser().getToday();
             app.getUser().getToday().getRemoteChallenges();
-            System.out.println("today setted");
         }
 
         //if the daily challenges are not loaded yet
