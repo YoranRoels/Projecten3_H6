@@ -37,21 +37,16 @@ public class ChallengeFragment extends Fragment {
             app = (EvaApplication) context.getApplicationContext();
         }
 
-        //if today is not yet set, set it
-        if(app.getUser().getToday() == null) {
-            app.getUser().getToday();
-            app.getUser().getToday().getRemoteChallenges();
-        }
-
-        //if the daily challenges are not loaded yet
-        if(app.getUser().getToday().getChallenges().size() == 0){
+        // If today exists
+        if(app.getUser().getToday() != null){
             //get the remote challenges of the backend
-            app.getUser().getToday().getRemoteChallenges();
+            if(app.getUser().getToday().getChallenges().size() == 0) {
+                app.getUser().getToday().getRemoteChallenges();
+            }
+            ChallengeAdapter adapter = new ChallengeAdapter(app.getUser().getToday().getChallenges());
+            mRecycler.setAdapter(adapter);
         }
 
-        ChallengeAdapter adapter;
-        adapter = new ChallengeAdapter(app.getUser().getToday().getChallenges());
-        mRecycler.setAdapter(adapter);
         return v;
     }
 

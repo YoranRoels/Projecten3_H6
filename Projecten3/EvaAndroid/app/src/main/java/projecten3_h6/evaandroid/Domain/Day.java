@@ -100,22 +100,13 @@ public class Day implements Serializable{
         //TODO implement with backend
         Calendar cal = Calendar.getInstance();
         List<Challenge> challengeList = new ArrayList<>();
-        if(cal.get(Calendar.DAY_OF_YEAR) >= dayOfTheYear) {
+        if(cal.get(Calendar.DAY_OF_YEAR) >= dayOfTheYear || challenges == null) {
             // get new challenges from backend here
-            challengeList.add(new Challenge("No dairy for me!","don't use milk in the daily dish",ChallengeType.EASY));
-            challengeList.add(new Challenge("Gather some Carroters","prepare a vegan dinner with friends",ChallengeType.MEDIUM));
-            challengeList.add(new Challenge("More vegans!","convert a friend to be vegan!",ChallengeType.HARD));
+            challengeList.add(new Challenge("No dairy for me","Don't use milk in today's dish.",ChallengeType.EASY));
+            challengeList.add(new Challenge("Infect your friends","Prepare a vegan dinner with friends.",ChallengeType.MEDIUM));
+            challengeList.add(new Challenge("More vegans","Convert a friend to the vegan lifestyle.",ChallengeType.HARD));
             challenges = challengeList;
         }
-
-        if(challenges == null ){
-            // get new challenges from backend here
-            challengeList.add(new Challenge("No dairy for me!","don't use milk in the daily dish",ChallengeType.EASY));
-            challengeList.add(new Challenge("Gather some Carroters","prepare a vegan dinner with friends",ChallengeType.MEDIUM));
-            challengeList.add(new Challenge("More vegans!","convert a friend to be vegan!",ChallengeType.HARD));
-            challenges = challengeList;
-        }
-
     }
 
     public List<Challenge> getChallenges() {
