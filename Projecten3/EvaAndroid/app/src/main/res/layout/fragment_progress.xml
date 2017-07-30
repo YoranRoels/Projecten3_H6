@@ -1,359 +1,366 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<android.support.v4.widget.NestedScrollView
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginTop="57dp"
-    android:orientation="vertical">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_marginTop="57dp">
 
-    <TextView
-        android:id="@+id/progressTextView"
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        android:textColor="@color/textPrimary"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"/>
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/progressTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:textSize="20sp"
+            android:textColor="@color/textPrimary"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"/>
 
-    <TextView
-        android:id="@+id/progressMotivationTextView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text=""
-        android:textAlignment="center"
-        android:textSize="14sp"
-        android:textColor="@color/textSecondary"
-        android:layout_marginBottom="15dp"/>
+        <TextView
+            android:id="@+id/progressMotivationTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textAlignment="center"
+            android:textSize="14sp"
+            android:textColor="@color/textSecondary"
+            android:layout_marginBottom="15dp"/>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center"
-        android:layout_marginBottom="5dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_marginBottom="5dp">
 
-        <ImageView
-            android:id="@+id/progressBox1"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:src="@drawable/checkbox"
-            android:layout_marginStart="1dp"
-            android:layout_marginLeft="1dp"
-            android:layout_marginEnd="1dp"
-            android:layout_marginRight="1dp"/>
+            <ImageView
+                android:id="@+id/progressBox1"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/checkbox"
+                android:layout_marginStart="1dp"
+                android:layout_marginLeft="1dp"
+                android:layout_marginEnd="1dp"
+                android:layout_marginRight="1dp"/>
 
-        <ImageView
-            android:id="@+id/progressBox2"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:src="@drawable/checkbox"
-            android:layout_marginStart="1dp"
-            android:layout_marginLeft="1dp"
-            android:layout_marginEnd="1dp"
-            android:layout_marginRight="1dp"/>
+            <ImageView
+                android:id="@+id/progressBox2"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/checkbox"
+                android:layout_marginStart="1dp"
+                android:layout_marginLeft="1dp"
+                android:layout_marginEnd="1dp"
+                android:layout_marginRight="1dp"/>
 
-        <ImageView
-            android:id="@+id/progressBox3"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:src="@drawable/checkbox"
-            android:layout_marginStart="1dp"
-            android:layout_marginLeft="1dp"
-            android:layout_marginEnd="1dp"
-            android:layout_marginRight="1dp"/>
+            <ImageView
+                android:id="@+id/progressBox3"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/checkbox"
+                android:layout_marginStart="1dp"
+                android:layout_marginLeft="1dp"
+                android:layout_marginEnd="1dp"
+                android:layout_marginRight="1dp"/>
 
-        <View
-            android:layout_width="1dp"
-            android:layout_height="match_parent"
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="@color/colorPrimary"
+                android:layout_marginStart="5dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginRight="5dp"/>
+
+            <ImageView
+                android:id="@+id/progressBox4"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/checkbox"
+                android:layout_marginStart="1dp"
+                android:layout_marginLeft="1dp"
+                android:layout_marginEnd="1dp"
+                android:layout_marginRight="1dp"/>
+
+            <ImageView
+                android:id="@+id/progressBox5"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/checkbox"
+                android:layout_marginStart="1dp"
+                android:layout_marginLeft="1dp"
+                android:layout_marginEnd="1dp"
+                android:layout_marginRight="1dp"/>
+
+            <ImageView
+                android:id="@+id/progressBox6"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/checkbox"
+                android:layout_marginStart="1dp"
+                android:layout_marginLeft="1dp"
+                android:layout_marginEnd="1dp"
+                android:layout_marginRight="1dp"/>
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="@color/textSecondary"
+                android:layout_marginStart="5dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginRight="5dp"/>
+
+            <ImageView
+                android:id="@+id/progressBox7"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/checkbox"
+                android:layout_marginStart="1dp"
+                android:layout_marginLeft="1dp"
+                android:layout_marginEnd="1dp"
+                android:layout_marginRight="1dp"/>
+
+            <ImageView
+                android:id="@+id/progressBox8"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/checkbox"
+                android:layout_marginStart="1dp"
+                android:layout_marginLeft="1dp"
+                android:layout_marginEnd="1dp"
+                android:layout_marginRight="1dp"/>
+
+            <ImageView
+                android:id="@+id/progressBox9"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/checkbox"
+                android:layout_marginStart="1dp"
+                android:layout_marginLeft="1dp"
+                android:layout_marginEnd="1dp"
+                android:layout_marginRight="1dp"/>
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="@color/textSecondary"
+                android:layout_marginStart="5dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginRight="5dp"/>
+
+            <ImageView
+                android:id="@+id/progressBox10"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/checkbox"
+                android:layout_marginStart="1dp"
+                android:layout_marginLeft="1dp"
+                android:layout_marginEnd="1dp"
+                android:layout_marginRight="1dp"/>
+
+            <ImageView
+                android:id="@+id/progressBox11"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/checkbox"
+                android:layout_marginStart="1dp"
+                android:layout_marginLeft="1dp"
+                android:layout_marginEnd="1dp"
+                android:layout_marginRight="1dp"/>
+
+            <ImageView
+                android:id="@+id/progressBox12"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/checkbox"
+                android:layout_marginStart="1dp"
+                android:layout_marginLeft="1dp"
+                android:layout_marginEnd="1dp"
+                android:layout_marginRight="1dp"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/progressBox13"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/checkbox"
+                android:layout_marginStart="1dp"
+                android:layout_marginLeft="1dp"
+                android:layout_marginEnd="1dp"
+                android:layout_marginRight="1dp"/>
+
+            <ImageView
+                android:id="@+id/progressBox14"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/checkbox"
+                android:layout_marginStart="1dp"
+                android:layout_marginLeft="1dp"
+                android:layout_marginEnd="1dp"
+                android:layout_marginRight="1dp"/>
+
+            <ImageView
+                android:id="@+id/progressBox15"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/checkbox"
+                android:layout_marginStart="1dp"
+                android:layout_marginLeft="1dp"
+                android:layout_marginEnd="1dp"
+                android:layout_marginRight="1dp"/>
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="@color/textSecondary"
+                android:layout_marginStart="5dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginRight="5dp"/>
+
+            <ImageView
+                android:id="@+id/progressBox16"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/checkbox"
+                android:layout_marginStart="1dp"
+                android:layout_marginLeft="1dp"
+                android:layout_marginEnd="1dp"
+                android:layout_marginRight="1dp"/>
+
+            <ImageView
+                android:id="@+id/progressBox17"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/checkbox"
+                android:layout_marginStart="1dp"
+                android:layout_marginLeft="1dp"
+                android:layout_marginEnd="1dp"
+                android:layout_marginRight="1dp"/>
+
+            <ImageView
+                android:id="@+id/progressBox18"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/checkbox"
+                android:layout_marginStart="1dp"
+                android:layout_marginLeft="1dp"
+                android:layout_marginEnd="1dp"
+                android:layout_marginRight="1dp"/>
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="@color/textSecondary"
+                android:layout_marginStart="5dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginRight="5dp"/>
+
+            <ImageView
+                android:id="@+id/progressBox19"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/checkbox"
+                android:layout_marginStart="1dp"
+                android:layout_marginLeft="1dp"
+                android:layout_marginEnd="1dp"
+                android:layout_marginRight="1dp"/>
+
+            <ImageView
+                android:id="@+id/progressBox20"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/checkbox"
+                android:layout_marginStart="1dp"
+                android:layout_marginLeft="1dp"
+                android:layout_marginEnd="1dp"
+                android:layout_marginRight="1dp"/>
+
+            <ImageView
+                android:id="@+id/progressBox21"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/checkbox"
+                android:layout_marginStart="1dp"
+                android:layout_marginLeft="1dp"
+                android:layout_marginEnd="1dp"
+                android:layout_marginRight="1dp"/>
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="@color/textSecondary"
+                android:layout_marginStart="5dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginRight="5dp"/>
+
+            <ImageView
+                android:id="@+id/progressBox22"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/checkbox"
+                android:layout_marginStart="1dp"
+                android:layout_marginLeft="1dp"
+                android:layout_marginEnd="1dp"
+                android:layout_marginRight="1dp"/>
+
+            <ImageView
+                android:id="@+id/progressBox23"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/checkbox"
+                android:layout_marginStart="1dp"
+                android:layout_marginLeft="1dp"
+                android:layout_marginEnd="1dp"
+                android:layout_marginRight="1dp"/>
+
+            <ImageView
+                android:id="@+id/progressBox24"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/checkbox"
+                android:layout_marginStart="1dp"
+                android:layout_marginLeft="1dp"
+                android:layout_marginEnd="1dp"
+                android:layout_marginRight="1dp"/>
+
+        </LinearLayout>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/progressRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:nestedScrollingEnabled="false">
+        </android.support.v7.widget.RecyclerView>
+
+        <Button
+            android:id="@+id/finishSegment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="15dp"
+            android:layout_margin="15dp"
+            android:layout_gravity="center"
+            android:visibility="invisible"
+            android:textColor="@color/contentColor"
             android:background="@color/colorPrimary"
-            android:layout_marginStart="5dp"
-            android:layout_marginLeft="5dp"
-            android:layout_marginEnd="5dp"
-            android:layout_marginRight="5dp"/>
-
-        <ImageView
-            android:id="@+id/progressBox4"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:src="@drawable/checkbox"
-            android:layout_marginStart="1dp"
-            android:layout_marginLeft="1dp"
-            android:layout_marginEnd="1dp"
-            android:layout_marginRight="1dp"/>
-
-        <ImageView
-            android:id="@+id/progressBox5"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:src="@drawable/checkbox"
-            android:layout_marginStart="1dp"
-            android:layout_marginLeft="1dp"
-            android:layout_marginEnd="1dp"
-            android:layout_marginRight="1dp"/>
-
-        <ImageView
-            android:id="@+id/progressBox6"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:src="@drawable/checkbox"
-            android:layout_marginStart="1dp"
-            android:layout_marginLeft="1dp"
-            android:layout_marginEnd="1dp"
-            android:layout_marginRight="1dp"/>
-
-        <View
-            android:layout_width="1dp"
-            android:layout_height="match_parent"
-            android:background="@color/textSecondary"
-            android:layout_marginStart="5dp"
-            android:layout_marginLeft="5dp"
-            android:layout_marginEnd="5dp"
-            android:layout_marginRight="5dp"/>
-
-        <ImageView
-            android:id="@+id/progressBox7"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:src="@drawable/checkbox"
-            android:layout_marginStart="1dp"
-            android:layout_marginLeft="1dp"
-            android:layout_marginEnd="1dp"
-            android:layout_marginRight="1dp"/>
-
-        <ImageView
-            android:id="@+id/progressBox8"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:src="@drawable/checkbox"
-            android:layout_marginStart="1dp"
-            android:layout_marginLeft="1dp"
-            android:layout_marginEnd="1dp"
-            android:layout_marginRight="1dp"/>
-
-        <ImageView
-            android:id="@+id/progressBox9"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:src="@drawable/checkbox"
-            android:layout_marginStart="1dp"
-            android:layout_marginLeft="1dp"
-            android:layout_marginEnd="1dp"
-            android:layout_marginRight="1dp"/>
-
-        <View
-            android:layout_width="1dp"
-            android:layout_height="match_parent"
-            android:background="@color/textSecondary"
-            android:layout_marginStart="5dp"
-            android:layout_marginLeft="5dp"
-            android:layout_marginEnd="5dp"
-            android:layout_marginRight="5dp"/>
-
-        <ImageView
-            android:id="@+id/progressBox10"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:src="@drawable/checkbox"
-            android:layout_marginStart="1dp"
-            android:layout_marginLeft="1dp"
-            android:layout_marginEnd="1dp"
-            android:layout_marginRight="1dp"/>
-
-        <ImageView
-            android:id="@+id/progressBox11"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:src="@drawable/checkbox"
-            android:layout_marginStart="1dp"
-            android:layout_marginLeft="1dp"
-            android:layout_marginEnd="1dp"
-            android:layout_marginRight="1dp"/>
-
-        <ImageView
-            android:id="@+id/progressBox12"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:src="@drawable/checkbox"
-            android:layout_marginStart="1dp"
-            android:layout_marginLeft="1dp"
-            android:layout_marginEnd="1dp"
-            android:layout_marginRight="1dp"/>
+            android:text="@string/finish_segment"/>
 
     </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center">
-
-        <ImageView
-            android:id="@+id/progressBox13"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:src="@drawable/checkbox"
-            android:layout_marginStart="1dp"
-            android:layout_marginLeft="1dp"
-            android:layout_marginEnd="1dp"
-            android:layout_marginRight="1dp"/>
-
-        <ImageView
-            android:id="@+id/progressBox14"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:src="@drawable/checkbox"
-            android:layout_marginStart="1dp"
-            android:layout_marginLeft="1dp"
-            android:layout_marginEnd="1dp"
-            android:layout_marginRight="1dp"/>
-
-        <ImageView
-            android:id="@+id/progressBox15"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:src="@drawable/checkbox"
-            android:layout_marginStart="1dp"
-            android:layout_marginLeft="1dp"
-            android:layout_marginEnd="1dp"
-            android:layout_marginRight="1dp"/>
-
-        <View
-            android:layout_width="1dp"
-            android:layout_height="match_parent"
-            android:background="@color/textSecondary"
-            android:layout_marginStart="5dp"
-            android:layout_marginLeft="5dp"
-            android:layout_marginEnd="5dp"
-            android:layout_marginRight="5dp"/>
-
-        <ImageView
-            android:id="@+id/progressBox16"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:src="@drawable/checkbox"
-            android:layout_marginStart="1dp"
-            android:layout_marginLeft="1dp"
-            android:layout_marginEnd="1dp"
-            android:layout_marginRight="1dp"/>
-
-        <ImageView
-            android:id="@+id/progressBox17"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:src="@drawable/checkbox"
-            android:layout_marginStart="1dp"
-            android:layout_marginLeft="1dp"
-            android:layout_marginEnd="1dp"
-            android:layout_marginRight="1dp"/>
-
-        <ImageView
-            android:id="@+id/progressBox18"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:src="@drawable/checkbox"
-            android:layout_marginStart="1dp"
-            android:layout_marginLeft="1dp"
-            android:layout_marginEnd="1dp"
-            android:layout_marginRight="1dp"/>
-
-        <View
-            android:layout_width="1dp"
-            android:layout_height="match_parent"
-            android:background="@color/textSecondary"
-            android:layout_marginStart="5dp"
-            android:layout_marginLeft="5dp"
-            android:layout_marginEnd="5dp"
-            android:layout_marginRight="5dp"/>
-
-        <ImageView
-            android:id="@+id/progressBox19"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:src="@drawable/checkbox"
-            android:layout_marginStart="1dp"
-            android:layout_marginLeft="1dp"
-            android:layout_marginEnd="1dp"
-            android:layout_marginRight="1dp"/>
-
-        <ImageView
-            android:id="@+id/progressBox20"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:src="@drawable/checkbox"
-            android:layout_marginStart="1dp"
-            android:layout_marginLeft="1dp"
-            android:layout_marginEnd="1dp"
-            android:layout_marginRight="1dp"/>
-
-        <ImageView
-            android:id="@+id/progressBox21"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:src="@drawable/checkbox"
-            android:layout_marginStart="1dp"
-            android:layout_marginLeft="1dp"
-            android:layout_marginEnd="1dp"
-            android:layout_marginRight="1dp"/>
-
-        <View
-            android:layout_width="1dp"
-            android:layout_height="match_parent"
-            android:background="@color/textSecondary"
-            android:layout_marginStart="5dp"
-            android:layout_marginLeft="5dp"
-            android:layout_marginEnd="5dp"
-            android:layout_marginRight="5dp"/>
-
-        <ImageView
-            android:id="@+id/progressBox22"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:src="@drawable/checkbox"
-            android:layout_marginStart="1dp"
-            android:layout_marginLeft="1dp"
-            android:layout_marginEnd="1dp"
-            android:layout_marginRight="1dp"/>
-
-        <ImageView
-            android:id="@+id/progressBox23"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:src="@drawable/checkbox"
-            android:layout_marginStart="1dp"
-            android:layout_marginLeft="1dp"
-            android:layout_marginEnd="1dp"
-            android:layout_marginRight="1dp"/>
-
-        <ImageView
-            android:id="@+id/progressBox24"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:src="@drawable/checkbox"
-            android:layout_marginStart="1dp"
-            android:layout_marginLeft="1dp"
-            android:layout_marginEnd="1dp"
-            android:layout_marginRight="1dp"/>
-
-    </LinearLayout>
-
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/progressRecyclerView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp">
-    </android.support.v7.widget.RecyclerView>
-
-    <Button
-        android:id="@+id/finishSegment"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="15dp"
-        android:layout_margin="15dp"
-        android:layout_gravity="center"
-        android:visibility="invisible"
-        android:textColor="@color/contentColor"
-        android:background="@color/colorPrimary"
-        android:text="@string/finish_segment"/>
-
-</LinearLayout>
+</android.support.v4.widget.NestedScrollView>
