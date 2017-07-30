@@ -8,8 +8,9 @@
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/progressPickerRecyclerView"
-        android:layout_width="450dp"
+        android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:padding="5dp"/>
+        android:padding="5dp"
+        android:background="@android:color/transparent"/>
 
 </LinearLayout>

@@ -55,14 +55,16 @@ public class MainActivity extends AppCompatActivity
         toggle.syncState();
 
         app = (EvaApplication)getApplicationContext();
-        // Get the user from the saved file.
-        app.setUser(getUserOutOfFile());
+        if(app.getUser() == null) {
+            // Get the user from the saved file.
+            app.setUser(getUserOutOfFile());
+            displaySelectedScreen(R.id.nav_progress);
+        }
 
         View navView =  navigationView.getHeaderView(0);
         TextView bottomHeaderTextView = (TextView)navView.findViewById(R.id.bottomHeaderTextView);
         bottomHeaderTextView.setText(String.format(getString(R.string.navigation_drawer_header_bottom),app.getUser().getStartingDate()));
 
-        displaySelectedScreen(R.id.nav_progress);
 
         navigationView.setNavigationItemSelectedListener(this);
     }
