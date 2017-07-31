@@ -1,15 +1,30 @@
-
 <div class="page-header">
     <h1>Dishes</h1>
 </div>
 
+<div>
+    <h3> Select a dish</h3>
+    <select ng-model="selectedDish" ng-options="item.name for item in dishes">
+        <option value="">---Please select---</option>
+</select>
+    <div class="form-group">
+        <p ng-if="selectedDish">Name : {{selectedDish.name}} </p>
+        <p ng-if="selectedDish">Cooking Time : {{selectedDish.cookingTime}} </p>
+        <p ng-if="selectedDish">Difficulty : {{selectedDish.difficulty}} </p>
+        <p ng-if="selectedDish">Dish type : {{selectedDish.dishType}} </p>
+        <p ng-if="selectedDish">Preparation : {{selectedDish.preparation}} </p>
+        
+    
+    </div>   
+</div>
 
 
 <div class="form-group" >
     <H3>Add a new dish</H3>
     <form ng-submit="createDish()" >
           <div class="form-group">
-            <input type="text" class="form-control" ng-model="name" placeholder="Naam" />
+              <label>Name</label>
+            <input type="text" class="form-control" ng-model="name" placeholder="Name" />
         </div>
  <div class="form-group">
             <label>Cooking time</label>
@@ -35,6 +50,38 @@
                 <option ng-value="DESSERT">DESSERT</option>
             </select>
         </div>
+        <div class="form-group-row">
+            <label>Ingredients</label>
+            </div>
+        <div class="row">
+            
+  <div class="col-lg-5" ng-repeat="itemToAdd in itemsToAdd">
+    <div class="input-group">
+      <span class="input-group-addon">
+          <label>Name</label>
+      </span>
+      <input type="text" class="form-control" aria-label="Name" ng-model="itemsToAdd.name">
+    </div><!-- /input-group -->
+  </div><!-- /.col-lg-6 -->
+  <div class="col-lg-5">
+    <div class="input-group">
+      <span class="input-group-addon">
+        <label>Amount</label>
+      </span>
+      <input type="text" class="form-control" aria-label="amount" ng-model="itemsToAdd.amount">
+    </div><!-- /input-group -->
+  </div><!-- /.col-lg-6 -->
+             <div class="col-lg-2">
+    <div class="input-group">
+      <span class="input-group-addon">
+         <button ng-click="add(itemToAdd)">Add</button>
+          
+    </div><!-- /input-group -->
+  </div><!-- /.col-lg-6 -->
+</div><!-- /.row -->
+            <button ng-click="addNew()">Add new</button>
+        
+        
 <div class="form-group">
              <label>Preparation</label>
             <textarea class="form-control" rows="5" ng-model="preparation" placeholder="preparation"></textarea>
@@ -45,26 +92,9 @@
 
     </div>
 
-<div>
-    <h3> Select a dish</h3>
-    <select ng-model="selectedDish" ng-options="item.name for item in dishes">
-        <option value="">---Please select---</option>
-</select>
-    <div class="form-group">
-        <p ng-if="selectedDish">Name : {{selectedDish.name}} </p>
-        <p ng-if="selectedDish">Cooking Time : {{selectedDish.cookingTime}} </p>
-        <p ng-if="selectedDish">Difficulty : {{selectedDish.difficulty}} </p>
-        <p ng-if="selectedDish">Dish type : {{selectedDish.dishType}} </p>
-        <p ng-if="selectedDish">Preparation : {{selectedDish.preparation}} </p>
-        
-    
-    </div>
-    
-    
-    
-</div>
 
-<!--
+
+
 <div >
     <div  class="form-group" ng-repeat="dish in dishes">
         <span> naam : {{dish.name}}</span>
@@ -74,6 +104,4 @@
         <button type = "submit">Bekijk</button>
     </div>
     </div>
-
--->
 

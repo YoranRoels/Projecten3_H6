@@ -2,11 +2,39 @@
     <h1>Achievements</h1>
 </div>
 
+<div class="form-group" >
+    <H3>Add a new Achievement </H3>
+    <form ng-submit="createAchievement()" >
+          <div class="form-group">
+               <label>Title</label>
+            <input type="text" class="form-control" ng-model="title" placeholder="title" />
+        </div>
+ <div class="form-group">
+            <label>Achievement type</label>
+            <select class="form-control" ng-model="achievementType">
+                <option ng-value="BRONZE">BRONZE</option>
+                <option ng-value="SILVER">SILVER</option>
+                <option ng-value="GOLD">GOLD</option>
+            </select>
+        </div>
+        
+<div class="form-group">
+             <label>Description</label>
+            <textarea class="form-control" rows="5" ng-model="description" placeholder="Description"></textarea>
+        </div>
+        <button type="submit" >BEVESTIGEN</button>
+        
+    </form>
+
+    </div>
+
+
+
 <div>
-    <div ng-repeat="ach in achievements">
-        <span>{{ach.title}}</span>
-        <span>{{ach.description}}</span>
-        <span>{{ach.achievementType}}</span>
+    <div class="form-group" ng-repeat="ach in achievements">
+        <span>Title : {{ach.title}}</span>
+        <span>Description : {{ach.description}}</span>
+        <span>Achievement type : {{ach.achievementType}}</span>
         
     </div>
 </div>

@@ -2,6 +2,23 @@
     <h1>Eva webapplication</h1>
 </div>
 
-<div>
-    {{test}}
-</div>
+<div >
+    
+   <table>
+       <tr>
+           <th>ImageId</th>
+           <th>Name</th>
+           <th>Dish type</th>
+           <th>Difficulty</th>
+       </tr>
+  <tr ng-repeat="dish in dishes">
+      <td>{{dish.imageId}}</td>
+    <td>{{dish.name}}</td>
+    <td>{{dish.dishType}}</td>
+      <td>{{dish.cookingTime}}</td>
+      <td> {{dish.difficulty}}</td>
+  </tr>
+</table> 
+    
+    
+   
