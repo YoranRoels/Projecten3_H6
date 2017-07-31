@@ -58,8 +58,9 @@ public class MainActivity extends AppCompatActivity
         if(app.getUser() == null) {
             // Get the user from the saved file.
             app.setUser(getUserOutOfFile());
-            displaySelectedScreen(R.id.nav_progress);
         }
+        
+        displaySelectedScreen(R.id.nav_progress);
 
         View navView =  navigationView.getHeaderView(0);
         TextView bottomHeaderTextView = (TextView)navView.findViewById(R.id.bottomHeaderTextView);
