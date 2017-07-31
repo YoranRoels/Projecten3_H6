@@ -160,6 +160,15 @@ router.get('/challenges', function(req, res, next) {
     });
 });
 
+
+router.get('/challenges/three-random',function(req , res, next){
+    Challenge.find(function(err,challenges){
+        if(err){ return next(err); }
+        var arr = underscore.sample(challenges, 3);
+        res.json(arr);
+    });
+});
+
 router.get('/challenges/:challenge', function(req, res) {
     res.json(req.challenge);
 });
