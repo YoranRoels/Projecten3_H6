@@ -3,16 +3,77 @@
     <h1>Dishes</h1>
 </div>
 
+
+
+<div class="form-group" >
+    <H3>Add a new dish</H3>
+    <form ng-submit="createDish()" >
+          <div class="form-group">
+            <input type="text" class="form-control" ng-model="name" placeholder="Naam" />
+        </div>
+ <div class="form-group">
+            <label>Cooking time</label>
+            <select class="form-control" ng-model="cookingTime">
+                <option ng-value="SHORT">SHORT</option>
+                <option ng-value="MEDIUM">MEDIUM</option>
+                <option ng-value="LONG">LONG</option>
+            </select>
+        </div>
+ <div class="form-group">
+            <label>Difficulty</label>
+            <select class="form-control" ng-model="difficulty">
+                <option ng-value="STARTERS">STARTERS</option>
+                <option ng-value="ADVANCED">ADVANCED</option>
+                <option ng-value="MASTER">MASTER</option>
+            </select>
+        </div>
+ <div class="form-group">
+            <label>Dish type</label>
+            <select class="form-control" ng-model="dishType">
+                <option ng-value="APPETIZER">APPETIZER</option>
+                <option ng-value="MAINDISH">MAINDISH</option>
+                <option ng-value="DESSERT">DESSERT</option>
+            </select>
+        </div>
+<div class="form-group">
+             <label>Preparation</label>
+            <textarea class="form-control" rows="5" ng-model="preparation" placeholder="preparation"></textarea>
+        </div>
+        <button type="submit" >BEVESTIGEN</button>
+        
+    </form>
+
+    </div>
+
 <div>
+    <h3> Select a dish</h3>
+    <select ng-model="selectedDish" ng-options="item.name for item in dishes">
+        <option value="">---Please select---</option>
+</select>
+    <div class="form-group">
+        <p ng-if="selectedDish">Name : {{selectedDish.name}} </p>
+        <p ng-if="selectedDish">Cooking Time : {{selectedDish.cookingTime}} </p>
+        <p ng-if="selectedDish">Difficulty : {{selectedDish.difficulty}} </p>
+        <p ng-if="selectedDish">Dish type : {{selectedDish.dishType}} </p>
+        <p ng-if="selectedDish">Preparation : {{selectedDish.preparation}} </p>
+        
+    
+    </div>
+    
+    
+    
+</div>
+
+<!--
 <div >
-    <div ng-repeat="dish in dishes">
+    <div  class="form-group" ng-repeat="dish in dishes">
         <span> naam : {{dish.name}}</span>
-        <span>type : {{dish.dishType}}</span>
+       <span>type : {{dish.dishType}}</span>
         <span>cooking time :  {{dish.cookingTime}}</span>
         <span>difficulty :  {{dish.difficulty}}</span>
         <button type = "submit">Bekijk</button>
     </div>
     </div>
 
+-->
 
-</div>
