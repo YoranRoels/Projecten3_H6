@@ -2,6 +2,7 @@ package projecten3_h6.evaandroid.Network;
 
 import java.util.List;
 import projecten3_h6.evaandroid.Domain.Achievement;
+import projecten3_h6.evaandroid.Domain.Challenge;
 import projecten3_h6.evaandroid.Domain.Dish;
 import retrofit2.Call;
 import retrofit2.http.GET;
@@ -16,4 +17,8 @@ public interface Calls {
 
     @GET("dishes/three-random")
     Call<List<Dish>> getThreeRandomDishes();
+
+    @GET("challenges/three-random")
+    Call<List<Challenge>> getThreeRandomChallenges();
+
 }
