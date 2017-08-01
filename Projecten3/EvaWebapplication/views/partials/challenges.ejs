@@ -1,0 +1,40 @@
+<div class="page-header">
+    <h1>Challenges</h1>
+</div>
+
+<div class="form-group" >
+    <H3>Add a new Challenge </H3>
+    <form ng-submit="createChallenge()" >
+          <div class="form-group">
+               <label>Name</label>
+            <input type="text" class="form-control" ng-model="name" placeholder="name" />
+        </div>
+ <div class="form-group">
+            <label>Challenge type</label>
+            <select class="form-control" ng-model="challengeType">
+                <option ng-value="EASY">EASY</option>
+                <option ng-value="MEDIUM">MEDIUM</option>
+                <option ng-value="HARD">HARD</option>
+            </select>
+        </div>
+        
+<div class="form-group">
+             <label>Description</label>
+            <textarea class="form-control" rows="5" ng-model="description" placeholder="Description"></textarea>
+        </div>
+        <button type="submit" >Confirm</button>
+        
+    </form>
+
+    </div>
+
+
+
+<div>
+    <div class="form-group" ng-repeat="chal in challenges">
+        <span>Title : {{chal.title}}</span>
+        <span>Description : {{chal.description}}</span>
+        <span>Achievement type : {{chal.challengeType}}</span>
+        
+    </div>
+</div>

@@ -35,15 +35,15 @@ app.config([
 						return data.getAllAchievements();
 					}]
 				}
-            }).state('dish', {
-                url: '/dishes/{id}',
-                templateUrl: 'partials/dish',
-                controller: 'dishCtrl',
-            resolve: {
-				story: ['$stateParams', 'dishes', function($stateParams, dishes) {
-					return dishes.get($stateParams.id);
-				}]
-			}
+            }).state('challenges', {
+                url: '/challenges',
+                templateUrl: 'partials/challenges',
+                controller: 'challengesCtrl',
+                resolve: {
+					postPromise: ['data', function(data) {
+						return data.getAllChallanges();
+					}]
+				}
                 
             });;
 
@@ -54,11 +54,18 @@ app.config([
 app.factory('data', ['$http', function($http){
     var o = {
         dishes: [],
-        achievements: []
+        achievements: [],
+        challenges:[]
     };
     o.getAllDishes = function() {
         return $http.get('/dishes').success(function(data){
             angular.copy(data, o.dishes);
+            
+        });
+    };
+     o.getAllChallanges = function() {
+        return $http.get('/challenges').success(function(data){
+            angular.copy(data, o.challenges);
             
         });
     };
@@ -70,6 +77,11 @@ app.factory('data', ['$http', function($http){
      o.createAchievement = function(achievement){
         return $http.post("/achievements",achievement).success(function(data){
             o.achievements.push(data);
+        })
+    }
+     o.createChallenge = function(challenge){
+        return $http.post("/challenges",challenge).success(function(data){
+            o.challenges.push(data);
         })
     }
     o.getDish = function(id){
@@ -150,6 +162,21 @@ app.controller('AchievementsCtrl', [
                 title: $scope.title,
                 description : $scope.description,
                 achievementType : $scope.achievementType
+                    
+            })
+        }
+        
+    }]);
+app.controller('challengesCtrl', [
+    '$scope','data',
+    function($scope,challenges){
+        $scope.challenges= challenges.challenges;
+        
+        $scope.createChallenge=function(){
+            challenges.createChallenge({
+                name: $scope.name,
+                description : $scope.description,
+                challengeType : $scope.challengeType
                     
             })
         }

@@ -6,6 +6,7 @@ var underscore = require('underscore');
 var Dish = mongoose.model('Dish');
 var Ingredient = mongoose.model('Ingredient');
 var Achievement = mongoose.model('Achievement');
+var Challenge = mongoose.model('Challenge');
 
 
 /* GET home page. */
@@ -147,6 +148,49 @@ router.param('ingredient', function(req, res, next, name) {
         if (!ingredient) { return next(new Error('can\'t find ingredient')); }
 
         req.ingredient = ingredient;
+        return next();
+    });
+});
+
+router.get('/challenges', function(req, res, next) {
+    Challenge.find(function(err, challenges){
+        if(err){ return next(err); }
+
+        res.json(challenges);
+    });
+});
+
+
+router.get('/challenges/three-random',function(req , res, next){
+    Challenge.find(function(err,challenges){
+        if(err){ return next(err); }
+        var arr = underscore.sample(challenges, 3);
+        res.json(arr);
+    });
+});
+
+router.get('/challenges/:challenge', function(req, res) {
+    res.json(req.challenge);
+});
+
+router.post('/challenges', function(req, res, next) {
+    var challenge = new Challenge(req.body);
+
+    challenge.save(function(err, challenge){
+        if(err){ return next(err); }
+
+        res.json(challenge);
+    });
+});
+
+router.param('challenge', function(req, res, next, id) {
+    var query = Challenge.findById(id);
+
+    query.exec(function (err, challenge){
+        if (err) { return next(err); }
+        if (!challenge) { return next(new Error('can\'t find challenge')); }
+
+        req.challenge = challenge;
         return next();
     });
 });
