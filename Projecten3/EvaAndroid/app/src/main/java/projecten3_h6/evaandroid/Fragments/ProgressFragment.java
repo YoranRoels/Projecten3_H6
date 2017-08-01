@@ -16,12 +16,15 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import java.util.Calendar;
 import java.util.List;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import projecten3_h6.evaandroid.Adapters.ProgressAdapter;
+import projecten3_h6.evaandroid.Domain.Challenge;
 import projecten3_h6.evaandroid.Domain.Day;
 import projecten3_h6.evaandroid.Domain.Dish;
 import projecten3_h6.evaandroid.Domain.EvaApplication;
@@ -32,7 +35,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class ProgressFragment extends Fragment implements ProgressPickerDialog.DialogListener{
+public class ProgressFragment extends Fragment implements ProgressPickerDialog.DialogListener {
     // Progress checkboxes
     @BindView(R.id.progressBox1) ImageView progressBox1;
     @BindView(R.id.progressBox2) ImageView progressBox2;
@@ -97,12 +100,12 @@ public class ProgressFragment extends Fragment implements ProgressPickerDialog.D
         View v = inflater.inflate(R.layout.fragment_progress, container, false);
         this.inflater = inflater;
         this.container = container;
-        ButterKnife.bind(this,v);
+        ButterKnife.bind(this, v);
 
         Context context = getContext();
-        app = (EvaApplication)context.getApplicationContext();
+        app = (EvaApplication) context.getApplicationContext();
         days = app.getUser().getDays();
-        segmentSize  = app.getSegmentSize();
+        segmentSize = app.getSegmentSize();
 
         progressBoxes = new ImageView[]{progressBox1, progressBox2, progressBox3, progressBox4, progressBox5, progressBox6,
                 progressBox7, progressBox8, progressBox9, progressBox10, progressBox11, progressBox12, progressBox13,
@@ -111,7 +114,7 @@ public class ProgressFragment extends Fragment implements ProgressPickerDialog.D
 
         progressTextViews = new TextView[]{progressTextView, progressMotivationTextView};
 
-        if(days.isEmpty()) {
+        if (days.isEmpty()) {
             progressTextView.setText(R.string.welcome);
             progressMotivationTextView.setText(R.string.welcome_advice);
             startFirstSegment();
@@ -134,7 +137,7 @@ public class ProgressFragment extends Fragment implements ProgressPickerDialog.D
         return v;
     }
 
-    public void reloadCards(){
+    public void reloadCards() {
         initChoices();
         checkSegmentButtonEnabled();
         mRecyclerView.setAdapter(new ProgressAdapter(app.getUser().getLastThreeDays(), progressOnclickListener));
@@ -145,16 +148,15 @@ public class ProgressFragment extends Fragment implements ProgressPickerDialog.D
         int daysCount = app.getUser().getDays().size();
         int startingDayIndex;
         int sizeToCheck;
-        if(daysCount > checkBoxCount) {
+        if (daysCount > checkBoxCount) {
             startingDayIndex = daysCount - checkBoxCount;
             sizeToCheck = checkBoxCount;
         } else {
             startingDayIndex = 0;
             sizeToCheck = daysCount;
         }
-        for(int i = 0; i < sizeToCheck; i++) {
-            if(app.getUser().getDays().get(i + startingDayIndex).isCompleted())
-            {
+        for (int i = 0; i < sizeToCheck; i++) {
+            if (app.getUser().getDays().get(i + startingDayIndex).isCompleted()) {
                 progressBoxes[i].setImageResource(R.drawable.checkbox_completed);
             } else {
                 progressBoxes[i].setImageResource(R.drawable.checkbox);
@@ -164,33 +166,35 @@ public class ProgressFragment extends Fragment implements ProgressPickerDialog.D
 
     public static void setMotivationTextViews() {
         progressTextViews[0].setText("You've had " + app.getUser().getTotalVeganDays() + " vegan days.");
-        if(app.getUser().getTotalVeganDays() == app.getUser().getLongestStreak()) {
+        if (app.getUser().getTotalVeganDays() == app.getUser().getLongestStreak()) {
             progressTextViews[1].setText(R.string.no_skipped_days);
         } else {
             progressTextViews[1].setText(R.string.skipped_days);
         }
     }
 
-    private void startFirstSegment(){
+    private void startFirstSegment() {
         Calendar cal = Calendar.getInstance();
         cal.getTime();
 
-        for(int i = 0; i < segmentSize; i++) {
-            days.add(new Day(cal.get(Calendar.YEAR), cal.get(Calendar.MONTH), cal.get(Calendar.DAY_OF_MONTH), cal.get(Calendar.DAY_OF_WEEK),cal.get(Calendar.DAY_OF_YEAR)));
+        for (int i = 0; i < segmentSize; i++) {
+            days.add(new Day(cal.get(Calendar.YEAR), cal.get(Calendar.MONTH), cal.get(Calendar.DAY_OF_MONTH), cal.get(Calendar.DAY_OF_WEEK), cal.get(Calendar.DAY_OF_YEAR)));
+            initChallenges(days.get(i));
             cal.add(Calendar.DAY_OF_YEAR, 1);
         }
     }
 
     private void startNewSegment() {
-        int lastDayIndex = days.size()-1;
+        int lastDayIndex = days.size() - 1;
         Day lastDay = days.get(lastDayIndex);
 
         Calendar cal = Calendar.getInstance();
         cal.set(lastDay.getYear(), lastDay.getMonth(), lastDay.getDayOfTheMonth());
 
-        for(int i = 0; i < segmentSize; i++) {
+        for (int i = 0; i < segmentSize; i++) {
             cal.add(Calendar.DAY_OF_YEAR, 1);
             days.add(new Day(cal.get(Calendar.YEAR), cal.get(Calendar.MONTH), cal.get(Calendar.DAY_OF_MONTH), cal.get(Calendar.DAY_OF_WEEK), cal.get(Calendar.DAY_OF_YEAR)));
+            initChallenges(days.get(lastDayIndex+i));
         }
     }
 
@@ -199,10 +203,10 @@ public class ProgressFragment extends Fragment implements ProgressPickerDialog.D
         Calendar today = Calendar.getInstance();
         // Last Date
         int daysLength = days.size();
-        Day lastDay = days.get(daysLength-1);
+        Day lastDay = days.get(daysLength - 1);
         // Check
-        if(today.get(Calendar.DAY_OF_YEAR) >= lastDay.getDayOfTheYear()
-                || today.get(Calendar.YEAR) > lastDay.getYear()){
+        if (today.get(Calendar.DAY_OF_YEAR) >= lastDay.getDayOfTheYear()
+                || today.get(Calendar.YEAR) > lastDay.getYear()) {
             finishSegment.setVisibility(View.VISIBLE);
         } else {
             finishSegment.setVisibility(View.INVISIBLE);
@@ -212,19 +216,19 @@ public class ProgressFragment extends Fragment implements ProgressPickerDialog.D
     @OnClick(R.id.finishSegment)
     public void finishSegment() {
         // Achievements
-        if(days.get(days.size()-segmentSize).isCompleted()
-                && days.get(days.size()-segmentSize + 1).isCompleted() &&
-                days.get(days.size()-segmentSize + 2).isCompleted()) {
+        if (days.get(days.size() - segmentSize).isCompleted()
+                && days.get(days.size() - segmentSize + 1).isCompleted() &&
+                days.get(days.size() - segmentSize + 2).isCompleted()) {
             app.earnAchievement(getContext(), inflater, container, "Making Progress");
         } else {
             app.earnAchievement(getContext(), inflater, container, "Cheat Day");
         }
-        if(app.getUser().getLongestStreak() >= 25) {
+        if (app.getUser().getLongestStreak() >= 25) {
             app.earnAchievement(getContext(), inflater, container, "Vegan Pro Streak");
-        } else if(app.getUser().getLongestStreak() >= 10) {
+        } else if (app.getUser().getLongestStreak() >= 10) {
             app.earnAchievement(getContext(), inflater, container, "Vegan Master Streak");
         }
-        if(app.getUser().getTotalVeganDays() >= 100) {
+        if (app.getUser().getTotalVeganDays() >= 100) {
             app.earnAchievement(getContext(), inflater, container, "Vegan Master");
         }
 
@@ -238,7 +242,7 @@ public class ProgressFragment extends Fragment implements ProgressPickerDialog.D
         super.onViewCreated(view, savedInstanceState);
     }
 
-    public void initChoices(){
+    public void initChoices() {
         Calls caller = Config.getRetrofit().create(Calls.class);
         Call<List<Dish>> call = caller.getThreeRandomDishes();
         call.enqueue(new Callback<List<Dish>>() {
@@ -252,7 +256,24 @@ public class ProgressFragment extends Fragment implements ProgressPickerDialog.D
             @Override
             public void onFailure(Call<List<Dish>> call, Throwable t) {
                 internetConnection = false;
-                Log.e("Backend call: ", "call failed (three random dishes) "+ t.getMessage());
+                Log.e("Backend call: ", "call failed (three random dishes) " + t.getMessage());
+            }
+        });
+    }
+
+    public void initChallenges(final Day day) {
+        Calls caller = Config.getRetrofit().create(Calls.class);
+        Call<List<Challenge>> call = caller.getThreeRandomChallenges();
+        call.enqueue(new Callback<List<Challenge>>() {
+            @Override
+            public void onResponse(Call<List<Challenge>> call, Response<List<Challenge>> response) {
+                day.setChallenges(response.body());
+                Log.e("Backend Call", " call successful (three random challenges)");
+            }
+
+            @Override
+            public void onFailure(Call<List<Challenge>> call, Throwable t) {
+                Log.e("Backend CAll", "call failed (three random challenges) " + t.getMessage());
             }
         });
 
@@ -263,7 +284,7 @@ public class ProgressFragment extends Fragment implements ProgressPickerDialog.D
         reloadCards();
     }
 
-    public class ProgressOnclickListener implements View.OnClickListener{
+    public class ProgressOnclickListener implements View.OnClickListener {
 
         private final Context context;
 
@@ -273,7 +294,7 @@ public class ProgressFragment extends Fragment implements ProgressPickerDialog.D
 
         @Override
         public void onClick(View v) {
-            if(internetConnection) {
+            if (internetConnection) {
                 pos = mRecyclerView.getChildAdapterPosition(v);
                 FragmentManager fm = getActivity().getSupportFragmentManager();
                 Calendar c = Calendar.getInstance();
@@ -285,9 +306,8 @@ public class ProgressFragment extends Fragment implements ProgressPickerDialog.D
                     ppd.show(fm, "food picker");
                 }
 
-            } else
-            {
-                Toast.makeText(getContext(),"No internet connection",Toast.LENGTH_LONG).show();
+            } else {
+                Toast.makeText(getContext(), "No internet connection", Toast.LENGTH_LONG).show();
             }
         }
 

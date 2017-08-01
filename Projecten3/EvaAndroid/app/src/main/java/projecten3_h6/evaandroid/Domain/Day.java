@@ -1,17 +1,9 @@
 package projecten3_h6.evaandroid.Domain;
 
-import android.util.Log;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
-
-import projecten3_h6.evaandroid.Network.Calls;
-import projecten3_h6.evaandroid.Network.Config;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class Day implements Serializable{
 
@@ -91,7 +83,6 @@ public class Day implements Serializable{
         return dayOfTheYear;
     }
 
-
     public Dish getDish() {
         return dish;
     }
@@ -104,34 +95,11 @@ public class Day implements Serializable{
         this.dish = dish;
     }
 
-    public void getRemoteChallenges(){
-
-        Calendar cal = Calendar.getInstance();
-        if(cal.get(Calendar.DAY_OF_YEAR) >= dayOfTheYear || challenges == null) {
-
-            Calls caller = Config.getRetrofit().create(Calls.class);
-            Call<List<Challenge>> call = caller.getThreeRandomChallenges();
-            call.enqueue(new Callback<List<Challenge>>() {
-                @Override
-                public void onResponse(Call<List<Challenge>> call, Response<List<Challenge>> response) {
-                    challenges = response.body();
-                    Log.e("Backend Call", " call successful (three random challenges)");
-                }
-
-                @Override
-                public void onFailure(Call<List<Challenge>> call, Throwable t) {
-                    Log.e("Backend CAll", "failed to call (three random challenges) "+ t.getMessage());
-                    challenges.clear();
-                    challenges.add(new Challenge("No dairy for me","Don't use milk in today's dish.",ChallengeType.EASY));
-                    challenges.add(new Challenge("Infect your friends","Prepare a vegan dinner with friends.",ChallengeType.MEDIUM));
-                    challenges.add(new Challenge("More vegans","Convert a friend to the vegan lifestyle.",ChallengeType.HARD));
-                }
-            });
-
-        }
-    }
-
     public List<Challenge> getChallenges() {
         return challenges;
+    }
+
+    public void setChallenges(List<Challenge> challenges) {
+        this.challenges = challenges;
     }
 }

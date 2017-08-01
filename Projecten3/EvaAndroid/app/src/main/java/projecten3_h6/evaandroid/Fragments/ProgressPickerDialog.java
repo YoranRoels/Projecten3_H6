@@ -93,7 +93,7 @@ public class ProgressPickerDialog extends DialogFragment {
                 for (Ingredient i : clickedDay.getDish().getIngredients()) {
                     shoppingListIngredients.add(i);
                 }
-                Toast.makeText(getActivity(), "The ingredients for " + "\"" + clickedDay.getDish().getName() + "\"" + " have been added to the list.", Toast.LENGTH_LONG).show();
+                Toast.makeText(getActivity(), "The ingredients for " + "\"" + clickedDay.getDish().getName() + "\"" + " have been added to the shopping list.", Toast.LENGTH_LONG).show();
             }
             // Achievement
             if(days.get(days.size() - segmentSize).getDish() != null &&

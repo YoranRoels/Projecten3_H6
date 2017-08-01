@@ -222,13 +222,13 @@ public class User implements Serializable{
             @Override
             public void onResponse(Call<List<Achievement>> call, Response<List<Achievement>> response) {
                 remoteAchievements = response.body();
-                Log.e("BackendCall", " call successful get all achievements");
+                Log.e("Backend call", "Call successful (get all achievements)");
                 compareAchievements();
             }
 
             @Override
             public void onFailure(Call<List<Achievement>> call, Throwable t) {
-                Log.e("BackendCAll", "failed to call get all achievements "+ t.getMessage());
+                Log.e("Backend call", "Call failed (get all achievements)"+ t.getMessage());
             }
         });
     }
