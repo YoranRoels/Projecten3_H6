@@ -27,14 +27,19 @@
     </form>
 
     </div>
-
-
-
-<div>
-    <div class="form-group" ng-repeat="ach in achievements">
-        <span>Title : {{ach.title}}</span>
-        <span>Description : {{ach.description}}</span>
-        <span>Achievement type : {{ach.achievementType}}</span>
+   <table class="table">
+       <thead class="thead-inverse">
         
-    </div>
-</div>
+        <th>Title</th>
+        <th>Achievement type</th>
+        <th>Description</th>
+        
+        
+  </thead>    
+  <tr ng-repeat="ach in achievements">
+        <td>{{ach.title}}</td>
+        <td>{{ach.achievementType}}</td>
+        <td>{{ach.description}}</td>
+        <td class="glyphicon glyphicon-trash" ng-click="deleteAch(ach)"></td> 
+  </tr>
+</table> 

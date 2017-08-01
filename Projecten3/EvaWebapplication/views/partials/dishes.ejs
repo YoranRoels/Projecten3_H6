@@ -53,44 +53,44 @@
         <div class="form-group-row">
             <label>Ingredients</label>
             </div>
+        
         <div class="row">
-            
-  <div class="col-lg-5" ng-repeat="itemToAdd in itemsToAdd">
-    <div class="input-group">
-      <span class="input-group-addon">
-          <label>Name</label>
-      </span>
-      <input type="text" class="form-control" aria-label="Name" ng-model="itemsToAdd.name">
-    </div><!-- /input-group -->
-  </div><!-- /.col-lg-6 -->
-  <div class="col-lg-5">
-    <div class="input-group">
-      <span class="input-group-addon">
-        <label>Amount</label>
-      </span>
-      <input type="text" class="form-control" aria-label="amount" ng-model="itemsToAdd.amount">
-    </div><!-- /input-group -->
-  </div><!-- /.col-lg-6 -->
-             <div class="col-lg-2">
-    <div class="input-group">
-      <span class="input-group-addon">
-         <button ng-click="add(itemToAdd)">Add</button>
-          
-    </div><!-- /input-group -->
-  </div><!-- /.col-lg-6 -->
-</div><!-- /.row -->
-            <button ng-click="addNew()">Add new</button>
+            <div class="col-lg-5" >
+                <div class="input-group">
+                    <span class="input-group-addon">
+                    <label>Name</label>
+                    </span>
+                    <input type="text" class="form-control" aria-label="Name" ng-model="itemToAddName">
+                </div><!-- /input-group -->
+            </div><!-- /.col-lg-6 -->
+            <div class="col-lg-5">
+                <div class="input-group">
+                    <span class="input-group-addon">
+                    <label>Amount</label>
+                    </span>
+                    <input type="text" class="form-control" aria-label="amount" ng-model="itemToAddAmount">
+                </div><!-- /input-group -->
+            </div><!-- /.col-lg-6 -->
+            <div class="col-lg-2">
+                <div class="input-group">
+                    <span class="input-group-addon">
+                    <button ng-click="add(itemToAdd)" type="button">Add</button>
+                </div><!-- /input-group -->
+            </div><!-- /.col-lg-6 -->
+        </div><!-- /.row -->
+         <div  class="form-group" ng-repeat="item in items">
+        <span> naam : {{item.name}}</span>
+        <span>type : {{item.amount}}</span>
+     </div>   
         
         
-<div class="form-group">
-             <label>Preparation</label>
+        <div class="form-group">
+            <label>Preparation</label>
             <textarea class="form-control" rows="5" ng-model="preparation" placeholder="preparation"></textarea>
         </div>
         <button type="submit" >Confirm</button>
-        
     </form>
-
-    </div>
+</div>
 
 
 
@@ -101,7 +101,7 @@
        <span>type : {{dish.dishType}}</span>
         <span>cooking time :  {{dish.cookingTime}}</span>
         <span>difficulty :  {{dish.difficulty}}</span>
-        <button type = "submit">Bekijk</button>
+        
     </div>
     </div>
 

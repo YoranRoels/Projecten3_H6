@@ -113,28 +113,20 @@ app.controller('DishesCtrl', [
         $scope.dishes = dishes.dishes;
          $scope.items = [];
 
-  $scope.itemsToAdd = [{
-    name: '',
-    lastName: ''
+  $scope.itemToAdd = [{
+    name: $scope.itemToAddName,
+    amount:$scope.itemToAddAmount
   }];
 
   $scope.add = function(itemToAdd) {
 
-    var index = $scope.itemsToAdd.indexOf(itemToAdd);
-
-    $scope.itemsToAdd.splice(index, 1);
-
+    
     $scope.items.push(angular.copy(itemToAdd))
+    $scope.itemToAdd = "";
+   
   }
 
-  $scope.addNew = function() {
-
-    $scope.itemsToAdd.push({
-      firstName: '',
-      lastName: ''
-    })
-  }
-        
+    
         
           $scope.createDish = function(){
             dishes.createDish({
@@ -143,7 +135,7 @@ app.controller('DishesCtrl', [
                 difficulty : $scope.difficulty,
                 dishType : $scope.dishType,
                 preparation : $scope.preparation,
-                ingredients : $scope.ingredientList
+                ingredients : $scope.items
                   
             })
         
@@ -164,6 +156,10 @@ app.controller('AchievementsCtrl', [
                 achievementType : $scope.achievementType
                     
             })
+        }
+        
+        $scope.deleteAch = function(ach){
+            achievements.deleteAch(ach);
         }
         
     }]);
