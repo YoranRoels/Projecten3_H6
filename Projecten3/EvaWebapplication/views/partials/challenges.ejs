@@ -1,10 +1,26 @@
 <div class="page-header">
     <h1>Challenges</h1>
 </div>
+ <table class="table" ng-hide = "showTableHideForm">
+       <thead class="thead-inverse">
+        
+        <th>Name</th>
+        <th>Challenge type</th>
+        <th>Description</th>
+        
+        
+  </thead>    
+  <tr ng-repeat="chal in challenges">
+        <td>{{chal.name}}</td>
+        <td>{{chal.challengeType}}</td>
+        <td>{{chal.description}}</td>
+        <td class="glyphicon glyphicon-trash"></td> 
+  </tr>
+</table>
 
 <div class="form-group" >
-    <H3>Add a new Challenge </H3>
-    <form ng-submit="createChallenge()" >
+   <button class="btn btn-default" type="button" ng-hide = "showTableHideForm" ng-click="showTableHideForm = true">Add a new Challenge </button>
+    <form ng-submit="createChallenge()"  ng-show="showTableHideForm" >
           <div class="form-group">
                <label>Name</label>
             <input type="text" class="form-control" ng-model="name" placeholder="name" />
@@ -22,27 +38,13 @@
              <label>Description</label>
             <textarea class="form-control" rows="5" ng-model="description" placeholder="Description"></textarea>
         </div>
-        <button type="submit" >Confirm</button>
+        <button class="btn btn-default" type="submit" >Confirm</button>
+        <button class="btn btn-danger" type="button" ng-click="showTableHideForm = false" > Cancel</button>
         
     </form>
 
     </div>
 
 
- <table class="table">
-       <thead class="thead-inverse">
-        
-        <th>Name</th>
-        <th>Challenge type</th>
-        <th>Description</th>
-        
-        
-  </thead>    
-  <tr ng-repeat="chal in challenges">
-        <td>{{chal.name}}</td>
-        <td>{{chal.challengeType}}</td>
-        <td>{{chal.description}}</td>
-        <td class="glyphicon glyphicon-trash"></td> 
-  </tr>
-</table> 
+ 
 

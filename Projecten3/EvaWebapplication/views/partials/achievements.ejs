@@ -1,10 +1,25 @@
 <div class="page-header">
     <h1>Achievements</h1>
 </div>
-
+<table class="table" ng-hide = "showTableHideForm">
+       <thead class="thead-inverse">
+        
+        <th>Title</th>
+        <th>Achievement type</th>
+        <th>Description</th>
+        
+        
+  </thead>    
+  <tr ng-repeat="ach in achievements">
+        <td>{{ach.title}}</td>
+        <td>{{ach.achievementType}}</td>
+        <td>{{ach.description}}</td>
+        <td class="glyphicon glyphicon-trash" ng-click="deleteAch(achievement)"></td> 
+  </tr>
+</table> 
 <div class="form-group" >
-    <H3>Add a new Achievement </H3>
-    <form ng-submit="createAchievement()" >
+    <button class="btn btn-default" type="button" ng-hide = "showTableHideForm" ng-click="showTableHideForm = true" >Add a new Achievement </button>
+    <form ng-submit="createAchievement()"  ng-show="showTableHideForm">
           <div class="form-group">
                <label>Title</label>
             <input type="text" class="form-control" ng-model="title" placeholder="title" />
@@ -22,24 +37,10 @@
              <label>Description</label>
             <textarea class="form-control" rows="5" ng-model="description" placeholder="Description"></textarea>
         </div>
-        <button type="submit" >Confirm</button>
+        <button class="btn btn-default" type="submit" >Confirm</button>
+        <button class="btn btn-danger" type="button" ng-click="showTableHideForm = false" > Cancel</button>
         
     </form>
 
     </div>
-   <table class="table">
-       <thead class="thead-inverse">
-        
-        <th>Title</th>
-        <th>Achievement type</th>
-        <th>Description</th>
-        
-        
-  </thead>    
-  <tr ng-repeat="ach in achievements">
-        <td>{{ach.title}}</td>
-        <td>{{ach.achievementType}}</td>
-        <td>{{ach.description}}</td>
-        <td class="glyphicon glyphicon-trash" ng-click="deleteAch(ach)"></td> 
-  </tr>
-</table> 
+   

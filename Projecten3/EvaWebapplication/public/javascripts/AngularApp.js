@@ -89,6 +89,11 @@ app.factory('data', ['$http', function($http){
 			return res.data;
 		});
     }
+    o.deleteAch = function(achievement){
+        return $http.delete('/achievement/' + achievement).success(function(data) {
+			angular.copy(data, o.achievements);
+		});
+    }
     
     
     
@@ -112,11 +117,15 @@ app.controller('DishesCtrl', [
     function($scope, dishes){
         $scope.dishes = dishes.dishes;
          $scope.items = [];
+        
+   $scope.showTableHideForm = false;
 
   $scope.itemToAdd = [{
     name: $scope.itemToAddName,
     amount:$scope.itemToAddAmount
   }];
+        
+
 
   $scope.add = function(itemToAdd) {
 
@@ -137,7 +146,8 @@ app.controller('DishesCtrl', [
                 preparation : $scope.preparation,
                 ingredients : $scope.items
                   
-            })
+            });
+              $scope.showTableHideForm = false;
         
         }
        
@@ -148,6 +158,7 @@ app.controller('AchievementsCtrl', [
     '$scope','data',
     function($scope,achievements){
         $scope.achievements= achievements.achievements;
+         $scope.showTableHideForm = false;
         
         $scope.createAchievement=function(){
             achievements.createAchievement({
@@ -155,11 +166,12 @@ app.controller('AchievementsCtrl', [
                 description : $scope.description,
                 achievementType : $scope.achievementType
                     
-            })
+            });
+            $scope.showTableHideForm = false;
         }
         
-        $scope.deleteAch = function(ach){
-            achievements.deleteAch(ach);
+        $scope.deleteAch = function(achievement){
+            achievements.deleteAch(achievement);
         }
         
     }]);
@@ -167,6 +179,7 @@ app.controller('challengesCtrl', [
     '$scope','data',
     function($scope,challenges){
         $scope.challenges= challenges.challenges;
+        $scope.showTableHideForm = false;
         
         $scope.createChallenge=function(){
             challenges.createChallenge({
@@ -174,7 +187,8 @@ app.controller('challengesCtrl', [
                 description : $scope.description,
                 challengeType : $scope.challengeType
                     
-            })
+            });
+            $scope.showTableHideForm = false;
         }
         
     }]);

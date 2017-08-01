@@ -3,6 +3,8 @@
 </div>
 
 <div>
+    
+    <!--This is a comment. Comments are not displayed in the browser
     <h3> Select a dish</h3>
     <select ng-model="selectedDish" ng-options="item.name for item in dishes">
         <option value="">---Please select---</option>
@@ -17,11 +19,29 @@
     
     </div>   
 </div>
-
+-->
+<table class="table" ng-hide = "showTableHideForm">
+       <thead class="thead-inverse">
+        
+        
+        <th>Name</th>
+        <th>Dish type</th>
+        <th>cooking time</th>
+        <th>Difficulty</th>
+        
+  </thead>    
+  <tr ng-repeat="dish in dishes">
+        
+        <td>{{dish.name}}</td>
+        <td>{{dish.dishType}}</td>
+        <td>{{dish.cookingTime}}</td>
+        <td> {{dish.difficulty}}</td>
+  </tr>
+</table> 
 
 <div class="form-group" >
-    <H3>Add a new dish</H3>
-    <form ng-submit="createDish()" >
+    <button class="btn btn-default" type="button" ng-click="showTableHideForm = true" ng-hide = "showTableHideForm"> Add a new dish </button>
+    <form ng-submit="createDish()" ng-show="showTableHideForm">
           <div class="form-group">
               <label>Name</label>
             <input type="text" class="form-control" ng-model="name" placeholder="Name" />
@@ -74,7 +94,7 @@
             <div class="col-lg-2">
                 <div class="input-group">
                     <span class="input-group-addon">
-                    <button ng-click="add(itemToAdd)" type="button">Add</button>
+                    <button class="btn btn-default" ng-click="add(itemToAdd)" type="button">Add</button>
                 </div><!-- /input-group -->
             </div><!-- /.col-lg-6 -->
         </div><!-- /.row -->
@@ -88,7 +108,8 @@
             <label>Preparation</label>
             <textarea class="form-control" rows="5" ng-model="preparation" placeholder="preparation"></textarea>
         </div>
-        <button type="submit" >Confirm</button>
+        <button class="btn btn-default" type="submit" >Confirm</button>
+            <button class="btn btn-danger" type="button" ng-click="showTableHideForm = false" > Cancel</button>
     </form>
 </div>
 
