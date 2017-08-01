@@ -177,7 +177,6 @@ public class ProgressFragment extends Fragment implements ProgressPickerDialog.D
         Calendar cal = Calendar.getInstance();
         cal.getTime();
 
-        System.out.println("LEL");
         for (int i = 0; i < segmentSize; i++) {
             days.add(new Day(cal.get(Calendar.YEAR), cal.get(Calendar.MONTH), cal.get(Calendar.DAY_OF_MONTH), cal.get(Calendar.DAY_OF_WEEK), cal.get(Calendar.DAY_OF_YEAR)));
             initChallenges(days.get(i));
@@ -263,7 +262,6 @@ public class ProgressFragment extends Fragment implements ProgressPickerDialog.D
     }
 
     public void initChallenges(final Day day) {
-        System.out.println("hello");
         Calls caller = Config.getRetrofit().create(Calls.class);
         Call<List<Challenge>> call = caller.getThreeRandomChallenges();
         call.enqueue(new Callback<List<Challenge>>() {
