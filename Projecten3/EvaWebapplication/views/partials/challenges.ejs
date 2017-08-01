@@ -29,12 +29,20 @@
     </div>
 
 
-
-<div>
-    <div class="form-group" ng-repeat="chal in challenges">
-        <span>Title : {{chal.title}}</span>
-        <span>Description : {{chal.description}}</span>
-        <span>Achievement type : {{chal.challengeType}}</span>
+ <table class="table">
+       <thead class="thead-inverse">
         
-    </div>
-</div>
+        <th>Name</th>
+        <th>Challenge type</th>
+        <th>Description</th>
+        
+        
+  </thead>    
+  <tr ng-repeat="chal in challenges">
+        <td>{{chal.name}}</td>
+        <td>{{chal.challengeType}}</td>
+        <td>{{chal.description}}</td>
+        <td class="glyphicon glyphicon-trash"></td> 
+  </tr>
+</table> 
+
