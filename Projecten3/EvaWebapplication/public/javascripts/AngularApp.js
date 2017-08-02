@@ -116,39 +116,41 @@ app.controller('DishesCtrl', [
     '$scope','data',
     function($scope, dishes){
         $scope.dishes = dishes.dishes;
-         $scope.items = [];
+    
         
    $scope.showTableHideForm = false;
 
-  $scope.itemToAdd = [{
-    name: $scope.itemToAddName,
-    amount:$scope.itemToAddAmount
-  }];
-        
-
-
-  $scope.add = function(itemToAdd) {
-
+     $scope.arr=[];
+        $scope.iName="";
+        $scope.iAmount="";
+        $scope.add = function(){
+            this.arr.push({name:$scope.iName, amount: $scope.iAmount});
+           
+        }   
     
-    $scope.items.push(angular.copy(itemToAdd))
-    $scope.itemToAdd = "";
-   
-  }
-
     
         
           $scope.createDish = function(){
+              console.log({ name:$scope.name,
+                cookingTime : $scope.cookingTime,
+                difficulty : $scope.difficulty,
+                dishType : $scope.dishType,
+                preparation : $scope.preparation,
+                ingredients : $scope.arr});
+              console.log($scope.arr)
             dishes.createDish({
                 name:$scope.name,
                 cookingTime : $scope.cookingTime,
                 difficulty : $scope.difficulty,
                 dishType : $scope.dishType,
                 preparation : $scope.preparation,
-                ingredients : $scope.items
+                ingredients : $scope.arr
+                
                   
             });
               $scope.showTableHideForm = false;
-        
+              
+                
         }
        
         

@@ -44,7 +44,7 @@
     <form ng-submit="createDish()" ng-show="showTableHideForm">
           <div class="form-group">
               <label>Name</label>
-            <input type="text" class="form-control" ng-model="name" placeholder="Name" />
+            <input type="text" class="form-control" ng-model="name"  />
         </div>
  <div class="form-group">
             <label>Cooking time</label>
@@ -80,7 +80,7 @@
                     <span class="input-group-addon">
                     <label>Name</label>
                     </span>
-                    <input type="text" class="form-control" aria-label="Name" ng-model="itemToAddName">
+                    <input type="text" class="form-control" aria-label="Name" ng-model="iName">
                 </div><!-- /input-group -->
             </div><!-- /.col-lg-6 -->
             <div class="col-lg-5">
@@ -88,25 +88,25 @@
                     <span class="input-group-addon">
                     <label>Amount</label>
                     </span>
-                    <input type="text" class="form-control" aria-label="amount" ng-model="itemToAddAmount">
+                    <input type="text" class="form-control" aria-label="amount" ng-model="iAmount">
                 </div><!-- /input-group -->
             </div><!-- /.col-lg-6 -->
             <div class="col-lg-2">
                 <div class="input-group">
                     <span class="input-group-addon">
-                    <button class="btn btn-default" ng-click="add(itemToAdd)" type="button">Add</button>
+                    <button class="btn btn-default" ng-click="add()" type="button">Add</button>
                 </div><!-- /input-group -->
             </div><!-- /.col-lg-6 -->
         </div><!-- /.row -->
-         <div  class="form-group" ng-repeat="item in items">
-        <span> naam : {{item.name}}</span>
-        <span>type : {{item.amount}}</span>
+         <div  class="form-group" ng-repeat="ar in arr">
+        <span> naam : {{ar.name}}</span>
+        <span>amount : {{ar.amount}}</span>
      </div>   
         
         
         <div class="form-group">
             <label>Preparation</label>
-            <textarea class="form-control" rows="5" ng-model="preparation" placeholder="preparation"></textarea>
+            <textarea class="form-control" rows="5" ng-model="preparation" ></textarea>
         </div>
         <button class="btn btn-default" type="submit" >Confirm</button>
             <button class="btn btn-danger" type="button" ng-click="showTableHideForm = false" > Cancel</button>
