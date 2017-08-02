@@ -48,6 +48,9 @@ public class User implements Serializable{
     // Settings
     private boolean automaticShoppingEnabled = true;
 
+    // Challenges
+    private int challengeCoins = 0;
+
     // ----- Constructors -----
     public User(List<Achievement> achievements) {
         this.achievements = achievements;
@@ -150,6 +153,14 @@ public class User implements Serializable{
         this.automaticShoppingEnabled = automaticShoppingEnabled;
     }
 
+    public int getChallengeCoins() {
+        return challengeCoins;
+    }
+
+    public void setChallengeCoins(int challengeCoins) {
+        this.challengeCoins = challengeCoins;
+    }
+
     // ----- Methods -----
     // Days
     public List<Day> getLastThreeDays() {
@@ -208,11 +219,11 @@ public class User implements Serializable{
 
     private void compareAchievements(){
         for (Achievement a : remoteAchievements) {
-        if (!achievements.contains(a)) {
-            achievements.add(a);
+            if (!achievements.contains(a)) {
+                achievements.add(a);
+            }
         }
     }
-}
 
     public void getRemoteAchievements(){
         Calls caller = Config.getRetrofit().create(Calls.class);
@@ -263,6 +274,15 @@ public class User implements Serializable{
         }
     }
 
-
-
+    public void calculateChallengeCoins() {
+        int temporaryChallengeCoins = 0;
+        for(Day d:days) {
+            for(Challenge c: d.getChallenges()) {
+                if(c.isCompleted()) {
+                    temporaryChallengeCoins += 1;
+                }
+            }
+        }
+        challengeCoins = temporaryChallengeCoins;
+    }
 }
