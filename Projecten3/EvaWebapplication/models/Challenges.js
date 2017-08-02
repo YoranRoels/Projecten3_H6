@@ -13,5 +13,3 @@ var ChallengeSchema = new mongoose.Schema({
 });
 
 mongoose.model('Challenge', ChallengeSchema);
-
-

@@ -3,5 +3,152 @@
 </div>
 
 <div>
-    {{test}}
+    
+    <!--This is a comment. Comments are not displayed in the browser
+    <h3> Select a dish</h3>
+    <select ng-model="selectedDish" ng-options="item.name for item in dishes">
+        <option value="">---Please select---</option>
+</select>
+    <div class="form-group">
+        <p ng-if="selectedDish">Name : {{selectedDish.name}} </p>
+        <p ng-if="selectedDish">Cooking Time : {{selectedDish.cookingTime}} </p>
+        <p ng-if="selectedDish">Difficulty : {{selectedDish.difficulty}} </p>
+        <p ng-if="selectedDish">Dish type : {{selectedDish.dishType}} </p>
+        <p ng-if="selectedDish">Preparation : {{selectedDish.preparation}} </p>
+        
+    
+    </div>   
 </div>
+-->
+<table class="table" ng-hide = "showTableHideForm">
+       <thead class="thead-inverse">
+        
+        
+        <th>Name</th>
+        <th>Dish type</th>
+        <th>cooking time</th>
+        <th>Difficulty</th>
+        
+  </thead>    
+  <tr ng-repeat="dish in dishes">
+        
+        <td>{{dish.name}}</td>
+        <td>{{dish.dishType}}</td>
+        <td>{{dish.cookingTime}}</td>
+        <td> {{dish.difficulty}}</td>
+      
+      <td><button class="btn btn-default" type="button" ng-hide="showPreparation" ng-click="showPreparation = true"> Preparation</button></td>
+      <td><button class="btn btn-default" type="button" ng-show="showPreparation" ng-click="showPreparation = false"> Close</button></td>
+        <td class="glyphicon glyphicon-trash"></td> 
+      <td ng-show="showPreparation">{{dish.preparation}}</td>
+  </tr>
+</table> 
+
+    <div class= form-group ng-model="prepview">
+    
+    
+    </div>
+    
+<div class="form-group" >
+    <button class="btn btn-default" type="button" ng-click="showTableHideForm = true" ng-hide = "showTableHideForm"> Add a new dish </button>
+    <form ng-submit="createDish()" ng-show="showTableHideForm">
+        <div class="form-group">
+              <label>Image Id</label>
+            <input type="text" class="form-control" ng-model="image"  />
+        </div>
+          <div class="form-group">
+              <label>Name</label>
+            <input type="text" class="form-control" ng-model="name"  />
+        </div>
+ <div class="form-group">
+            <label>Cooking time</label>
+            <select class="form-control" ng-model="cookingTime">
+                <option ng-value="SHORT">SHORT</option>
+                <option ng-value="MEDIUM">MEDIUM</option>
+                <option ng-value="LONG">LONG</option>
+            </select>
+        </div>
+ <div class="form-group">
+            <label>Difficulty</label>
+            <select class="form-control" ng-model="difficulty">
+                <option ng-value="STARTERS">STARTERS</option>
+                <option ng-value="ADVANCED">ADVANCED</option>
+                <option ng-value="MASTER">MASTER</option>
+            </select>
+        </div>
+ <div class="form-group">
+            <label>Dish type</label>
+            <select class="form-control" ng-model="dishType">
+                <option ng-value="APPETIZER">APPETIZER</option>
+                <option ng-value="MAINDISH">MAINDISH</option>
+                <option ng-value="DESSERT">DESSERT</option>
+            </select>
+        </div>
+        <div class="form-group-row">
+            <label>Ingredients</label>
+            </div>
+        
+        <div class="row">
+            <div class="col-lg-5" >
+                <div class="input-group">
+                    <span class="input-group-addon">
+                    <label>Name</label>
+                    </span>
+                    <input type="text" class="form-control" aria-label="Name" ng-model="iName">
+                </div><!-- /input-group -->
+            </div><!-- /.col-lg-6 -->
+            <div class="col-lg-5">
+                <div class="input-group">
+                    <span class="input-group-addon">
+                    <label>Amount</label>
+                    </span>
+                    <input type="text" class="form-control" aria-label="amount" ng-model="iAmount">
+                </div><!-- /input-group -->
+            </div><!-- /.col-lg-6 -->
+            <div class="col-lg-2">
+                <div class="input-group">
+                    <span class="input-group-addon">
+                    <button class="btn btn-default" ng-click="add()" type="button">Add</button>
+                </div><!-- /input-group -->
+            </div><!-- /.col-lg-6 -->
+        </div><!-- /.row -->
+            <table class="table" >
+       <thead class="thead-inverse">
+        
+        <th>Name</th>
+        <th>Amount</th>
+        
+        
+  </thead>    
+  <tr ng-repeat="ar in arr">
+        <td>{{ar.name}}</td>
+        <td>{{ar.amount}}</td>
+         <td class="glyphicon glyphicon-trash"></td> 
+  </tr>
+</table>
+       
+
+        
+        
+        <div class="form-group">
+            <label>Preparation</label>
+            <textarea class="form-control" rows="5" ng-model="preparation" ></textarea>
+        </div>
+        <button class="btn btn-default" type="submit" >Confirm</button>
+            <button class="btn btn-danger" type="button" ng-click="showTableHideForm = false" > Cancel</button>
+    </form>
+</div>
+
+
+
+<!--This is a comment. Comments are not displayed in the browser
+<div >
+    <div  class="form-group" ng-repeat="dish in dishes">
+        <span> naam : {{dish.name}}</span>
+       <span>type : {{dish.dishType}}</span>
+        <span>cooking time :  {{dish.cookingTime}}</span>
+        <span>difficulty :  {{dish.difficulty}}</span>
+        
+    </div>
+    </div>
+-->

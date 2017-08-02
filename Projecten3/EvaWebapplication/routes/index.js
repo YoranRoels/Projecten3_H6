@@ -103,6 +103,14 @@ router.post('/achievements', function(req, res, next) {
     });
 });
 
+router.delete('/achievements/:achievement',function(req,res){
+    Achievement.remove({achievement  :req.achievement},
+                       function(err,achievement){
+        if (err) { return next(err); }
+    });
+});
+
+
 router.param('achievement', function(req, res, next, id) {
     var query = Achievement.findById(id);
 

@@ -17,7 +17,7 @@ var DishSchema = new mongoose.Schema({
             'MAINDISH',
             'DESSERT'],
     },
-    ingredients: [{ type: mongoose.Schema.Types.ObjectId, ref:'Ingredient'}],
+    ingredients: [{ name: String , amount : String }],
     preparation: String,
     imageId: {type: Number, default: 0},
 });
