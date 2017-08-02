@@ -10,7 +10,7 @@ var mongoose = require('mongoose');
 require('./models/Dishes');
 require('./models/Ingredients');
 require('./models/Achievements');
-require('./models/Challenges')
+require('./models/Challenges');
 
 mongoose.connect('mongodb://localhost/eva');
 

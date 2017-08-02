@@ -1,8 +1,8 @@
 package projecten3_h6.evaandroid;
 
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.design.widget.NavigationView;
@@ -11,36 +11,27 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.AttributeSet;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
-
-import org.w3c.dom.Text;
-
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.List;
 import java.util.Locale;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
-import butterknife.OnItemClick;
-import projecten3_h6.evaandroid.Fragments.AchievementFragment;
-import projecten3_h6.evaandroid.Fragments.ChallengeFragment;
-import projecten3_h6.evaandroid.Fragments.ProgressFragment;
-import projecten3_h6.evaandroid.Fragments.SettingsFragment;
-import projecten3_h6.evaandroid.Fragments.ShoppinglistFragment;
-import projecten3_h6.evaandroid.Fragments.TodayFragment;
-
-import projecten3_h6.evaandroid.Domain.*;
+import projecten3_h6.evaandroid.fragments.AchievementFragment;
+import projecten3_h6.evaandroid.fragments.ChallengeFragment;
+import projecten3_h6.evaandroid.fragments.ProgressFragment;
+import projecten3_h6.evaandroid.fragments.SettingsFragment;
+import projecten3_h6.evaandroid.fragments.ShoppingListFragment;
+import projecten3_h6.evaandroid.fragments.TodayFragment;
+import projecten3_h6.evaandroid.domain.*;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -60,25 +51,35 @@ public class MainActivity extends AppCompatActivity
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.setDrawerListener(toggle);
+        drawer.addDrawerListener(toggle);
         toggle.syncState();
 
         app = (EvaApplication)getApplicationContext();
-        // Get the user from the saved file.
-        app.setUser(getUserOutOfFile());
+
+        if(app.getUser() == null) {
+            // Get the user from the saved file.
+            app.setUser(getUserOutOfFile());
+        }
+        // Calculation(s)
+        app.getUser().calculateChallengeCoins();
+
+        //getAchievements
+        app.getRemoteAchievements();
+
+        displaySelectedScreen(R.id.nav_progress);
 
         View navView =  navigationView.getHeaderView(0);
         TextView bottomHeaderTextView = (TextView)navView.findViewById(R.id.bottomHeaderTextView);
         bottomHeaderTextView.setText(String.format(getString(R.string.navigation_drawer_header_bottom),app.getUser().getStartingDate()));
 
-        displaySelectedScreen(R.id.nav_progress);
 
         navigationView.setNavigationItemSelectedListener(this);
     }
 
     private User getUserOutOfFile(){
-        User user = new User();
+        User user;
         try {
+
             FileInputStream fis = getApplicationContext().openFileInput("EvaApplicationUserStorage");
             ObjectInputStream is = new ObjectInputStream(fis);
             user = (User) is.readObject();
@@ -146,7 +147,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
         // Handle navigation view item clicks here.
         displaySelectedScreen(item.getItemId());
@@ -165,7 +166,7 @@ public class MainActivity extends AppCompatActivity
             fragment = new TodayFragment();
             toolbar.setTitle("Today");
         } else if (itemId == R.id.nav_shoppinglist) {
-            fragment = new ShoppinglistFragment();
+            fragment = new ShoppingListFragment();
             toolbar.setTitle("Shopping List");
         } else if (itemId == R.id.nav_achievements) {
             fragment = new AchievementFragment();
