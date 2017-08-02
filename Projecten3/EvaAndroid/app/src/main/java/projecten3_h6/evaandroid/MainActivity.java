@@ -25,13 +25,13 @@ import java.util.Calendar;
 import java.util.Locale;
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import projecten3_h6.evaandroid.Fragments.AchievementFragment;
-import projecten3_h6.evaandroid.Fragments.ChallengeFragment;
-import projecten3_h6.evaandroid.Fragments.ProgressFragment;
-import projecten3_h6.evaandroid.Fragments.SettingsFragment;
-import projecten3_h6.evaandroid.Fragments.ShoppingListFragment;
-import projecten3_h6.evaandroid.Fragments.TodayFragment;
-import projecten3_h6.evaandroid.Domain.*;
+import projecten3_h6.evaandroid.fragments.AchievementFragment;
+import projecten3_h6.evaandroid.fragments.ChallengeFragment;
+import projecten3_h6.evaandroid.fragments.ProgressFragment;
+import projecten3_h6.evaandroid.fragments.SettingsFragment;
+import projecten3_h6.evaandroid.fragments.ShoppingListFragment;
+import projecten3_h6.evaandroid.fragments.TodayFragment;
+import projecten3_h6.evaandroid.domain.*;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -55,13 +55,17 @@ public class MainActivity extends AppCompatActivity
         toggle.syncState();
 
         app = (EvaApplication)getApplicationContext();
+
         if(app.getUser() == null) {
             // Get the user from the saved file.
             app.setUser(getUserOutOfFile());
         }
         // Calculation(s)
         app.getUser().calculateChallengeCoins();
-        
+
+        //getAchievements
+        app.getRemoteAchievements();
+
         displaySelectedScreen(R.id.nav_progress);
 
         View navView =  navigationView.getHeaderView(0);
@@ -75,6 +79,7 @@ public class MainActivity extends AppCompatActivity
     private User getUserOutOfFile(){
         User user;
         try {
+
             FileInputStream fis = getApplicationContext().openFileInput("EvaApplicationUserStorage");
             ObjectInputStream is = new ObjectInputStream(fis);
             user = (User) is.readObject();
