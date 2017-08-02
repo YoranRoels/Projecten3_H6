@@ -119,7 +119,7 @@ app.controller('DishesCtrl', [
     
         
    $scope.showTableHideForm = false;
-
+        $scope.showPreparation = false;
      $scope.arr=[];
         $scope.iName="";
         $scope.iAmount="";
@@ -127,16 +127,9 @@ app.controller('DishesCtrl', [
             this.arr.push({name:$scope.iName, amount: $scope.iAmount});
            $scope.iName="";
         $scope.iAmount="";
-        }   
-     
-        
-        
-    
-    
-        
-          $scope.createDish = function(){
-              
-              
+        }  
+       
+        $scope.createDish = function(){              
             dishes.createDish({
                 imageId : $scope.image,
                 name:$scope.name,
@@ -144,13 +137,9 @@ app.controller('DishesCtrl', [
                 difficulty : $scope.difficulty,
                 dishType : $scope.dishType,
                 preparation : $scope.preparation,
-                ingredients : $scope.arr
-                
-                  
+                ingredients : $scope.arr                  
             });
-              $scope.showTableHideForm = false;
-              
-                
+              $scope.showTableHideForm = false;                
         }
        
         
