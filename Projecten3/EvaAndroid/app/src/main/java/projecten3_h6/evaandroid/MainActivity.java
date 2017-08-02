@@ -59,6 +59,8 @@ public class MainActivity extends AppCompatActivity
             // Get the user from the saved file.
             app.setUser(getUserOutOfFile());
         }
+        // Calculation(s)
+        app.getUser().calculateChallengeCoins();
         
         displaySelectedScreen(R.id.nav_progress);
 

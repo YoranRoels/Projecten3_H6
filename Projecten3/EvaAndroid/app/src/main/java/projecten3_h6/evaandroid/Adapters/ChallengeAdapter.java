@@ -7,19 +7,28 @@ import android.view.ViewGroup;
 import android.widget.CompoundButton;
 import android.widget.TextView;
 import android.widget.ToggleButton;
+
+import org.w3c.dom.Text;
+
 import java.util.List;
+import java.util.Locale;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import projecten3_h6.evaandroid.Domain.Challenge;
+import projecten3_h6.evaandroid.Domain.User;
+import projecten3_h6.evaandroid.Fragments.ChallengeFragment;
 import projecten3_h6.evaandroid.R;
 
 public class ChallengeAdapter extends RecyclerView.Adapter<ChallengeAdapter.ChallengeViewHolder> {
 
     private int itemCount;
     private List<Challenge> challenges;
+    private TextView challengeCoinsTextView;
 
-    public ChallengeAdapter(List<Challenge> challenges) {
+    public ChallengeAdapter(List<Challenge> challenges, TextView challengeCoinsTextView) {
         this.challenges = challenges;
+        this.challengeCoinsTextView = challengeCoinsTextView;
         this.itemCount = challenges.size();
     }
 
@@ -47,6 +56,13 @@ public class ChallengeAdapter extends RecyclerView.Adapter<ChallengeAdapter.Chal
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 challenges.get(holderPosition).setCompleted(isChecked);
+                User user = ChallengeFragment.app.getUser();
+                if(isChecked) {
+                    user.setChallengeCoins(user.getChallengeCoins() + 1);
+                } else {
+                    user.setChallengeCoins(user.getChallengeCoins() - 1);
+                }
+                challengeCoinsTextView.setText(String.format(Integer.toString(user.getChallengeCoins()), Locale.ENGLISH));
             }
         });
     }
