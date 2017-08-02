@@ -36,12 +36,17 @@
         <td>{{dish.dishType}}</td>
         <td>{{dish.cookingTime}}</td>
         <td> {{dish.difficulty}}</td>
+        <td class="glyphicon glyphicon-trash"></td> 
   </tr>
 </table> 
 
 <div class="form-group" >
     <button class="btn btn-default" type="button" ng-click="showTableHideForm = true" ng-hide = "showTableHideForm"> Add a new dish </button>
     <form ng-submit="createDish()" ng-show="showTableHideForm">
+        <div class="form-group">
+              <label>Image Id</label>
+            <input type="text" class="form-control" ng-model="image"  />
+        </div>
           <div class="form-group">
               <label>Name</label>
             <input type="text" class="form-control" ng-model="name"  />
@@ -98,10 +103,22 @@
                 </div><!-- /input-group -->
             </div><!-- /.col-lg-6 -->
         </div><!-- /.row -->
-         <div  class="form-group" ng-repeat="ar in arr">
-        <span> naam : {{ar.name}}</span>
-        <span>amount : {{ar.amount}}</span>
-     </div>   
+            <table class="table" >
+       <thead class="thead-inverse">
+        
+        <th>Name</th>
+        <th>Amount</th>
+        
+        
+  </thead>    
+  <tr ng-repeat="ar in arr">
+        <td>{{ar.name}}</td>
+        <td>{{ar.amount}}</td>
+         <td class="glyphicon glyphicon-trash"></td> 
+  </tr>
+</table>
+       
+
         
         
         <div class="form-group">

@@ -125,20 +125,20 @@ app.controller('DishesCtrl', [
         $scope.iAmount="";
         $scope.add = function(){
             this.arr.push({name:$scope.iName, amount: $scope.iAmount});
-           
+           $scope.iName="";
+        $scope.iAmount="";
         }   
+     
+        
+        
     
     
         
           $scope.createDish = function(){
-              console.log({ name:$scope.name,
-                cookingTime : $scope.cookingTime,
-                difficulty : $scope.difficulty,
-                dishType : $scope.dishType,
-                preparation : $scope.preparation,
-                ingredients : $scope.arr});
-              console.log($scope.arr)
+              
+              
             dishes.createDish({
+                imageId : $scope.image,
                 name:$scope.name,
                 cookingTime : $scope.cookingTime,
                 difficulty : $scope.difficulty,
