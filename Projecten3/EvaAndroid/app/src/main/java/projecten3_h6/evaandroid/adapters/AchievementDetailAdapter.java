@@ -42,12 +42,8 @@ AchievementDetailAdapter extends RecyclerView.Adapter<AchievementDetailAdapter.A
 
         if (achievements.get(position).isCompleted()) {
             Picasso.with(context).load(achievements.get(position).getCompletedImageId()).into(achievementDetailImage);
-            achievementDetailImage.setImageResource(achievements.get(position).getCompletedImageId());
-
         } else {
             Picasso.with(context).load(achievements.get(position).getImageId()).into(achievementDetailImage);
-            achievementDetailImage.setImageResource(achievements.get(position).getImageId());
-
         }
 
         achievementTitle.setText(achievements.get(position).getTitle());

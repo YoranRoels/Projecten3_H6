@@ -37,12 +37,8 @@ public class AchievementAdapter extends RecyclerView.Adapter<AchievementAdapter.
 
         if (achievements.get(position).isCompleted()) {
             Picasso.with(context).load(achievements.get(position).getCompletedImageId()).into(achievementImage);
-            achievementImage.setImageResource(achievements.get(position).getCompletedImageId());
-
         } else {
             Picasso.with(context).load(achievements.get(position).getImageId()).into(achievementImage);
-            achievementImage.setImageResource(achievements.get(position).getImageId());
-
         }
 
     }
