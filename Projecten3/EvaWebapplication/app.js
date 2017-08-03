@@ -8,11 +8,10 @@ var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 
 require('./models/Dishes');
-require('./models/Ingredients');
 require('./models/Achievements');
 require('./models/Challenges');
 
-mongoose.connect('mongodb://localhost/eva');
+mongoose.connect("mongodb://localhost/eva-webapplication");
 
 var index = require('./routes/index');
 var partialsRoutes = require('./routes/partials');

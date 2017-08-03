@@ -1,50 +1,51 @@
 <div class="page-header">
     <h1>Challenges</h1>
 </div>
- <table class="table" ng-hide = "showTableHideForm">
-       <thead class="thead-inverse">
-        
-        <th>Name</th>
-        <th>Challenge type</th>
-        <th>Description</th>
-        <th></th>
-        
-        
-  </thead>    
-  <tr ng-repeat="chal in challenges">
-        <td>{{chal.name}}</td>
+
+<table class="table" ng-hide="showTableHideForm">
+    <thead class="thead-inverse">
+    <th>Title</th>
+    <th>Challenge type</th>
+    <th>Description</th>
+    </thead>
+
+    <tr ng-repeat="chal in challenges">
+        <td>{{chal.title}}</td>
         <td>{{chal.challengeType}}</td>
         <td>{{chal.description}}</td>
-        <td class="glyphicon glyphicon-trash"></td> 
-  </tr>
+        <td class="glyphicon glyphicon-trash"></td>
+    </tr>
 </table>
 
-<div class="form-group" >
-   <button class="btn btn-default" type="button" ng-hide = "showTableHideForm" ng-click="showTableHideForm = true">Add a new Challenge </button>
-    <form ng-submit="createChallenge()"  ng-show="showTableHideForm" >
-          <div class="form-group">
-               <label>Name</label>
-            <input type="text" class="form-control" ng-model="name"  />
+<div class="form-group">
+    <button class="btn btn-default" type="button" ng-hide="showTableHideForm" ng-click="showTableHideForm = true">Add a
+        new Challenge
+    </button>
+    <form ng-submit="createChallenge()" ng-show="showTableHideForm">
+        <div class="form-group">
+            <label>Name</label>
+            <input type="text" class="form-control" ng-model="title" required/>
         </div>
- <div class="form-group">
+        <div class="form-group">
             <label>Challenge type</label>
-            <select class="form-control" ng-model="challengeType">
-                <option ng-value="EASY">EASY</option>
-                <option ng-value="MEDIUM">MEDIUM</option>
-                <option ng-value="HARD">HARD</option>
+            <select class="form-control" ng-model="challengeType" required>
+                <option></option>
+                <option>Easy</option>
+                <option>Medium</option>
+                <option>Hard</option>
             </select>
         </div>
-        
-<div class="form-group">
-             <label>Description</label>
-            <textarea class="form-control" rows="5" ng-model="description" ></textarea>
+
+        <div class="form-group">
+            <label>Description</label>
+            <textarea class="form-control" rows="5" ng-model="description" required></textarea>
         </div>
-        <button class="btn btn-default" type="submit" >Confirm</button>
-        <button class="btn btn-danger" type="button" ng-click="showTableHideForm = false" > Cancel</button>
-        
+        <button class="btn btn-primary" type="submit">Confirm</button>
+        <button class="btn btn-danger" type="button" ng-click="showTableHideForm = false"> Cancel</button>
+
     </form>
 
-    </div>
+</div>
 
 
  

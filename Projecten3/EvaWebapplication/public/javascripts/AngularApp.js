@@ -41,7 +41,7 @@ app.config([
                 controller: 'challengesCtrl',
                 resolve: {
 					postPromise: ['data', function(data) {
-						return data.getAllChallanges();
+						return data.getAllChallenges();
 					}]
 				}
                 
@@ -63,7 +63,7 @@ app.factory('data', ['$http', function($http){
             
         });
     };
-     o.getAllChallanges = function() {
+     o.getAllChallenges = function() {
         return $http.get('/challenges').success(function(data){
             angular.copy(data, o.challenges);
             
@@ -116,33 +116,39 @@ app.controller('DishesCtrl', [
     '$scope','data',
     function($scope, dishes){
         $scope.dishes = dishes.dishes;
-    
-        
-   $scope.showTableHideForm = false;
+        $scope.showTableHideForm = false;
         $scope.showPreparation = false;
-     $scope.arr=[];
+        $scope.ingredients=[];
         $scope.iName="";
         $scope.iAmount="";
+
         $scope.add = function(){
-            this.arr.push({name:$scope.iName, amount: $scope.iAmount});
-           $scope.iName="";
-        $scope.iAmount="";
-        }  
+            this.ingredients.push({name:$scope.iName, amount: $scope.iAmount});
+            $scope.iName="";
+            $scope.iAmount="";
+        };
        
         $scope.createDish = function(){              
             dishes.createDish({
-                imageId : $scope.image,
-                name:$scope.name,
+                imageId : $scope.imageId,
+                name: $scope.name,
                 cookingTime : $scope.cookingTime,
                 difficulty : $scope.difficulty,
                 dishType : $scope.dishType,
                 preparation : $scope.preparation,
-                ingredients : $scope.arr                  
+                ingredients : $scope.ingredients
             });
-              $scope.showTableHideForm = false;                
-        }
-       
-        
+            $scope.showTableHideForm = false;
+            $scope.ingredients =[];
+            $scope.iName = "";
+            $scope.iAmount = "";
+            $scope.name = "";
+            $scope.cookingTime = "";
+            $scope.difficulty = "";
+            $scope.dishType = "";
+            $scope.preparation = "";
+            $scope.imageId = "";
+        };
     }]);
 
 app.controller('AchievementsCtrl', [
@@ -155,10 +161,12 @@ app.controller('AchievementsCtrl', [
             achievements.createAchievement({
                 title: $scope.title,
                 description : $scope.description,
-                achievementType : $scope.achievementType
-                    
+                achievementType : $scope.achievementType,
             });
             $scope.showTableHideForm = false;
+            $scope.title = "";
+            $scope.description = "";
+            $scope.achievementType = "";
         }
         
         $scope.deleteAch = function(achievement){
@@ -166,6 +174,7 @@ app.controller('AchievementsCtrl', [
         }
         
     }]);
+
 app.controller('challengesCtrl', [
     '$scope','data',
     function($scope,challenges){
@@ -174,14 +183,15 @@ app.controller('challengesCtrl', [
         
         $scope.createChallenge=function(){
             challenges.createChallenge({
-                name: $scope.name,
+                title: $scope.title,
                 description : $scope.description,
-                challengeType : $scope.challengeType
-                    
+                challengeType : $scope.challengeType,
             });
             $scope.showTableHideForm = false;
-        }
-        
+            $scope.title = "";
+            $scope.description = "";
+            $scope.challengeType = "";
+        };
     }]);
 
 app.controller('NavCtrl', [
