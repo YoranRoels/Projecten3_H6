@@ -4,18 +4,18 @@ var DishSchema = new mongoose.Schema({
     name: String,
     cookingTime: {
         type: String,
-        enum: ['SHORT', 'MEDIUM', 'LONG']
+        enum: ['Short', 'Medium', 'Long']
     },
     difficulty: {
         type: String,
-        enum: ['STARTERS', 'ADVANCED', 'MASTER']
+        enum: ['Starters', 'Advanced', 'Master']
     },
     dishType: {
         type: String,
         enum:[
-            'APPETIZER',
-            'MAINDISH',
-            'DESSERT'],
+            'Appetizer',
+            'Maindish',
+            'Dessert'],
     },
     ingredients: [{ name: String , amount : String }],
     preparation: String,

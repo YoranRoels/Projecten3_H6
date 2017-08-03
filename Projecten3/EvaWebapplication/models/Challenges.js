@@ -1,14 +1,14 @@
 var mongoose = require('mongoose');
 
 var ChallengeSchema = new mongoose.Schema({
-    name: String,
+    title: String,
     description: String,
     challengeType: {
         type: String,
         enum:[
-            'EASY',
-            'MEDIUM',
-            'HARD'],
+            'Easy',
+            'Medium',
+            'Hard'],
     },
 });
 

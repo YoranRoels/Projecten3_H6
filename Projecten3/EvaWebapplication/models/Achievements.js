@@ -6,12 +6,10 @@ var AchievementSchema = new mongoose.Schema({
     achievementType: {
         type: String,
         enum:[
-            'BRONZE',
-            'SILVER',
-            'GOLD'],
+            'Bronze',
+            'Silver',
+            'Gold'],
     },
 });
 
 mongoose.model('Achievement', AchievementSchema);
-
-
