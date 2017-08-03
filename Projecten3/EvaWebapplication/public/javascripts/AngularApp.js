@@ -133,7 +133,7 @@ app.controller('DishesCtrl', [
                 imageId : $scope.imageId,
                 name: $scope.name,
                 cookingTime : $scope.cookingTime,
-                difficulty : $scope.difficulty,
+                difficultyType : $scope.difficultyType,
                 dishType : $scope.dishType,
                 preparation : $scope.preparation,
                 ingredients : $scope.ingredients
@@ -144,7 +144,7 @@ app.controller('DishesCtrl', [
             $scope.iAmount = "";
             $scope.name = "";
             $scope.cookingTime = "";
-            $scope.difficulty = "";
+            $scope.difficultyType = "";
             $scope.dishType = "";
             $scope.preparation = "";
             $scope.imageId = "";
@@ -167,12 +167,15 @@ app.controller('AchievementsCtrl', [
             $scope.title = "";
             $scope.description = "";
             $scope.achievementType = "";
-        }
+        };
         
         $scope.deleteAch = function(achievement){
             achievements.deleteAch(achievement);
-        }
-        
+        };
+        $scope.deleteAchievement = function(achievement) {
+            console.log(achievement);
+
+        };
     }]);
 
 app.controller('challengesCtrl', [
