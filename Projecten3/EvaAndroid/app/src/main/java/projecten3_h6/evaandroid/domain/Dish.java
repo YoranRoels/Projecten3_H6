@@ -10,17 +10,17 @@ public class Dish implements Serializable{
     private String name;
     private CookingTime cookingTime;
     private DifficultyType difficultyType;
-    private DishType type;
+    private DishType dishType;
     private List<Ingredient> ingredients;
     private String preparation;
 
-    public Dish(int imageId, String name, CookingTime cookingTime, DifficultyType difficultyType, DishType type,
+    public Dish(int imageId, String name, CookingTime cookingTime, DifficultyType difficultyType, DishType dishType,
                 List<Ingredient> ingredients, String preparation) {
         this.imageId = imageId;
         this.name = name;
         this.cookingTime = cookingTime;
         this.difficultyType = difficultyType;
-        this.type = type;
+        this.dishType = dishType;
         this.ingredients = ingredients;
         this.preparation = preparation;
     }
@@ -49,8 +49,8 @@ public class Dish implements Serializable{
         return difficultyType;
     }
 
-    public DishType getType() {
-        return type;
+    public DishType getDishType() {
+        return dishType;
     }
 
     public List<Ingredient> getIngredients() {

@@ -71,42 +71,11 @@ public class TodayFragment extends Fragment {
 
             delim = "\n";
         }
+
         ingredientsView.setText(sb.toString());
-
-        // Type
-        String typeStr;
-        if(dish.getType() == DishType.MAINDISH){
-            typeStr = "Main Dish";
-        } else if(dish.getType() == DishType.APPETIZER){
-            typeStr = "Appetizer";
-        } else {
-            typeStr = "Dessert";
-        }
-        type.setText(typeStr);
-
-        // Time
-        String time;
-        if(dish.getCookingTime() == CookingTime.LONG){
-            time = "Long";
-        } else  if(dish.getCookingTime() == CookingTime.MEDIUM){
-            time = "Medium";
-        } else {
-            time = "Short";
-        }
-        cookingTime.setText(time);
-
-        // Difficulty
-        String sDifficulty;
-        if(dish.getDifficultyType() == DifficultyType.STARTERS){
-            sDifficulty = "Starters";
-        } else  if(dish.getDifficultyType() == DifficultyType.ADVANCED){
-            sDifficulty = "Advanced";
-        } else {
-            sDifficulty = "Master";
-        }
-        difficulty.setText(sDifficulty);
-
-        // Rest
+        type.setText(dish.getDishType().toString());
+        cookingTime.setText(dish.getCookingTime().toString());
+        difficulty.setText(dish.getDifficultyType().toString());
         preparationView.setText(dish.getPreparation());
         recipeImage.setPadding(0,0,0,0);
         recipeImage.setImageResource(dish.getImageId());
