@@ -6,17 +6,13 @@
     <color name="colorPrimaryLight">#9CCC65</color>
 
     <!-- Accent Color -->
-    <color name="colorAccentLight">#FFA726</color>
-    <color name="colorAccent">#FB8C00</color>
-    <color name="colorAccentDark">#EF6C00</color>
+    <color name="colorAccentLight">#919191</color>
+    <color name="colorAccent">#737373</color>
 
     <!-- Content Color -->
     <color name="contentColor">#FFFFFF</color>
 
     <!-- Gray -->
-    <color name="grayDark">#3D3D3D</color>
-    <color name="grayMedium">#6D6D6D</color>
-    <color name="grayLight">#B3B3B3</color>
     <color name="grayBorder">#ECECEC</color>
 
     <!-- Text colors -->

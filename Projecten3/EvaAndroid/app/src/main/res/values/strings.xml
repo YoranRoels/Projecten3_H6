@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Carrot</string>
+    <string name="app_name">Eva</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -26,7 +26,7 @@
     <string name="navigation_drawer_item5">Challenges</string>
 
     <!-- Progress Strings -->
-    <string name="welcome">Welcome to Carrot!</string>
+    <string name="welcome">Welcome to the Eva app!</string>
     <string name="welcome_advice">Start tapping the cards to select dishes.</string>
     <string name="no_skipped_days">You didn\'t skip a single day. We admire you.</string>
     <string name="skipped_days">Don\'t give up, keep the vegan streaks coming!</string>
