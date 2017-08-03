@@ -62,7 +62,7 @@ public class TodayFragment extends Fragment {
 
         for(Ingredient i : dish.getIngredients()){
             sb.append(delim);
-            if(i.getAmount() == null){
+            if(i.getAmount() == null || i.getAmount().equals("")){
                 sb.append(i.getName());
             }else
             {
