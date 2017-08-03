@@ -53,7 +53,6 @@ public class ProgressAdapter extends RecyclerView.Adapter<ProgressAdapter.Progre
             progressDishTitle.setText(currentDays.get(holderPosition).getDish().getName());
             Context context = holder.dayDishImage.getContext();
             Picasso.with(context).load(currentDays.get(holderPosition).getDish().getImageId()).into(dayDishImage);
-            dayDishImage.setImageResource(currentDays.get(holderPosition).getDish().getImageId());
             toggleComplete.setChecked(currentDays.get(holderPosition).isCompleted());
             if (today.get(Calendar.DAY_OF_YEAR) >= currentDays.get(holderPosition).getDayOfTheYear()
                     || today.get(Calendar.YEAR) > currentDays.get(holderPosition).getYear()) {

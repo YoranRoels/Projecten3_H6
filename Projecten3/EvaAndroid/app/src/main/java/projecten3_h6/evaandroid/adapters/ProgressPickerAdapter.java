@@ -45,8 +45,6 @@ public class ProgressPickerAdapter extends RecyclerView.Adapter<ProgressPickerAd
         pickerDishTitle.setText(choices.get(position).getName());
         Context context = holder.pickerDishImage.getContext();
         Picasso.with(context).load(choices.get(position).getImageId()).into(pickerDishImage);
-        pickerDishImage.setImageResource(choices.get(position).getImageId());
-
     }
 
     @Override
