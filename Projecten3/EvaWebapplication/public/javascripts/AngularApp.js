@@ -45,7 +45,7 @@ app.config([
 					}]
 				}
                 
-            });;
+            });
 
 
         $urlRouterProvider.otherwise('home');
@@ -60,43 +60,48 @@ app.factory('data', ['$http', function($http){
     o.getAllDishes = function() {
         return $http.get('/dishes').success(function(data){
             angular.copy(data, o.dishes);
-            
         });
     };
      o.getAllChallenges = function() {
         return $http.get('/challenges').success(function(data){
             angular.copy(data, o.challenges);
-            
         });
     };
     o.createDish = function(dish){
         return $http.post("/dishes",dish).success(function(data){
             o.dishes.push(data);
         })
-    }
+    };
      o.createAchievement = function(achievement){
         return $http.post("/achievements",achievement).success(function(data){
             o.achievements.push(data);
         })
-    }
+    };
      o.createChallenge = function(challenge){
         return $http.post("/challenges",challenge).success(function(data){
             o.challenges.push(data);
         })
-    }
+    };
     o.getDish = function(id){
         return $http.get('/dishes'+ id).then(function(res) {
 			return res.data;
 		});
-    }
-    o.deleteAch = function(achievement){
-        return $http.delete('/achievement/' + achievement).success(function(data) {
-			angular.copy(data, o.achievements);
+    };
+    o.deleteAchievement = function(achievement){
+        return $http.delete('/achievements/' + achievement._id).success(function(data) {
+            _.remove(o.achievements, {_id : data._id});
 		});
-    }
-    
-    
-    
+    };
+    o.deleteDish = function(dish){
+        return $http.delete('/dishes/' + dish.name).success(function(data) {
+            _.remove(o.dishes, {name : data.name});
+        });
+    };
+    o.deleteChallenge = function(challenge){
+        return $http.delete('/challenges/' + challenge._id).success(function(data) {
+            _.remove(o.challenges, {_id : data._id});
+        });
+    };
     o.getAllAchievements = function() {
         return $http.get('/achievements').success(function(data){
             angular.copy(data, o.achievements);
@@ -149,6 +154,11 @@ app.controller('DishesCtrl', [
             $scope.preparation = "";
             $scope.imageId = "";
         };
+
+        $scope.deleteDish = function(dish) {
+            console.log(dish);
+            dishes.deleteDish(dish);
+        };
     }]);
 
 app.controller('AchievementsCtrl', [
@@ -168,13 +178,9 @@ app.controller('AchievementsCtrl', [
             $scope.description = "";
             $scope.achievementType = "";
         };
-        
-        $scope.deleteAch = function(achievement){
-            achievements.deleteAch(achievement);
-        };
-        $scope.deleteAchievement = function(achievement) {
-            console.log(achievement);
 
+        $scope.deleteAchievement = function(achievement) {
+            achievements.deleteAchievement(achievement);
         };
     }]);
 
@@ -194,6 +200,10 @@ app.controller('challengesCtrl', [
             $scope.title = "";
             $scope.description = "";
             $scope.challengeType = "";
+        };
+
+        $scope.deleteChallenge = function(challenge) {
+            challenges.deleteChallenge(challenge);
         };
     }]);
 

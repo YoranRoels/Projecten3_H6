@@ -28,7 +28,7 @@
                 Close
             </button>
         </td>
-        <td class="glyphicon glyphicon-trash"></td>
+        <td class="glyphicon glyphicon-trash" ng-click="deleteDish(dish)"></td>
         <td ng-show="showPreparation">{{dish.preparation}}</td>
     </tr>
 </table>
@@ -57,7 +57,7 @@
                 <option></option>
                 <option>Starters</option>
                 <option>Advanced</option>
-                <option>Masters</option>
+                <option>Master</option>
             </select>
         </div>
         <div class="form-group">
