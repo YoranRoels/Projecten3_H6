@@ -7,7 +7,6 @@ var Dish = mongoose.model('Dish');
 var Achievement = mongoose.model('Achievement');
 var Challenge = mongoose.model('Challenge');
 
-
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
@@ -30,13 +29,16 @@ router.get('/dishes/three-random',function(req , res, next){
 });
 
 router.get('/dishes/:dish', function(req, res) {
-    req.dish.populate('ingredients', function(err, dish) {
-        if (err) { return next(err); }
+        res.json(req.dish);
+});
 
+router.delete('/dishes/:dish', function(req, res) {
+    Dish.findOneAndRemove({'name': req.dish.name}, function(err, dish) {
+        if(err){
+            return err;
+        }
         res.json(dish);
     });
-
-    //res.json(req.dish);
 });
 
 router.post('/dishes', function(req, res, next) {
@@ -49,9 +51,6 @@ router.post('/dishes', function(req, res, next) {
     });
 });
 
-// One thing you might notice about the remaining routes we need to implement is that they all require us to load a post object by ID.
-// Rather than replicating the same code across several different request handler functions,
-// we can use Express's param() function to automatically load an object.
 router.param('dish', function(req, res, next, name) {
     var query = Dish.findOne({'name' : name});
 
@@ -64,27 +63,20 @@ router.param('dish', function(req, res, next, name) {
     });
 });
 
-router.post('/dishes/:dish/ingredients', function(req, res, next) {
-    var ingredient = new Ingredient(req.body);
-    ingredient.dish = req.dish;
-
-    ingredient.save(function(err, ingredient){
-        if(err){ return next(err); }
-
-        req.dish.ingredients.push(ingredient);
-        req.dish.save(function(err, ingredient) {
-            if(err){ return next(err); }
-
-            res.json(ingredient);
-        });
-    });
-});
-
 router.get('/achievements', function(req, res, next) {
     Achievement.find(function(err, achievements){
         if(err){ return next(err); }
 
         res.json(achievements);
+    });
+});
+
+router.delete('/achievements/:achievement', function(req, res) {
+    Achievement.findByIdAndRemove(req.achievement._id, function(err, achievement) {
+        if(err){
+            return err;
+        }
+        res.json(achievement);
     });
 });
 
@@ -101,14 +93,6 @@ router.post('/achievements', function(req, res, next) {
         res.json(achievement);
     });
 });
-
-router.delete('/achievements/:achievement',function(req,res){
-    Achievement.remove({achievement  :req.achievement},
-                       function(err,achievement){
-        if (err) { return next(err); }
-    });
-});
-
 
 router.param('achievement', function(req, res, next, id) {
     var query = Achievement.findById(id);
@@ -130,7 +114,6 @@ router.get('/challenges', function(req, res, next) {
     });
 });
 
-
 router.get('/challenges/three-random',function(req , res, next){
     Challenge.find(function(err,challenges){
         if(err){ return next(err); }
@@ -141,6 +124,15 @@ router.get('/challenges/three-random',function(req , res, next){
 
 router.get('/challenges/:challenge', function(req, res) {
     res.json(req.challenge);
+});
+
+router.delete('/challenges/:challenge', function(req, res) {
+    Challenge.findByIdAndRemove(req.challenge._id, function(err, challenge) {
+        if(err){
+            return err;
+        }
+        res.json(challenge);
+    });
 });
 
 router.post('/challenges', function(req, res, next) {

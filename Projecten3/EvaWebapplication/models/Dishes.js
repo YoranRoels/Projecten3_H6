@@ -6,7 +6,7 @@ var DishSchema = new mongoose.Schema({
         type: String,
         enum: ['Short', 'Medium', 'Long']
     },
-    difficulty: {
+    difficultyType: {
         type: String,
         enum: ['Starters', 'Advanced', 'Master']
     },
