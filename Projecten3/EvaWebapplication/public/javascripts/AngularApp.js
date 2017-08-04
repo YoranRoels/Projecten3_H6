@@ -211,10 +211,3 @@ app.controller('NavCtrl', [
     function($scope){
 
     }]);
-
-app.controller('dishCtrl', [
-    '$scope',
-    function($scope){
-        $scope.test = 'Hello DISH';
-        
-    }]);
