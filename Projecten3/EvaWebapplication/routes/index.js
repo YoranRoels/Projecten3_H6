@@ -7,7 +7,6 @@ var Dish = mongoose.model('Dish');
 var Achievement = mongoose.model('Achievement');
 var Challenge = mongoose.model('Challenge');
 
-
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });

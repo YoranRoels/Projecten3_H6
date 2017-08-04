@@ -156,7 +156,6 @@ app.controller('DishesCtrl', [
         };
 
         $scope.deleteDish = function(dish) {
-            console.log(dish);
             dishes.deleteDish(dish);
         };
     }]);
