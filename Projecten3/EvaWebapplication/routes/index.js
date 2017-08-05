@@ -41,12 +41,32 @@ router.delete('/dishes/:dish', function(req, res) {
     });
 });
 
-router.put('/dishes/:dish', function(req, res) {
-    Dish.findOneAndUpdate({name: req.body.name}, {
+
+
+router.put('/achievements/:achievement', function(req, res) {
+    Achievement.findOneAndUpdate({_id: req.body._id}, {
         $set: {
             title: req.body.title,
-            challengeType: req.body.challengeType,
+            achievementType: req.body.achievementType,
             description: req.body.description,
+        }
+    }, function(err, result) {
+        if (err) return res.send(err)
+        res.send(result)
+    });
+});
+
+
+router.put('/dishes/:dish', function(req, res) {
+    Dish.findOneAndUpdate({_id: req.body._id}, {
+        $set: {
+            name: req.body.name,
+            imageId : req.body.imageId,
+            cookingTime : req.body.cookingTime,
+            difficultyType : req.body.difficultyType,
+            dishType : req.body.dishType,
+            preparation : req.body.preparation,
+            ingredients : req.body.ingredients,
         }
     }, function(err, result) {
         if (err) { return res.send(err) }

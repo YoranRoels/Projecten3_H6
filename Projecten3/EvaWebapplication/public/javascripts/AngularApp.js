@@ -28,7 +28,7 @@ app.config([
             }).state('challenges', {
                 url: '/challenges',
                 templateUrl: 'partials/challenges',
-                controller: 'challengesCtrl',
+                controller: 'ChallengesCtrl',
                 resolve: {
 					postPromise: ['data', function(data) {
 						return data.getAllChallenges();
@@ -114,19 +114,15 @@ app.factory('data', ['$http', function($http){
     return o;
 }]);
 
-app.controller('MainCtrl', [
-    '$scope','data',
-    function($scope,dishes){
-        $scope.dishes = dishes.dishes;
-        
-    }]);
-
 app.controller('DishesCtrl', [
     '$scope','data',
     function($scope, dishes){
         $scope.dishes = dishes.dishes;
+        $scope.editMode = false;
         $scope.showTableHideForm = false;
         $scope.showPreparation = false;
+        $scope.showedDish = {};
+
         $scope.ingredients=[];
         $scope.iName="";
         $scope.iAmount="";
@@ -135,6 +131,10 @@ app.controller('DishesCtrl', [
             this.ingredients.push({name:$scope.iName, amount: $scope.iAmount});
             $scope.iName="";
             $scope.iAmount="";
+        };
+
+        $scope.deleteIngredient = function(ingredient) {
+          _.remove($scope.ingredients, {name : ingredient.name});
         };
        
         $scope.createDish = function(){              
@@ -147,6 +147,52 @@ app.controller('DishesCtrl', [
                 preparation : $scope.preparation,
                 ingredients : $scope.ingredients
             });
+            $scope.cancelForm();
+        };
+
+        $scope.deleteDish = function(dish) {
+            dishes.deleteDish(dish);
+        };
+
+        $scope.showDish = function(dish) {
+            console.log(dish);
+            $scope.showTableHideForm = true;
+            $scope.imageId = dish.imageId;
+            $scope.name= dish.name;
+            $scope.cookingTime = dish.cookingTime;
+            $scope.difficultyType = dish.difficultyType;
+            $scope.dishType = dish.dishType;
+            $scope.preparation = dish.preparation;
+            $scope.ingredients = dish.ingredients;
+            $scope.editMode = true;
+            $scope.showedDish = dish;
+        };
+
+        $scope.editDish = function() {
+            console.log({
+                _id : $scope.showedDish._id,
+                name: $scope.name,
+                imageId : $scope.imageId,
+                cookingTime : $scope.cookingTime,
+                difficultyType : $scope.difficultyType,
+                dishType : $scope.dishType,
+                preparation : $scope.preparation,
+                ingredients : $scope.ingredients,
+            });
+            dishes.editDish({
+                _id : $scope.showedDish._id,
+                imageId : $scope.imageId,
+                name: $scope.name,
+                cookingTime : $scope.cookingTime,
+                difficultyType : $scope.difficultyType,
+                dishType : $scope.dishType,
+                preparation : $scope.preparation,
+                ingredients : $scope.ingredients,
+            });
+            $scope.cancelForm();
+        };
+
+        $scope.cancelForm = function() {
             $scope.showTableHideForm = false;
             $scope.ingredients =[];
             $scope.iName = "";
@@ -157,10 +203,7 @@ app.controller('DishesCtrl', [
             $scope.dishType = "";
             $scope.preparation = "";
             $scope.imageId = "";
-        };
-
-        $scope.deleteDish = function(dish) {
-            dishes.deleteDish(dish);
+            $scope.editMode = false;
         };
     }]);
 
@@ -213,7 +256,7 @@ app.controller('AchievementsCtrl', [
         };
     }]);
 
-app.controller('challengesCtrl', [
+app.controller('ChallengesCtrl', [
     '$scope','data',
     function($scope,challenges){
         $scope.challenges = challenges.challenges;
@@ -234,7 +277,6 @@ app.controller('challengesCtrl', [
             challenges.deleteChallenge(challenge);
         };
         $scope.showChallenge = function(challenge) {
-            console.log(challenge);
             $scope.showTableHideForm = true;
             $scope.title = challenge.title;
             $scope.description = challenge.description;
