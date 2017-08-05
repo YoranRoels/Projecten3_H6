@@ -28,7 +28,7 @@ app.config([
             }).state('challenges', {
                 url: '/challenges',
                 templateUrl: 'partials/challenges',
-                controller: 'challengesCtrl',
+                controller: 'ChallengesCtrl',
                 resolve: {
 					postPromise: ['data', function(data) {
 						return data.getAllChallenges();
@@ -83,8 +83,8 @@ app.factory('data', ['$http', function($http){
 		});
     };
     o.deleteDish = function(dish){
-        return $http.delete('/dishes/' + dish.name).success(function(data) {
-            _.remove(o.dishes, {name : data.name});
+        return $http.delete('/dishes/' + dish._id).success(function(data) {
+            _.remove(o.dishes, {_id : data._id});
         });
     };
     o.deleteChallenge = function(challenge){
@@ -98,7 +98,6 @@ app.factory('data', ['$http', function($http){
         });
     };
     o.editChallenge = function(challenge) {
-        console.log(challenge);
         return $http.put('/challenges/' + challenge._id, challenge).success(function(data) {
             o.challenges[_.findIndex(o.challenges, {_id : data._id})] = challenge;
         });
@@ -106,27 +105,25 @@ app.factory('data', ['$http', function($http){
     o.editAchievement = function(achievement) {
         return $http.put('/achievements/' + achievement._id, achievement).success(function(data) {
             o.achievements[_.findIndex(o.achievements, {_id : data._id})] = achievement;
-        });;
+        });
     };
     o.editDish = function(dish) {
-        return $http.put('/dishes/' + dish._id, dish);
+        return $http.put('/dishes/' + dish._id, dish).success(function(data) {
+            o.dishes[_.findIndex(o.dishes, {_id : data._id})] = dish;
+        });
     };
     return o;
 }]);
-
-app.controller('MainCtrl', [
-    '$scope','data',
-    function($scope,dishes){
-        $scope.dishes = dishes.dishes;
-        
-    }]);
 
 app.controller('DishesCtrl', [
     '$scope','data',
     function($scope, dishes){
         $scope.dishes = dishes.dishes;
+        $scope.editMode = false;
         $scope.showTableHideForm = false;
         $scope.showPreparation = false;
+        $scope.showedDish = {};
+
         $scope.ingredients=[];
         $scope.iName="";
         $scope.iAmount="";
@@ -135,6 +132,10 @@ app.controller('DishesCtrl', [
             this.ingredients.push({name:$scope.iName, amount: $scope.iAmount});
             $scope.iName="";
             $scope.iAmount="";
+        };
+
+        $scope.deleteIngredient = function(ingredient) {
+          _.remove($scope.ingredients, {name : ingredient.name});
         };
        
         $scope.createDish = function(){              
@@ -147,6 +148,41 @@ app.controller('DishesCtrl', [
                 preparation : $scope.preparation,
                 ingredients : $scope.ingredients
             });
+            $scope.cancelForm();
+        };
+
+        $scope.deleteDish = function(dish) {
+            dishes.deleteDish(dish);
+        };
+
+        $scope.showDish = function(dish) {
+            $scope.showTableHideForm = true;
+            $scope.imageId = dish.imageId;
+            $scope.name= dish.name;
+            $scope.cookingTime = dish.cookingTime;
+            $scope.difficultyType = dish.difficultyType;
+            $scope.dishType = dish.dishType;
+            $scope.preparation = dish.preparation;
+            $scope.ingredients = dish.ingredients;
+            $scope.editMode = true;
+            $scope.showedDish = dish;
+        };
+
+        $scope.editDish = function() {
+            dishes.editDish({
+                _id : $scope.showedDish._id,
+                imageId : $scope.imageId,
+                name: $scope.name,
+                cookingTime : $scope.cookingTime,
+                difficultyType : $scope.difficultyType,
+                dishType : $scope.dishType,
+                preparation : $scope.preparation,
+                ingredients : $scope.ingredients,
+            });
+            $scope.cancelForm();
+        };
+
+        $scope.cancelForm = function() {
             $scope.showTableHideForm = false;
             $scope.ingredients =[];
             $scope.iName = "";
@@ -157,10 +193,7 @@ app.controller('DishesCtrl', [
             $scope.dishType = "";
             $scope.preparation = "";
             $scope.imageId = "";
-        };
-
-        $scope.deleteDish = function(dish) {
-            dishes.deleteDish(dish);
+            $scope.editMode = false;
         };
     }]);
 
@@ -213,7 +246,7 @@ app.controller('AchievementsCtrl', [
         };
     }]);
 
-app.controller('challengesCtrl', [
+app.controller('ChallengesCtrl', [
     '$scope','data',
     function($scope,challenges){
         $scope.challenges = challenges.challenges;
@@ -234,7 +267,6 @@ app.controller('challengesCtrl', [
             challenges.deleteChallenge(challenge);
         };
         $scope.showChallenge = function(challenge) {
-            console.log(challenge);
             $scope.showTableHideForm = true;
             $scope.title = challenge.title;
             $scope.description = challenge.description;

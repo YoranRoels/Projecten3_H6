@@ -101,7 +101,7 @@
             <tr ng-repeat="ingredient in ingredients">
                 <td>{{ingredient.name}}</td>
                 <td>{{ingredient.amount}}</td>
-                <td class="glyphicon glyphicon-trash"></td>
+                <td class="glyphicon glyphicon-trash" ng-click="deleteIngredient(ingredient)"></td>
             </tr>
         </table>
 

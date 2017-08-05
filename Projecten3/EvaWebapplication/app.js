@@ -15,6 +15,9 @@ mongoose.connect("mongodb://localhost/eva-webapplication");
 
 var index = require('./routes/index');
 var partialsRoutes = require('./routes/partials');
+var dishes = require('./routes/dishes');
+var achievements = require('./routes/achievements');
+var challenges = require('./routes/challenges');
 var users = require('./routes/users');
 
 var app = express();
@@ -33,6 +36,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
 app.use('/', partialsRoutes);
+app.use('/', dishes);
+app.use('/', achievements);
+app.use('/', challenges);
 app.use('/users', users);
 
 // catch 404 and forward to error handler
