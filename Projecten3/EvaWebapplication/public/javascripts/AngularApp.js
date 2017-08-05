@@ -6,16 +6,6 @@ app.config([
     function($stateProvider, $urlRouterProvider) {
 
         $stateProvider
-            .state('home', {
-                url: '/home',
-                templateUrl: 'partials/home',
-                controller: 'MainCtrl',
-                resolve: {
-					postPromise: ['data', function(data) {
-						return data.getAllDishes();
-					}]
-				}
-            })
             .state('dishes', {
                 url: '/dishes',
                 templateUrl: 'partials/dishes',
@@ -48,7 +38,7 @@ app.config([
             });
 
 
-        $urlRouterProvider.otherwise('home');
+        $urlRouterProvider.otherwise('dishes');
     }]);
 
 app.factory('data', ['$http', function($http){
@@ -107,6 +97,20 @@ app.factory('data', ['$http', function($http){
             angular.copy(data, o.achievements);
         });
     };
+    o.editChallenge = function(challenge) {
+        console.log(challenge);
+        return $http.put('/challenges/' + challenge._id, challenge).success(function(data) {
+            o.challenges[_.findIndex(o.challenges, {_id : data._id})] = challenge;
+        });
+    };
+    o.editAchievement = function(achievement) {
+        return $http.put('/achievements/' + achievement._id, achievement).success(function(data) {
+            o.achievements[_.findIndex(o.achievements, {_id : data._id})] = achievement;
+        });;
+    };
+    o.editDish = function(dish) {
+        return $http.put('/dishes/' + dish._id, dish);
+    };
     return o;
 }]);
 
@@ -163,8 +167,10 @@ app.controller('DishesCtrl', [
 app.controller('AchievementsCtrl', [
     '$scope','data',
     function($scope,achievements){
-        $scope.achievements= achievements.achievements;
-         $scope.showTableHideForm = false;
+        $scope.achievements = achievements.achievements;
+        $scope.editMode = false;
+        $scope.showTableHideForm = false;
+        $scope.showedAchievement = {};
         
         $scope.createAchievement=function(){
             achievements.createAchievement({
@@ -172,22 +178,48 @@ app.controller('AchievementsCtrl', [
                 description : $scope.description,
                 achievementType : $scope.achievementType,
             });
-            $scope.showTableHideForm = false;
-            $scope.title = "";
-            $scope.description = "";
-            $scope.achievementType = "";
+            $scope.cancelForm();
         };
 
         $scope.deleteAchievement = function(achievement) {
             achievements.deleteAchievement(achievement);
+        };
+
+        $scope.showAchievement = function(achievement) {
+            $scope.showTableHideForm = true;
+            $scope.title = achievement.title;
+            $scope.description = achievement.description;
+            $scope.achievementType = achievement.achievementType;
+            $scope.editMode = true;
+            $scope.showedAchievement = achievement;
+        };
+
+        $scope.editAchievement = function() {
+            achievements.editAchievement({
+                _id: $scope.showedAchievement._id,
+                title: $scope.title,
+                description : $scope.description,
+                achievementType : $scope.achievementType,
+            });
+            $scope.cancelForm();
+        };
+
+        $scope.cancelForm = function() {
+            $scope.showTableHideForm = false;
+            $scope.title = "";
+            $scope.description = "";
+            $scope.achievementType = "";
+            $scope.editMode = false;
         };
     }]);
 
 app.controller('challengesCtrl', [
     '$scope','data',
     function($scope,challenges){
-        $scope.challenges= challenges.challenges;
+        $scope.challenges = challenges.challenges;
+        $scope.editMode = false;
         $scope.showTableHideForm = false;
+        $scope.showedChallenge = {};
         
         $scope.createChallenge=function(){
             challenges.createChallenge({
@@ -195,14 +227,36 @@ app.controller('challengesCtrl', [
                 description : $scope.description,
                 challengeType : $scope.challengeType,
             });
-            $scope.showTableHideForm = false;
-            $scope.title = "";
-            $scope.description = "";
-            $scope.challengeType = "";
+            $scope.cancelForm();
         };
 
         $scope.deleteChallenge = function(challenge) {
             challenges.deleteChallenge(challenge);
+        };
+        $scope.showChallenge = function(challenge) {
+            console.log(challenge);
+            $scope.showTableHideForm = true;
+            $scope.title = challenge.title;
+            $scope.description = challenge.description;
+            $scope.challengeType = challenge.challengeType;
+            $scope.editMode = true;
+            $scope.showedChallenge = challenge;
+        };
+        $scope.editChallenge = function() {
+            challenges.editChallenge({
+                _id: $scope.showedChallenge._id,
+                title: $scope.title,
+                description : $scope.description,
+                challengeType : $scope.challengeType,
+            });
+            $scope.cancelForm();
+        };
+        $scope.cancelForm = function() {
+            $scope.showTableHideForm = false;
+            $scope.title = "";
+            $scope.description = "";
+            $scope.challengeType = "";
+            $scope.editMode = false;
         };
     }]);
 
