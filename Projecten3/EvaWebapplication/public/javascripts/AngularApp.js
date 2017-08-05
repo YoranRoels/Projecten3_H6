@@ -83,8 +83,8 @@ app.factory('data', ['$http', function($http){
 		});
     };
     o.deleteDish = function(dish){
-        return $http.delete('/dishes/' + dish.name).success(function(data) {
-            _.remove(o.dishes, {name : data.name});
+        return $http.delete('/dishes/' + dish._id).success(function(data) {
+            _.remove(o.dishes, {_id : data._id});
         });
     };
     o.deleteChallenge = function(challenge){

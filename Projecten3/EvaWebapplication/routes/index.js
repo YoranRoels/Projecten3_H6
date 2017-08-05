@@ -65,8 +65,8 @@ router.post('/dishes', function(req, res, next) {
     });
 });
 
-router.param('dish', function(req, res, next, name) {
-    var query = Dish.findOne({'name' : name});
+router.param('dish', function(req, res, next, id) {
+    var query = Dish.findById(id);
 
     query.exec(function (err, dish){
         if (err) { return next(err); }
