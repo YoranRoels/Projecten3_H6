@@ -41,6 +41,20 @@ router.delete('/dishes/:dish', function(req, res) {
     });
 });
 
+router.put('/dishes/:dish', function(req, res) {
+    Dish.findOneAndUpdate({name: req.body.name}, {
+        $set: {
+            title: req.body.title,
+            challengeType: req.body.challengeType,
+            description: req.body.description,
+        }
+    }, function(err, result) {
+        if (err) { return res.send(err) }
+
+        res.send(result);
+    });
+});
+
 router.post('/dishes', function(req, res, next) {
     var dish = new Dish(req.body);
 
@@ -77,6 +91,19 @@ router.delete('/achievements/:achievement', function(req, res) {
             return err;
         }
         res.json(achievement);
+    });
+});
+
+router.put('/achievements/:achievement', function(req, res) {
+    Achievement.findOneAndUpdate({_id: req.body._id}, {
+        $set: {
+            title: req.body.title,
+            achievementType: req.body.achievementType,
+            description: req.body.description,
+        }
+    }, function(err, result) {
+        if (err) return res.send(err)
+        res.send(result)
     });
 });
 
@@ -142,6 +169,19 @@ router.post('/challenges', function(req, res, next) {
         if(err){ return next(err); }
 
         res.json(challenge);
+    });
+});
+
+router.put('/challenges/:challenge', function(req, res) {
+    Challenge.findOneAndUpdate({_id: req.body._id}, {
+        $set: {
+            title: req.body.title,
+            challengeType: req.body.challengeType,
+            description: req.body.description,
+        }
+    }, function(err, result) {
+    if (err) {return res.send(err)}
+    res.send(result);
     });
 });
 

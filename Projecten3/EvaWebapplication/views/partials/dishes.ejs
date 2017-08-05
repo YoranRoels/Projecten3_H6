@@ -17,19 +17,8 @@
         <td>{{dish.cookingTime}}</td>
         <td>{{dish.difficultyType}}</td>
         <td>{{dish.imageId}}</td>
-
-        <td>
-            <button class="btn btn-default" type="button" ng-hide="showPreparation" ng-click="showPreparation = true">
-                Preparation
-            </button>
-        </td>
-        <td>
-            <button class="btn btn-default" type="button" ng-show="showPreparation" ng-click="showPreparation = false">
-                Close
-            </button>
-        </td>
+        <td class="glyphicon glyphicon-edit" ng-click="showDish(dish)"></td>
         <td class="glyphicon glyphicon-trash" ng-click="deleteDish(dish)"></td>
-        <td ng-show="showPreparation">{{dish.preparation}}</td>
     </tr>
 </table>
 
@@ -120,8 +109,8 @@
             <label>Preparation</label>
             <textarea class="form-control" rows="5" ng-model="preparation" required></textarea>
         </div>
-
-        <button class="btn btn-primary" type="submit">Confirm</button>
-        <button class="btn btn-danger" type="button" ng-click="showTableHideForm = false"> Cancel</button>
+        <button class="btn btn-primary" type="submit" ng-hide="editMode">Confirm</button>
+        <button class="btn btn-primary" type="button" ng-show="editMode" ng-click=editDish()>Edit</button>
+        <button class="btn btn-danger" type="button" ng-click="cancelForm()">Cancel</button>
     </form>
 </div>

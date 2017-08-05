@@ -13,7 +13,9 @@
         <td>{{chal.title}}</td>
         <td>{{chal.challengeType}}</td>
         <td>{{chal.description}}</td>
+        <td class="glyphicon glyphicon-edit" ng-click="showChallenge(chal)"></td>
         <td class="glyphicon glyphicon-trash" ng-click="deleteChallenge(chal)"></td>
+
     </tr>
 </table>
 
@@ -40,9 +42,9 @@
             <label>Description</label>
             <textarea class="form-control" rows="5" ng-model="description" required></textarea>
         </div>
-        <button class="btn btn-primary" type="submit">Confirm</button>
-        <button class="btn btn-danger" type="button" ng-click="showTableHideForm = false"> Cancel</button>
-
+        <button class="btn btn-primary" type="submit" ng-hide="editMode">Confirm</button>
+        <button class="btn btn-primary" type="button" ng-show="editMode" ng-click=editChallenge()>Edit</button>
+        <button class="btn btn-danger" type="button" ng-click="cancelForm()">Cancel</button>
     </form>
 
 </div>
