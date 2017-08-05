@@ -98,7 +98,6 @@ app.factory('data', ['$http', function($http){
         });
     };
     o.editChallenge = function(challenge) {
-        console.log(challenge);
         return $http.put('/challenges/' + challenge._id, challenge).success(function(data) {
             o.challenges[_.findIndex(o.challenges, {_id : data._id})] = challenge;
         });
@@ -106,10 +105,12 @@ app.factory('data', ['$http', function($http){
     o.editAchievement = function(achievement) {
         return $http.put('/achievements/' + achievement._id, achievement).success(function(data) {
             o.achievements[_.findIndex(o.achievements, {_id : data._id})] = achievement;
-        });;
+        });
     };
     o.editDish = function(dish) {
-        return $http.put('/dishes/' + dish._id, dish);
+        return $http.put('/dishes/' + dish._id, dish).success(function(data) {
+            o.dishes[_.findIndex(o.dishes, {_id : data._id})] = dish;
+        });
     };
     return o;
 }]);
@@ -155,7 +156,6 @@ app.controller('DishesCtrl', [
         };
 
         $scope.showDish = function(dish) {
-            console.log(dish);
             $scope.showTableHideForm = true;
             $scope.imageId = dish.imageId;
             $scope.name= dish.name;
@@ -169,16 +169,6 @@ app.controller('DishesCtrl', [
         };
 
         $scope.editDish = function() {
-            console.log({
-                _id : $scope.showedDish._id,
-                name: $scope.name,
-                imageId : $scope.imageId,
-                cookingTime : $scope.cookingTime,
-                difficultyType : $scope.difficultyType,
-                dishType : $scope.dishType,
-                preparation : $scope.preparation,
-                ingredients : $scope.ingredients,
-            });
             dishes.editDish({
                 _id : $scope.showedDish._id,
                 imageId : $scope.imageId,
